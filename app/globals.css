@@ -2,32 +2,77 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+/*:root {*/
+/*  --foreground-rgb: 0, 0, 0;*/
+/*  --background-start-rgb: 214, 219, 220;*/
+/*  --background-end-rgb: 255, 255, 255;*/
+/*}*/
+
+/*@media (prefers-color-scheme: dark) {*/
+/*  :root {*/
+/*    --foreground-rgb: 255, 255, 255;*/
+/*    --background-start-rgb: 0, 0, 0;*/
+/*    --background-end-rgb: 0, 0, 0;*/
+/*  }*/
+/*}*/
+
+/*body {*/
+/*  color: rgb(var(--foreground-rgb));*/
+/*  background: linear-gradient(*/
+/*      to bottom,*/
+/*      transparent,*/
+/*      rgb(var(--background-end-rgb))*/
+/*    )*/
+/*    rgb(var(--background-start-rgb));*/
+/*}*/
+
+/*@layer utilities {*/
+/*  .text-balance {*/
+/*    text-wrap: balance;*/
+/*  }*/
+/*}*/
+
+@font-face {
+  font-family: "Mercury";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/fonts/MercurySSm-Book-Pro_Web.woff2") format("woff2");
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+@font-face {
+  font-family: "Mercury";
+  font-style: italic;
+  font-weight: 400;
+  src: url("/fonts/MercurySSm-BookItalic-Pro_Web.woff2") format("woff2");
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@font-face {
+  font-family: "Mercury";
+  font-style: normal;
+  font-weight: 700;
+  src: url("/fonts/MercurySSm-Bold-Pro_Web.woff2") format("woff2");
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+@font-face {
+  font-family: "Sentinel";
+  font-style: normal;
+  font-weight: 700;
+  src: url("/fonts/Sentinel-Bold-Pro_Web.woff2") format("woff2");
+}
+
+.prose blockquote {
+  @apply ps-0 border-none;
+}
+
+.prose blockquote p:before,
+.prose blockquote p:after {
+  @apply content-none;
+}
+
+.prose blockquote p cite {
+  @apply block not-italic mt-6 text-sm text-neutral-500;
+}
+
+.prose > *:last-child {
+  @apply mb-0;
 }
