@@ -2,6 +2,7 @@ import path from "path";
 import fs from "fs";
 import {compileMDX} from "next-mdx-remote/rsc";
 import {POSTS_PER_PAGE} from "@/constants";
+import {Children, ReactNode} from "react";
 
 export const getPostData = async(slug: string) => {
   const fullPath = path.resolve(".", "content/posts/", `${slug}.mdx`);
@@ -10,6 +11,29 @@ export const getPostData = async(slug: string) => {
   return await compileMDX<{ title: string; date: string; tags: string[] }>({
     source: fileContents,
     options: { parseFrontmatter: true },
+    components: {
+      p: ({ children, ...props }) => {
+        try {
+          if (Children.only(children)) {
+            if (children.props.src) {
+              return <div {...props}>{children}</div>;
+            }
+          }
+        } catch (e) {
+          return <p {...props}>{children}</p>;
+        }
+
+        return <p {...props}>{children}</p>;
+      },
+      img: ({ src, alt, title }) => {
+        return (
+          <figure>
+            <img src={src} alt={alt} />
+            {title && <figcaption>{title}</figcaption>}
+          </figure>
+        )
+      },
+    }
   });
 }
 
