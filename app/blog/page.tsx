@@ -1,16 +1,23 @@
-import {getPostSlugs} from "@/lib/utils";
+import {getPostMonths, getPostSlugs, getPostTags} from "@/lib/utils";
 import {Post} from "@/components/post";
 import Link from "next/link";
 
 interface BlogPageProps {
   searchParams: {
+    tag?: string;
+    month?: string;
     page?: string;
   };
 }
 
 const BlogPage = async ({searchParams}: BlogPageProps) => {
-  const {page} = searchParams;
-  const { slugs, pagination } = await getPostSlugs(page ? Number(page) : 0);
+  const tag = searchParams.tag;
+  const month = searchParams.month;
+  const page = searchParams.page ? Number(searchParams.page) : 0;
+
+  const { slugs, pagination } = await getPostSlugs({ tag, month, page });
+  const { tags } = await getPostTags();
+  const { months } = await getPostMonths();
   const { currentPage, totalPages } = pagination;
 
   return (
@@ -21,21 +28,43 @@ const BlogPage = async ({searchParams}: BlogPageProps) => {
             <Post slug={slug}/>
           ))}
         </div>
-        <div className="flex gap-2">
-          {Array.from({ length: totalPages }).map((_, index) => (
-            <Link key={index} href={`?page=${index}`} className={currentPage === index ? "font-bold" : ""}>{index}</Link>
+        {totalPages > 1 && (
+          <div className="flex gap-2">
+            {Array.from({ length: totalPages }).map((_, index) => (
+              <Link key={index} href={`?page=${index}`} className={currentPage === index ? "font-bold" : ""}>{index}</Link>
             ))}
-        </div>
+          </div>
+        )}
       </div>
-      <div className="col-start-10 col-end-13">
-        <div className="sticky top-0 py-16 text-lg">
-          <ul>
-            <li>July 2024</li>
-            <li>June 2024</li>
-            <li>May 2024</li>
-          </ul>
+      <section className="col-start-10 col-end-13">
+        <h2 className="sr-only">Filters</h2>
+        <div className="flex flex-col gap-8 py-16 text-lg">
+          {Boolean(tags.length) && (
+            <div className="flex flex-col gap-1">
+              <h3 className="all-small-caps">Tags</h3>
+              <ul>
+                {tags.map(tag => (
+                  <li key={tag}>
+                    <Link href={`?tag=${tag}`}>{tag}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {Boolean(months.length) && (
+            <div className="flex flex-col gap-1">
+              <h3 className="all-small-caps">Months</h3>
+              <ul>
+                {months.map(month => (
+                  <li key={month}>
+                    <Link href={`?month=${month}`}>{month}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
-      </div>
+      </section>
     </div>
   );
 };
