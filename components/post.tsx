@@ -15,15 +15,15 @@ export const Post = async ({ slug }: PostProps) => {
   });
 
   return (
-    <div className="prose w-full mx-auto pt-16 pb-12 border-b border-neutral-200">
+    <div className="prose md:prose-lg lg:prose-xl w-full py-16 border-b border-neutral-200">
       <div className="mb-4">
         {frontmatter.title}
-        <Link href={`/blog/${slug}`} className="font-sentinel text-lg no-underline">
-          <time dateTime={frontmatter.date} className="block font-bold">
+        <Link href={`/blog/${slug}`} className="text-lg no-underline">
+          <time dateTime={frontmatter.date} className="block text-xl small-caps">
             {formattedDate}
           </time>
         </Link>
-        #{frontmatter.tags}
+        <div>{frontmatter.tags.map(tag => `/${tag}`)}</div>
       </div>
       {content}
     </div>

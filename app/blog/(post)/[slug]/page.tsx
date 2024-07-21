@@ -17,7 +17,7 @@ const BlogPost = async ({params}: BlogPostProps) => {
   });
 
   return (
-    <div className="w-full mx-auto prose">
+    <div className="w-full mx-auto prose prose-lg">
       <div className="mb-4">
         {frontmatter.title}
         <time dateTime={frontmatter.date} className="block font-bold">

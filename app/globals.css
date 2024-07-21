@@ -60,8 +60,40 @@
   src: url("/fonts/Sentinel-Bold-Pro_Web.woff2") format("woff2");
 }
 
+@font-face {
+  font-family: "RequiemTDA";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/fonts/RequiemText-Roman-TD-Space.woff") format("woff");
+}
+
+@font-face {
+  font-family: "RequiemTDB";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/fonts/RequiemText-Roman-TD.woff") format("woff");
+}
+
+@font-face {
+  font-family: "RequiemTDA";
+  font-style: italic;
+  font-weight: 400;
+  src: url("/fonts/RequiemText-Italic-TD-Space.woff") format("woff");
+}
+
+@font-face {
+  font-family: "RequiemTDB";
+  font-style: italic;
+  font-weight: 400;
+  src: url("/fonts/RequiemText-Italic-TD.woff") format("woff");
+}
+
+.prose {
+  @apply !leading-normal;
+}
+
 .prose blockquote {
-  @apply ps-0 border-none;
+  @apply ps-0 border-none not-italic;
 }
 
 .prose blockquote p:before,
@@ -70,10 +102,22 @@
 }
 
 .prose blockquote p cite {
-  @apply block not-italic mt-6 text-sm text-neutral-500;
+  @apply block italic mt-3;
+}
+
+.prose blockquote p cite::before {
+  @apply content-['—'];
 }
 
 .prose > *:last-child {
+  @apply mb-0;
+}
+
+.prose > *:last-child figure {
+  @apply mb-0;
+}
+
+.prose > *:last-child p:last-child {
   @apply mb-0;
 }
 
@@ -83,4 +127,36 @@
 
 .prose figure img {
   @apply my-0;
+}
+
+.prose p:has(+ ul),
+.prose p:has(+ ol) {
+  @apply mb-2;
+}
+
+.prose p + ul,
+.prose p + ol {
+  @apply mt-2;
+}
+
+.prose ul,
+.prose ol {
+  @apply pl-4 marker:text-inherit;
+}
+
+.prose ul li,
+.prose ol li {
+  @apply my-0.5 pl-0.5;
+}
+
+.prose figcaption {
+  @apply text-base lg:text-lg lg:text-xl italic text-neutral-800;
+}
+
+.small-caps {
+  font-variant: small-caps;
+}
+
+.all-small-caps {
+  font-variant: all-small-caps;
 }

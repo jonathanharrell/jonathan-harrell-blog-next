@@ -10,6 +10,7 @@ const config: Config = {
   theme: {
     fontFamily: {
       "mercury": ["Mercury", "serif"],
+      "requiem": ["RequiemTDA", "RequiemTDB", "serif"],
       "sentinel": ["Sentinel", "sans-serif"],
     },
     extend: {},
