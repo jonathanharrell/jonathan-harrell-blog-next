@@ -80,3 +80,7 @@
 .prose video {
   @apply w-full;
 }
+
+.prose figure img {
+  @apply my-0;
+}
