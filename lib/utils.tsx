@@ -29,7 +29,7 @@ export const getPostData = async(slug: string) => {
         return (
           <figure>
             <img src={src} alt={alt} />
-            {title && <figcaption>{title}</figcaption>}
+            {title && <figcaption dangerouslySetInnerHTML={{ __html: title}} />}
           </figure>
         )
       },
@@ -37,7 +37,7 @@ export const getPostData = async(slug: string) => {
   });
 }
 
-export const getPostSlugs = async({ tag, month, page = 0 }: { tag?: string; month?: string; page?: number }) => {
+export const getPostSlugs = async({ tag, month, page = 0 }: { tag?: string; month?: string; page?: number } = {}) => {
   const directoryPath = path.resolve(".", "content/posts");
   const files = fs.readdirSync(directoryPath);
   const descendingPostSlugs = files.reverse().map((file) => file.replace(/\.mdx$/, ""));

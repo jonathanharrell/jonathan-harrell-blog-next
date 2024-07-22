@@ -22,7 +22,10 @@ const BlogPage = async ({searchParams}: BlogPageProps) => {
 
   return (
     <div className="grid grid-cols-12 gap-8">
-      <div className="col-span-8 flex flex-col gap-16">
+      <div className="col-span-12 lg:col-span-8 flex flex-col">
+        {(tag || month) && (
+          <h1 className="mt-16 font-requiem-ornaments text-3xl uppercase">3{tag || month}<span className="inline-block scale-[-1]">3</span></h1>
+        )}
         <div className="flex flex-col">
           {slugs.map((slug) => (
             <Post slug={slug}/>
@@ -36,16 +39,16 @@ const BlogPage = async ({searchParams}: BlogPageProps) => {
           </div>
         )}
       </div>
-      <section className="col-start-10 col-end-13">
+      <section className="hidden lg:block col-start-10 col-end-13">
         <h2 className="sr-only">Filters</h2>
         <div className="flex flex-col gap-8 py-16 text-lg">
           {Boolean(tags.length) && (
             <div className="flex flex-col gap-1">
               <h3 className="all-small-caps">Tags</h3>
-              <ul>
+              <ul className="text-xl">
                 {tags.map(tag => (
                   <li key={tag}>
-                    <Link href={`?tag=${tag}`}>{tag}</Link>
+                    <Link href={`?tag=${tag}`} className="hover:underline decoration-1 underline-offset-4">/{tag}</Link>
                   </li>
                 ))}
               </ul>
@@ -54,10 +57,10 @@ const BlogPage = async ({searchParams}: BlogPageProps) => {
           {Boolean(months.length) && (
             <div className="flex flex-col gap-1">
               <h3 className="all-small-caps">Months</h3>
-              <ul>
+              <ul className="text-xl">
                 {months.map(month => (
                   <li key={month}>
-                    <Link href={`?month=${month}`}>{month}</Link>
+                    <Link href={`?month=${month}`} className="hover:underline decoration-1 underline-offset-4">{month}</Link>
                   </li>
                 ))}
               </ul>

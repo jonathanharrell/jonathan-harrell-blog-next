@@ -33,34 +33,6 @@
 /*}*/
 
 @font-face {
-  font-family: "Mercury";
-  font-style: normal;
-  font-weight: 400;
-  src: url("/fonts/MercurySSm-Book-Pro_Web.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "Mercury";
-  font-style: italic;
-  font-weight: 400;
-  src: url("/fonts/MercurySSm-BookItalic-Pro_Web.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "Mercury";
-  font-style: normal;
-  font-weight: 700;
-  src: url("/fonts/MercurySSm-Bold-Pro_Web.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "Sentinel";
-  font-style: normal;
-  font-weight: 700;
-  src: url("/fonts/Sentinel-Bold-Pro_Web.woff2") format("woff2");
-}
-
-@font-face {
   font-family: "RequiemTDA";
   font-style: normal;
   font-weight: 400;
@@ -88,6 +60,13 @@
   src: url("/fonts/RequiemText-Italic-TD.woff") format("woff");
 }
 
+@font-face {
+  font-family: "RequiemOrnaments";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/fonts/RequiemOrnaments.woff") format("woff");
+}
+
 .prose {
   @apply !leading-normal;
 }
@@ -102,7 +81,7 @@
 }
 
 .prose blockquote p cite {
-  @apply block italic mt-3;
+  @apply block not-italic mt-2 text-lg;
 }
 
 .prose blockquote p cite::before {
@@ -150,7 +129,11 @@
 }
 
 .prose figcaption {
-  @apply text-base lg:text-lg lg:text-xl italic text-neutral-800;
+  @apply text-lg text-neutral-800;
+}
+
+.prose a {
+  @apply hover:no-underline decoration-1 underline-offset-4;
 }
 
 .small-caps {

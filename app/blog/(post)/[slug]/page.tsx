@@ -1,4 +1,5 @@
 import {getPostSlugs, getPostData} from "@/lib/utils";
+import Link from "next/link";
 
 interface BlogPostProps {
   params: {
@@ -17,13 +18,15 @@ const BlogPost = async ({params}: BlogPostProps) => {
   });
 
   return (
-    <div className="w-full mx-auto prose prose-lg">
+    <div className="prose prose-lg md:prose-xl w-full mx-auto py-16">
       <div className="mb-4">
         {frontmatter.title}
-        <time dateTime={frontmatter.date} className="block font-bold">
-          {formattedDate}
-        </time>
-        #{frontmatter.tags}
+        <Link href={`/blog/${slug}`} className="text-lg no-underline">
+          <time dateTime={frontmatter.date} className="block text-xl small-caps">
+            {formattedDate}
+          </time>
+        </Link>
+        <div>{frontmatter.tags.map(tag => `/${tag}`)}</div>
       </div>
       {content}
     </div>
