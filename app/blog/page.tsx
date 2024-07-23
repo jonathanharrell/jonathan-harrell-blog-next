@@ -21,8 +21,8 @@ const BlogPage = async ({searchParams}: BlogPageProps) => {
   const { currentPage, totalPages } = pagination;
 
   return (
-    <div className="grid grid-cols-12 gap-8">
-      <div className="col-span-12 lg:col-span-8 flex flex-col">
+    <div className="grid grid-cols-12 gap-16">
+      <div className="col-span-12 lg:col-span-9 xl:col-span-8 flex flex-col">
         {(tag || month) && (
           <h1 className="mt-16 text-2xl uppercase">• {tag || month} •</h1>
         )}
@@ -45,7 +45,7 @@ const BlogPage = async ({searchParams}: BlogPageProps) => {
           {Boolean(tags.length) && (
             <div className="flex flex-col gap-1">
               <h3 className="all-small-caps">Tags</h3>
-              <ul className="text-xl">
+              <ul>
                 {tags.map(tag => (
                   <li key={tag}>
                     <Link href={`?tag=${tag}`} className="hover:underline decoration-1 underline-offset-4">/{tag}</Link>
@@ -57,7 +57,7 @@ const BlogPage = async ({searchParams}: BlogPageProps) => {
           {Boolean(months.length) && (
             <div className="flex flex-col gap-1">
               <h3 className="all-small-caps">Months</h3>
-              <ul className="text-xl">
+              <ul>
                 {months.map(month => (
                   <li key={month}>
                     <Link href={`?month=${month}`} className="hover:underline decoration-1 underline-offset-4">{month}</Link>
