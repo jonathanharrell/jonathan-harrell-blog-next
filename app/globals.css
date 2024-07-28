@@ -96,13 +96,13 @@
   @apply mb-0;
 }
 
-.prose > * > * > figure {
-  @apply mt-0;
-}
+/*.prose > * > * > figure {*/
+/*  @apply mt-0;*/
+/*}*/
 
-.prose > *:has(> * > figure) + * > figure {
-  @apply mt-0;
-}
+/*.prose > *:has(> * > figure) + * > figure {*/
+/*  @apply mt-0;*/
+/*}*/
 
 .prose > *:last-child p:last-child {
   @apply mb-0;
