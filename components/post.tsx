@@ -19,11 +19,13 @@ export const Post = async ({ slug }: PostProps) => {
     <div className="prose prose-lg md:prose-xl">
       <div className="mb-4">
         {frontmatter.title}
-        <Link href={`/blog/${slug}`} className="no-underline">
-          <time dateTime={frontmatter.date} className="block text-xl small-caps">
-            {formattedDate}
-          </time>
-        </Link>
+        <div>
+          <Link href={`/blog/${slug}`} className="no-underline">
+            <time dateTime={frontmatter.date} className="inline-block text-xl small-caps">
+              {formattedDate}
+            </time>
+          </Link>
+        </div>
         <div className="flex flex-wrap gap-3">{frontmatter.tags.map(tag => <Link href={`?tag=${tag}`} className="no-underline">/{tag}</Link>)}</div>
       </div>
       {content}
