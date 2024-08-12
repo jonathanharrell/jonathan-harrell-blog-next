@@ -20,6 +20,12 @@ const BlogPage = async ({searchParams}: BlogPageProps) => {
   const { months } = await getPostMonths();
   const { currentPage, totalPages } = pagination;
 
+  let pageLinkPrefix = tag ? `tag=${tag}` : '';
+
+  if (month) {
+    pageLinkPrefix = pageLinkPrefix ? `${pageLinkPrefix}&month=${month}` : `month=${month}`;
+  }
+
   return (
     <div className="grid grid-cols-12 gap-16">
       <div className="col-span-12 lg:col-span-9 xl:col-span-8 flex flex-col">
@@ -34,7 +40,7 @@ const BlogPage = async ({searchParams}: BlogPageProps) => {
         {totalPages > 1 && (
           <div className="flex gap-2">
             {Array.from({ length: totalPages }).map((_, index) => (
-              <Link key={index} href={`?page=${index}`} className={currentPage === index ? "font-bold" : ""}>{index}</Link>
+              <Link key={index} href={pageLinkPrefix ? `?${pageLinkPrefix}&page=${index}` : `?page=${index}`} className={currentPage === index ? "font-bold" : ""}>{index}</Link>
             ))}
           </div>
         )}

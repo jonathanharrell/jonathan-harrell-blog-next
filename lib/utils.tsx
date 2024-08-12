@@ -40,9 +40,9 @@ export const getPostData = async(slug: string) => {
 export const getPostSlugs = async({ tag, month, page = 0 }: { tag?: string; month?: string; page?: number } = {}) => {
   const directoryPath = path.resolve(".", "content/posts");
   const files = fs.readdirSync(directoryPath);
-  const descendingPostSlugs = files.reverse().map((file) => file.replace(/\.mdx$/, ""));
+  const postSlugs = files.map((file) => file.replace(/\.mdx$/, ""));
 
-  const slugsWithFrontmatterPromises = descendingPostSlugs.map(async (slug) => {
+  const slugsWithFrontmatterPromises = postSlugs.map(async (slug) => {
     const fullPath = path.resolve(".", "content/posts/", `${slug}.mdx`);
     const fileContents = fs.readFileSync(fullPath, "utf8");
     const parsedContents = await compileMDX({
@@ -55,7 +55,14 @@ export const getPostSlugs = async({ tag, month, page = 0 }: { tag?: string; mont
 
   const slugsWithFrontmatter = await Promise.all(slugsWithFrontmatterPromises);
 
-  const filteredPostSlugs = slugsWithFrontmatter.filter(slugWithFrontmatter => {
+  const sortedSlugsWithFrontmatter = slugsWithFrontmatter.sort((a, b) => {
+    const dateA = new Date(a.frontmatter.date as string);
+    const dateB = new Date(b.frontmatter.date as string);
+
+    return dateB.getTime() - dateA.getTime();
+  });
+
+  const filteredPostSlugs = sortedSlugsWithFrontmatter.filter(slugWithFrontmatter => {
     if (tag) {
       return slugWithFrontmatter.frontmatter.tags.includes(tag);
     }
