@@ -18,18 +18,17 @@ const BlogPost = async ({params}: BlogPostProps) => {
   });
 
   return (
-    <div className="prose prose-lg md:prose-xl w-full mx-auto py-16">
-      <div className="mb-4">
-        {frontmatter.title}
+    <article className="prose prose-lg md:prose-xl w-full mx-auto py-16">
+      <header className="mb-4">
         <Link href={`/blog/${slug}`} className="text-lg no-underline">
           <time dateTime={frontmatter.date} className="block text-xl small-caps">
             {formattedDate}
           </time>
         </Link>
         <div>{frontmatter.tags.map(tag => `/${tag}`)}</div>
-      </div>
+      </header>
       {content}
-    </div>
+    </article>
   );
 };
 

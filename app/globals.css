@@ -33,31 +33,45 @@
 /*}*/
 
 @font-face {
-  font-family: "RequiemTDA";
+  font-family: "RequiemTextTDA";
   font-style: normal;
   font-weight: 400;
   src: url("/fonts/RequiemText-Roman-TD-Space.woff") format("woff");
 }
 
 @font-face {
-  font-family: "RequiemTDB";
+  font-family: "RequiemTextTDB";
   font-style: normal;
   font-weight: 400;
   src: url("/fonts/RequiemText-Roman-TD.woff") format("woff");
 }
 
 @font-face {
-  font-family: "RequiemTDA";
+  font-family: "RequiemTextTDA";
   font-style: italic;
   font-weight: 400;
   src: url("/fonts/RequiemText-Italic-TD-Space.woff") format("woff");
 }
 
 @font-face {
-  font-family: "RequiemTDB";
+  font-family: "RequiemTextTDB";
   font-style: italic;
   font-weight: 400;
   src: url("/fonts/RequiemText-Italic-TD.woff") format("woff");
+}
+
+@font-face {
+  font-family: "RequiemDispTDA";
+  font-style: italic;
+  font-weight: 400;
+  src: url("/fonts/RequiemDisp-Roman-TD-Space.woff") format("woff");
+}
+
+@font-face {
+  font-family: "RequiemDispTDB";
+  font-style: italic;
+  font-weight: 400;
+  src: url("/fonts/RequiemDisp-Roman-TD.woff") format("woff");
 }
 
 @font-face {
@@ -69,6 +83,10 @@
 
 .prose {
   @apply !leading-normal;
+}
+
+.prose h1 {
+  @apply font-requiem-display text-3xl mt-8 mb-0 font-normal small-caps;
 }
 
 .prose blockquote {
@@ -95,14 +113,6 @@
 .prose > *:last-child figure {
   @apply mb-0;
 }
-
-/*.prose > * > * > figure {*/
-/*  @apply mt-0;*/
-/*}*/
-
-/*.prose > *:has(> * > figure) + * > figure {*/
-/*  @apply mt-0;*/
-/*}*/
 
 .prose > *:last-child p:last-child {
   @apply mb-0;

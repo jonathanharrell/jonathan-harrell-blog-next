@@ -15,21 +15,20 @@ export const Post = async ({ slug }: PostProps) => {
   });
 
   return (
-    <div className="w-full py-16 border-b border-neutral-200">
-    <div className="prose prose-lg md:prose-xl">
-      <div className="mb-4">
-        {frontmatter.title}
-        <div>
-          <Link href={`/blog/${slug}`} className="no-underline">
-            <time dateTime={frontmatter.date} className="inline-block text-xl small-caps">
-              {formattedDate}
-            </time>
-          </Link>
-        </div>
-        <div className="flex flex-wrap gap-3">{frontmatter.tags.map(tag => <Link href={`?tag=${tag}`} className="no-underline">/{tag}</Link>)}</div>
+    <article className="w-full py-16 border-b border-neutral-200">
+      <div className="prose prose-lg md:prose-xl">
+        <header className="mb-4">
+          <div>
+            <Link href={`/blog/${slug}`} className="no-underline">
+              <time dateTime={frontmatter.date} className="inline-block text-xl small-caps">
+                {formattedDate}
+              </time>
+            </Link>
+          </div>
+          <div className="flex flex-wrap gap-3">{frontmatter.tags.map(tag => <Link href={`?tag=${tag}`} className="no-underline">/{tag}</Link>)}</div>
+        </header>
+        {content}
       </div>
-      {content}
-    </div>
-    </div>
+    </article>
   );
 }
