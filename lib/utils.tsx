@@ -138,5 +138,5 @@ export const getPostMonths = async() => {
 export const getAllPhotoSlugs = async() => {
   const directoryPath = path.resolve(".", "public/assets/photos");
   const files = fs.readdirSync(directoryPath);
-  return files.reverse();
+  return files.filter(file => !file.endsWith(".mov") && !file.endsWith(".mp4")).reverse();
 }
