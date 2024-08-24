@@ -25,7 +25,7 @@ export const Post = async ({ slug }: PostProps) => {
               </time>
             </Link>
           </div>
-          <div className="flex flex-wrap gap-3">{frontmatter.tags.map(tag => <Link href={`?tag=${tag}`} className="no-underline">/{tag}</Link>)}</div>
+          <div className="flex flex-wrap gap-3">{frontmatter.tags.filter(tag => tag !== "jdch").map(tag => <Link href={`?tag=${tag}`} className="no-underline">/{tag}</Link>)}</div>
         </header>
         {content}
       </div>

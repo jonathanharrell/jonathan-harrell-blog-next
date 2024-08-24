@@ -34,7 +34,7 @@ const BlogPage = async ({searchParams}: BlogPageProps) => {
         )}
         <div className="flex flex-col">
           {slugs.map((slug) => (
-            <Post slug={slug}/>
+            <Post key={slug} slug={slug}/>
           ))}
         </div>
         {totalPages > 1 && (
@@ -52,7 +52,7 @@ const BlogPage = async ({searchParams}: BlogPageProps) => {
             <div className="flex flex-col gap-1">
               <h3 className="all-small-caps">Tags</h3>
               <ul>
-                {tags.map(tag => (
+                {tags.filter(tag => tag !== "jdch").map(tag => (
                   <li key={tag}>
                     <Link href={`?tag=${tag}`} className="hover:underline decoration-1 underline-offset-4">/{tag}</Link>
                   </li>
