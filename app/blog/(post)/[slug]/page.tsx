@@ -1,5 +1,7 @@
 import {getPostSlugs, getPostData} from "@/lib/utils";
 import Link from "next/link";
+import classNames from "classnames";
+import {Post} from "@/components/post";
 
 interface BlogPostProps {
   params: {
@@ -8,27 +10,8 @@ interface BlogPostProps {
 }
 
 const BlogPost = async ({params}: BlogPostProps) => {
-  const {slug} = params;
-  const { content, frontmatter } = await getPostData(slug);
-
-  const formattedDate = new Date(frontmatter.date).toLocaleDateString('en-US', {
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric'
-  });
-
   return (
-    <article className="prose prose-lg md:prose-xl w-full mx-auto py-16">
-      <header className="mb-4">
-        <Link href={`/blog/${slug}`} className="text-lg no-underline">
-          <time dateTime={frontmatter.date} className="block text-xl small-caps">
-            {formattedDate}
-          </time>
-        </Link>
-        <div>{frontmatter.tags.map(tag => `/${tag}`)}</div>
-      </header>
-      {content}
-    </article>
+    <Post slug={params.slug} className="mx-auto py-16" />
   );
 };
 

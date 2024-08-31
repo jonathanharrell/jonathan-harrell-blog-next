@@ -3,6 +3,8 @@ import fs from "fs";
 import {compileMDX} from "next-mdx-remote/rsc";
 import {POSTS_PER_PAGE} from "@/constants";
 import {Children, ReactNode} from "react";
+import markdownToTxt from "markdown-to-txt";
+import truncate from "lodash.truncate";
 
 export const getPostData = async(slug: string) => {
   const fullPath = path.resolve(".", "content/posts/", `${slug}.mdx`);
@@ -37,6 +39,40 @@ export const getPostData = async(slug: string) => {
   });
 }
 
+export const getAllPostsTeasers = async() => {
+  const directoryPath = path.resolve(".", "content/posts");
+  const files = fs.readdirSync(directoryPath);
+
+  const postTeaserPromises = files.map(async (file) => {
+    const fullPath = path.resolve(".", "content/posts/", file);
+    const fileContents = fs.readFileSync(fullPath, "utf8");
+
+    const parsedContents = await compileMDX({
+      source: fileContents,
+      options: { parseFrontmatter: true },
+    });
+
+    const fileContentsWithoutFrontmatter = fileContents.replace(/---[\s\S]*?---/, "");
+
+    return {
+      slug: file.replace(/\.mdx$/, ""),
+      frontmatter: parsedContents.frontmatter,
+      content: truncate(markdownToTxt(fileContentsWithoutFrontmatter).replaceAll("\n", " "), {
+        length: 130,
+      }),
+    };
+  });
+
+  const postTeasers = await Promise.all(postTeaserPromises);
+
+  return postTeasers.sort((a, b) => {
+    const dateA = new Date(a.frontmatter.date as string);
+    const dateB = new Date(b.frontmatter.date as string);
+
+    return dateB.getTime() - dateA.getTime();
+  });
+}
+
 export const getPostSlugs = async({ tag, month, page = 0 }: { tag?: string; month?: string; page?: number } = {}) => {
   const directoryPath = path.resolve(".", "content/posts");
   const files = fs.readdirSync(directoryPath);
@@ -64,7 +100,8 @@ export const getPostSlugs = async({ tag, month, page = 0 }: { tag?: string; mont
 
   const filteredPostSlugs = sortedSlugsWithFrontmatter.filter(slugWithFrontmatter => {
     if (tag) {
-      return slugWithFrontmatter.frontmatter.tags.includes(tag);
+      const tags = tag.split(",");
+      return tags.every(t => slugWithFrontmatter.frontmatter.tags.includes(t));
     }
 
     if (month) {
