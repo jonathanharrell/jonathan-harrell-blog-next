@@ -1,15 +1,15 @@
-import {getAllPostsTeasers} from "@/lib/utils";
-import {PostTeaser} from "@/components/post-teaser";
+import {getPostTeasers} from "@/lib/utils";
+import {ArchiveTeaser} from "@/components/archive-teaser";
 
 const ArchivePage = async () => {
-  const postTeasers = await getAllPostsTeasers();
+  const postTeasers = await getPostTeasers();
 
   return (
     <div className="flex flex-col gap-4 py-16">
       <ul className="prose prose-lg md:prose-xl mx-auto">
         {postTeasers.map((teaser) => (
           <li key={teaser.slug}>
-            <PostTeaser teaser={teaser} />
+            <ArchiveTeaser teaser={teaser} />
           </li>
         ))}
       </ul>

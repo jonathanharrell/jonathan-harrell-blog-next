@@ -1,8 +1,8 @@
 import path from "path";
 import fs from "fs";
 import {compileMDX} from "next-mdx-remote/rsc";
-import {POSTS_PER_PAGE} from "@/constants";
-import {Children, ReactNode} from "react";
+import {DEFAULT_POSTS_PER_PAGE} from "@/constants";
+import {Children} from "react";
 import markdownToTxt from "markdown-to-txt";
 import truncate from "lodash.truncate";
 
@@ -39,7 +39,7 @@ export const getPostData = async(slug: string) => {
   });
 }
 
-export const getAllPostsTeasers = async() => {
+export const getPostTeasers = async({ tag, perPage = Infinity }: { tag?: string; perPage?: number } = {}) => {
   const directoryPath = path.resolve(".", "content/posts");
   const files = fs.readdirSync(directoryPath);
 
@@ -54,26 +54,48 @@ export const getAllPostsTeasers = async() => {
 
     const fileContentsWithoutFrontmatter = fileContents.replace(/---[\s\S]*?---/, "");
 
+    let images = [];
+    const regex = /!\[\]\(([^)\s]+)(?:\s+["'].*["'])?\)/g;
+    const matches = fileContentsWithoutFrontmatter.match(regex);
+
+    if (matches) {
+      images = matches.map(match => match.match(/!\[\]\(([^)\s]+)/)?.[1]).filter(Boolean);
+    }
+
     return {
       slug: file.replace(/\.mdx$/, ""),
       frontmatter: parsedContents.frontmatter,
-      content: truncate(markdownToTxt(fileContentsWithoutFrontmatter).replaceAll("\n", " "), {
+      text: truncate(markdownToTxt(fileContentsWithoutFrontmatter).replaceAll("\n", " "), {
         length: 130,
       }),
+      images,
     };
   });
 
   const postTeasers = await Promise.all(postTeaserPromises);
 
-  return postTeasers.sort((a, b) => {
+  const sortedPostTeasers = postTeasers.sort((a, b) => {
     const dateA = new Date(a.frontmatter.date as string);
     const dateB = new Date(b.frontmatter.date as string);
 
     return dateB.getTime() - dateA.getTime();
   });
+
+  const filteredPostTeasers = sortedPostTeasers.filter(postTeaser => {
+    if (tag) {
+      const tags = tag.split(",");
+      const positiveTags = tags.filter(t => !t.startsWith("!"));
+      const negativeTags = tags.filter(t => t.startsWith("!")).map(t => t.replace("!", ""));
+      return positiveTags.every(t => postTeaser.frontmatter.tags.includes(t)) && negativeTags.every(t => !postTeaser.frontmatter.tags.includes(t));
+    }
+
+    return true;
+  });
+
+  return filteredPostTeasers.slice(0, perPage);
 }
 
-export const getPostSlugs = async({ tag, month, page = 0 }: { tag?: string; month?: string; page?: number } = {}) => {
+export const getPostSlugs = async({ tag, month, page = 0, perPage = DEFAULT_POSTS_PER_PAGE }: { tag?: string; month?: string; page?: number, perPage?: number } = {}) => {
   const directoryPath = path.resolve(".", "content/posts");
   const files = fs.readdirSync(directoryPath);
   const postSlugs = files.map((file) => file.replace(/\.mdx$/, ""));
@@ -101,7 +123,9 @@ export const getPostSlugs = async({ tag, month, page = 0 }: { tag?: string; mont
   const filteredPostSlugs = sortedSlugsWithFrontmatter.filter(slugWithFrontmatter => {
     if (tag) {
       const tags = tag.split(",");
-      return tags.every(t => slugWithFrontmatter.frontmatter.tags.includes(t));
+      const positiveTags = tags.filter(t => !t.startsWith("!"));
+      const negativeTags = tags.filter(t => t.startsWith("!")).map(t => t.replace("!", ""));
+      return positiveTags.every(t => slugWithFrontmatter.frontmatter.tags.includes(t)) && negativeTags.every(t => !slugWithFrontmatter.frontmatter.tags.includes(t));
     }
 
     if (month) {
@@ -119,11 +143,11 @@ export const getPostSlugs = async({ tag, month, page = 0 }: { tag?: string; mont
     return true;
   }).map(slugWithFrontmatter => slugWithFrontmatter.slug);
 
-  const skip = page ? page * POSTS_PER_PAGE : 0;
-  const slugs = filteredPostSlugs.slice(skip, skip + POSTS_PER_PAGE);
+  const skip = page ? page * perPage : 0;
+  const slugs = filteredPostSlugs.slice(skip, skip + perPage);
   const pagination = {
     currentPage: page || 0,
-    totalPages: Math.ceil(filteredPostSlugs.length / POSTS_PER_PAGE),
+    totalPages: Math.ceil(filteredPostSlugs.length / perPage),
   }
 
   return {

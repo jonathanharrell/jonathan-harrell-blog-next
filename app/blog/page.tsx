@@ -33,7 +33,7 @@ const BlogPage = async ({searchParams}: BlogPageProps) => {
     <div className="grid grid-cols-12 md:gap-16">
       <div className="col-span-12 lg:col-span-9 xl:col-span-8 flex flex-col">
         {(tagToDisplay || month) && (
-          <h1 className="mt-16 text-2xl uppercase">• {tagToDisplay || month} •</h1>
+          <h1 className="mt-16 text-2xl">• {tagToDisplay || month} •</h1>
         )}
         <div className="flex flex-col">
           {slugs.map((slug) => (
