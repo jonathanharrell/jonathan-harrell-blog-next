@@ -62,16 +62,30 @@
 
 @font-face {
   font-family: "RequiemDispTDA";
-  font-style: italic;
+  font-style: normal;
   font-weight: 400;
   src: url("/fonts/RequiemDisp-Roman-TD-Space.woff") format("woff");
 }
 
 @font-face {
   font-family: "RequiemDispTDB";
-  font-style: italic;
+  font-style: normal;
   font-weight: 400;
   src: url("/fonts/RequiemDisp-Roman-TD.woff") format("woff");
+}
+
+@font-face {
+  font-family: "RequiemDispTDA";
+  font-style: italic;
+  font-weight: 400;
+  src: url("/fonts/RequiemDisp-Italic-TD-Space.woff") format("woff");
+}
+
+@font-face {
+  font-family: "RequiemDispTDB";
+  font-style: italic;
+  font-weight: 400;
+  src: url("/fonts/RequiemDisp-Italic-TD.woff") format("woff");
 }
 
 @font-face {
