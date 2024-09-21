@@ -1,17 +1,19 @@
 "use client";
 
-import Link from "next/link";
-import {useState} from "react";
+import {useRouter} from "next/navigation";
+import {ChangeEventHandler} from "react";
 
 interface FilterMonthsProps {
   months: string[];
+  selectedMonth?: string;
 }
 
-export const FilterMonths = ({ months }: FilterMonthsProps) => {
-  const [isExpanded, setIsExpanded] = useState(false);
+export const FilterMonths = ({ months, selectedMonth = "" }: FilterMonthsProps) => {
+  const router = useRouter();
 
-  const firstEighteenMonths = months.slice(0, 18);
-  const monthsToDisplay = isExpanded ? months : firstEighteenMonths;
+  const filterByMonth: ChangeEventHandler<HTMLSelectElement> = (event) => {
+    router.replace(`?month=${event.target.value}`);
+  }
 
   if (!months.length) {
     return null;
@@ -19,23 +21,20 @@ export const FilterMonths = ({ months }: FilterMonthsProps) => {
 
   return (
     <div className="flex flex-col gap-1">
-      <h3 className="all-small-caps">Months</h3>
-      <ul>
-        {monthsToDisplay.map(month => (
-          <li key={month}>
-            <Link href={`?month=${month}`} className="hover:underline decoration-1 underline-offset-4">
-              {month}
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <h3 className="sr-only">Months</h3>
       <div>
-        <button
-          onClick={() => setIsExpanded(!isExpanded)}
-          className="inline-block underline"
+        <select
+          value={selectedMonth}
+          onChange={filterByMonth}
+          className="appearance-none py-1.5 px-3 rounded-full bg-neutral-200 hover:bg-neutral-300 leading-none transition-colors duration-150 ease-in-out cursor-pointer"
         >
-          View {isExpanded ? "less" : "more"}
-        </button>
+          <option value="">All Time</option>
+          {months.map(month => (
+            <option key={month} value={month}>
+              {month}
+            </option>
+          ))}
+        </select>
       </div>
     </div>
   );

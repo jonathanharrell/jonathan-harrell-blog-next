@@ -5,7 +5,7 @@ const ArchivePage = async () => {
   const postTeasers = await getPostTeasers();
 
   return (
-    <div className="flex flex-col gap-4 py-16">
+    <div className="wrapper flex flex-col gap-4 py-12">
       <ul className="prose prose-lg md:prose-xl mx-auto">
         {postTeasers.map((teaser) => (
           <li key={teaser.slug}>

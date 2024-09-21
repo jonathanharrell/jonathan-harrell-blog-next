@@ -11,7 +11,9 @@ interface BlogPostProps {
 
 const BlogPost = async ({params}: BlogPostProps) => {
   return (
-    <Post slug={params.slug} className="mx-auto py-16" />
+    <div className="wrapper">
+      <Post slug={params.slug} className="mx-auto py-16" />
+    </div>
   );
 };
 
