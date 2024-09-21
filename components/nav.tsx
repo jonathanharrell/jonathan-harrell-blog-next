@@ -9,10 +9,10 @@ export const Nav = () => {
           <span>Jonathan Harrell’s Creative Scrapbook</span>
         </p>
         <nav>
-          <ul className="flex justify-center gap-3 [&_a:hover]:underline [&_a:hover]:decoration-1 [&_a:hover]:underline-offset-4">
-            <li><Link href="/blog">Blog</Link></li>{` | `}
-            <li><Link href="/photos">Photos</Link></li>{` | `}
-            <li><Link href="/archive">Archive</Link></li>{` | `}
+          <ul className="flex justify-center gap-8 [&_a:hover]:underline [&_a:hover]:decoration-1 [&_a:hover]:underline-offset-4">
+            <li><Link href="/blog">Blog</Link></li>
+            <li><Link href="/photos">Photos</Link></li>
+            <li><Link href="/archive">Archive</Link></li>
             <li><Link href="/about">About</Link></li>
           </ul>
         </nav>
