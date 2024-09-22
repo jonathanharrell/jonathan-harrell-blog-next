@@ -1,19 +1,22 @@
 "use client";
 
-import {useRouter} from "next/navigation";
-import {ChangeEventHandler} from "react";
+import { useRouter } from "next/navigation";
+import { ChangeEventHandler } from "react";
 
 interface FilterMonthsProps {
   months: string[];
   selectedMonth?: string;
 }
 
-export const FilterMonths = ({ months, selectedMonth = "" }: FilterMonthsProps) => {
+export const FilterMonths = ({
+  months,
+  selectedMonth = "",
+}: FilterMonthsProps) => {
   const router = useRouter();
 
   const filterByMonth: ChangeEventHandler<HTMLSelectElement> = (event) => {
     router.replace(`?month=${event.target.value}`);
-  }
+  };
 
   if (!months.length) {
     return null;
@@ -22,14 +25,18 @@ export const FilterMonths = ({ months, selectedMonth = "" }: FilterMonthsProps) 
   return (
     <div className="flex flex-col gap-1">
       <h3 className="sr-only">Months</h3>
+      <p id="months-label" className="sr-only" aria-hidden="true">
+        Filter posts by month
+      </p>
       <div>
         <select
           value={selectedMonth}
           onChange={filterByMonth}
           className="appearance-none py-1.5 px-3 rounded-full bg-neutral-200 hover:bg-neutral-300 leading-none transition-colors duration-150 ease-in-out cursor-pointer"
+          aria-labelledby="months-label"
         >
           <option value="">All Time</option>
-          {months.map(month => (
+          {months.map((month) => (
             <option key={month} value={month}>
               {month}
             </option>
@@ -38,4 +45,4 @@ export const FilterMonths = ({ months, selectedMonth = "" }: FilterMonthsProps) 
       </div>
     </div>
   );
-}
+};

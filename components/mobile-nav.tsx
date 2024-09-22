@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import classNames from "classnames";
 import { usePathname } from "next/navigation";
 
 export const MobileNav = () => {
@@ -46,7 +45,14 @@ export const MobileNav = () => {
           <button autoFocus onClick={closeModal}>
             Close
           </button>
-          <nav>
+          <nav aria-labelledby="mobile-navigation-label">
+            <h2
+              id="mobile-navigation-label"
+              className="sr-only"
+              aria-hidden="true"
+            >
+              Site navigation
+            </h2>
             <ul className="flex flex-col items-center gap-8 text-xl">
               <li>
                 <Link href="/blog" onClick={closeModal}>

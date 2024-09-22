@@ -1,8 +1,9 @@
-import { getPostMonths, getPostSlugs, getPostTags } from "@/lib/utils";
-import { Post } from "@/components/post";
 import Link from "next/link";
 import classNames from "classnames";
+import { getPostMonths, getPostSlugs, getPostTags } from "@/lib/utils";
 import { Filters } from "@/components/filters";
+import { Post } from "@/components/post";
+import { Pagination } from "@/components/pagination";
 
 interface BlogPageProps {
   searchParams: {
@@ -13,21 +14,28 @@ interface BlogPageProps {
 }
 
 const BlogPage = async ({ searchParams }: BlogPageProps) => {
-  const tag = searchParams.tag;
-  const month = searchParams.month;
-  const page = searchParams.page ? Number(searchParams.page) : 0;
+  const {
+    tag: selectedTag,
+    month: selectedMonth,
+    page: selectedPage,
+  } = searchParams;
 
-  const { slugs, pagination } = await getPostSlugs({ tag, month, page });
+  const { slugs, pagination } = await getPostSlugs({
+    tag: selectedTag,
+    month: selectedMonth,
+    page: selectedPage ? Number(selectedPage) : 0,
+  });
   const { tags } = await getPostTags();
   const { months } = await getPostMonths();
+
   const { currentPage, totalPages } = pagination;
 
-  let pageLinkPrefix = tag ? `tag=${tag}` : "";
+  let pageLinkPrefix = selectedTag ? `tag=${selectedTag}` : "";
 
-  if (month) {
+  if (selectedMonth) {
     pageLinkPrefix = pageLinkPrefix
-      ? `${pageLinkPrefix}&month=${month}`
-      : `month=${month}`;
+      ? `${pageLinkPrefix}&month=${selectedMonth}`
+      : `month=${selectedMonth}`;
   }
 
   return (
@@ -36,41 +44,31 @@ const BlogPage = async ({ searchParams }: BlogPageProps) => {
       <Filters
         tags={tags}
         months={months}
-        selectedTag={tag}
-        selectedMonth={month}
+        selectedTag={selectedTag}
+        selectedMonth={selectedMonth}
       />
-      <div className="wrapper">
-        <div className="flex flex-col">
-          {slugs.map((slug) => (
-            <div key={slug}>
-              <Post
-                slug={slug}
-                className="mx-auto py-8 sm:py-10 md:py-12 border-b border-neutral-200"
-              />
-            </div>
-          ))}
-        </div>
-        {totalPages > 1 && (
-          <div className="flex flex-wrap justify-center py-8">
-            {Array.from({ length: totalPages }).map((_, index) => (
-              <Link
-                key={index}
-                href={
-                  pageLinkPrefix
-                    ? `?${pageLinkPrefix}&page=${index}`
-                    : `?page=${index}`
-                }
-                className={classNames(
-                  "p-3 md:p-2 hover:underline underline-offset-4",
-                  currentPage === index ? "underline" : "",
-                )}
-              >
-                {index}
-              </Link>
+      <section>
+        <div className="wrapper">
+          <h2 id="posts-label" className="sr-only">
+            Posts
+          </h2>
+          <ul className="flex flex-col" aria-labelledby="posts-label">
+            {slugs.map((slug) => (
+              <li key={slug}>
+                <Post
+                  slug={slug}
+                  className="mx-auto py-8 sm:py-10 md:py-12 border-b border-neutral-200"
+                />
+              </li>
             ))}
-          </div>
-        )}
-      </div>
+          </ul>
+          <Pagination
+            totalPages={totalPages}
+            currentPage={currentPage}
+            pageLinkPrefix={pageLinkPrefix}
+          />
+        </div>
+      </section>
     </div>
   );
 };

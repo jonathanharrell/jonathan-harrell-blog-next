@@ -22,8 +22,10 @@ export const Filters = ({
       <div className="wrapper grid grid-cols-12 text-lg">
         {Boolean(tags.length) && (
           <div className="col-span-7 flex flex-col gap-1">
-            <h3 className="sr-only">Tags</h3>
-            <ul className="flex flex-wrap gap-3">
+            <h3 id="tags-label" className="sr-only" aria-hidden="true">
+              Tags
+            </h3>
+            <ul className="flex flex-wrap gap-3" aria-labelledby="tags-label">
               <li>
                 <Link
                   href={`?tag=`}
@@ -31,6 +33,7 @@ export const Filters = ({
                     "py-1.5 px-3 rounded-full bg-neutral-200 hover:bg-neutral-300 transition-colors duration-150 ease-in-out",
                     !selectedTag ? "bg-neutral-300" : undefined,
                   )}
+                  aria-label="Show all posts"
                 >
                   All
                 </Link>
@@ -47,6 +50,7 @@ export const Filters = ({
                           ? "bg-neutral-300"
                           : undefined,
                       )}
+                      aria-label={`Filter posts by ${tag} tag`}
                     >
                       {capitalize(tag)}
                     </Link>
