@@ -2,6 +2,7 @@ import type { Config } from "tailwindcss";
 import TailwindTypography from "@tailwindcss/typography";
 
 const config: Config = {
+  darkMode: "selector",
   content: [
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
@@ -9,15 +10,13 @@ const config: Config = {
   ],
   theme: {
     fontFamily: {
-      "requiem": ["RequiemTextTDA", "RequiemTextTDB", "serif"],
+      requiem: ["RequiemTextTDA", "RequiemTextTDB", "serif"],
       "requiem-display": ["RequiemDispTDA", "RequiemDispTDB", "serif"],
       "requiem-ornaments": ["RequiemOrnaments", "serif"],
     },
     extend: {},
   },
-  plugins: [
-    TailwindTypography,
-  ],
+  plugins: [TailwindTypography],
 };
 
 export default config;

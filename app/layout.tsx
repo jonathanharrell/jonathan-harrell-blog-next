@@ -1,4 +1,6 @@
+import { ReactNode } from "react";
 import type { Metadata } from "next";
+import { Header } from "@/components/header";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -7,14 +9,16 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-                                     children,
-                                   }: Readonly<{
-  children: React.ReactNode;
+  children,
+}: Readonly<{
+  children: ReactNode;
 }>) {
   return (
     <html lang="en">
-      <body className="font-requiem bg-white text-neutral-800">
-        {children}
+      <body className="font-requiem bg-neutral-100 dark:bg-neutral-800 text-neutral-800">
+        <Header />
+        <main>{children}</main>
+        <footer className="wrapper">footer</footer>
       </body>
     </html>
   );

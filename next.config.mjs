@@ -4,6 +4,15 @@ import NextMdx from '@next/mdx';
 const nextConfig = {
   // Configure `pageExtensions` to include MDX files
   pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
+  redirects() {
+    return [
+      {
+        source: "/",
+        destination: "/blog",
+        permanent: true,
+      }
+    ]
+  }
 };
 
 const withMdx = NextMdx({
