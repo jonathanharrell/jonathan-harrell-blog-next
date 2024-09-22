@@ -17,9 +17,9 @@ export const Filters = ({
   selectedMonth,
 }: FiltersProps) => {
   return (
-    <section id="filters" className="hidden lg:block py-10 px-16 bg-neutral-50">
+    <section id="filters" className="hidden sm:block py-10 bg-neutral-50">
       <h2 className="sr-only">Filters</h2>
-      <div className="wrapper grid grid-cols-12 text-lg">
+      <div className="wrapper grid grid-cols-12 md:text-lg">
         {Boolean(tags.length) && (
           <div className="col-span-7 flex flex-col gap-1">
             <h3 id="tags-label" className="sr-only" aria-hidden="true">
