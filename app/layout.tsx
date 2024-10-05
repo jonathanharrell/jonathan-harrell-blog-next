@@ -18,9 +18,9 @@ export default function RootLayout({
   return (
     <ViewTransitions>
       <html lang="en">
-        <body className="font-requiem bg-white dark:bg-neutral-800 text-neutral-800">
+        <body className="flex flex-col min-h-screen font-requiem bg-white dark:bg-neutral-800 text-neutral-800">
           <Header />
-          <main>{children}</main>
+          <main className="flex-1">{children}</main>
           <Footer />
         </body>
       </html>
