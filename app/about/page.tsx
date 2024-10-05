@@ -1,15 +1,15 @@
 const AboutPage = () => {
   return (
     <div className="wrapper py-4 md:py-8 lg:py-12">
-      <div className="prose prose-lg md:prose-xl mx-auto">
+      <div className="prose prose-neutral prose-lg md:prose-xl mx-auto [&_p]:text-pretty">
         <h1>About this Book</h1>
         <p>
           I’m Jonathan, a{" "}
           <a href="https://www.jonathan-harrell.com/" target="_blank">
             software engineer
           </a>{" "}
-          by trade, and a writer, photographer, and designer in my free time.
-          I’m using this small corner of the web as a digital{" "}
+          by trade, and a writer/photographer/designer in my free time. I’m
+          using this small corner of the web as a digital{" "}
           <a
             href="https://en.wikipedia.org/wiki/Commonplace_book"
             target="_blank"
@@ -27,8 +27,8 @@ const AboutPage = () => {
           pleased indeed.
         </p>
         <p>
-          Why not a social media platform? There is something fulfilling about
-          owning one’s own turf and{" "}
+          Why not social media? There is something fulfilling about owning one’s
+          own turf and{" "}
           <a
             href="https://blog.ayjay.org/on-blogging/"
             target="_blank"
@@ -38,9 +38,28 @@ const AboutPage = () => {
           </a>
           . In a world where a handful of companies control everything we do,
           own, and share online, it is a small act of resistance to maintain a
-          personal website, in cultivating a blog over years, free from the
-          whims of capricious tech moguls. Perhaps some of you will join me in
-          doing the same.
+          personal website, to cultivate a blog over years, free from the whims
+          of capricious tech moguls. Perhaps some of you will join me in doing
+          the same.
+        </p>
+        <p>
+          The title{" "}
+          <a
+            href="https://en.wikipedia.org/wiki/Human-in-the-loop"
+            target="_blank"
+            rel="noreferrer"
+            className="italic"
+          >
+            Human in the Loop
+          </a>{" "}
+          comes from a concept in artificial intelligence, where human
+          involvement is integral in the decision-making or learning process of
+          an AI system. Rather than a feed that is algorithmically curated, the
+          inspirations collected here come primarily from being out in the
+          world: museum visits, trips to libraries, travels abroad. Building a
+          collection from the chaotic, the un&shy;predicted, the unforeseen, is
+          infinitely more interesting to me than regurgitating the same content
+          available cheaply on the nearest social media platform.
         </p>
         <p className="text-lg">▪︎ Jonathan Harrell</p>
       </div>
