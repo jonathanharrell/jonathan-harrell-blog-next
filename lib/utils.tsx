@@ -5,6 +5,7 @@ import { DEFAULT_POSTS_PER_PAGE } from "@/constants";
 import { Children } from "react";
 import markdownToTxt from "markdown-to-txt";
 import { truncate } from "lodash";
+import sharp from "sharp";
 
 export interface Frontmatter {
   date: string;
@@ -247,4 +248,20 @@ export const getAllPhotoSlugs = async () => {
   return files
     .filter((file) => !file.endsWith(".mov") && !file.endsWith(".mp4"))
     .reverse();
+};
+
+export const getPhotoSize = async (
+  slug: string,
+): Promise<{ width?: number; height?: number }> => {
+  const fullPath = path.resolve(".", "public/assets/photos", slug);
+
+  try {
+    const metadata = await sharp(fullPath).metadata();
+    return {
+      width: metadata.width,
+      height: metadata.height,
+    };
+  } catch (error) {
+    return {};
+  }
 };

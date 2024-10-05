@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import classNames from "classnames";
 import { flushSync } from "react-dom";
+import Link from "next/link";
 
 interface PhotoProps {
   slug: string;
