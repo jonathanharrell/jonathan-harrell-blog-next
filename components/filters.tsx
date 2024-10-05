@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { twMerge } from "tailwind-merge";
 import { FilterMonths } from "@/components/filter-months";
 import { capitalize } from "lodash";

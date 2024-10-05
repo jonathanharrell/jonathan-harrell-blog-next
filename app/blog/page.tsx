@@ -1,5 +1,3 @@
-import Link from "next/link";
-import classNames from "classnames";
 import { getPostMonths, getPostSlugs, getPostTags } from "@/lib/utils";
 import { Filters } from "@/components/filters";
 import { Post } from "@/components/post";
