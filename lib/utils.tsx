@@ -33,6 +33,13 @@ export const getPostData = async (slug: string) => {
 
         return <p {...props}>{children}</p>;
       },
+      a: ({ children, ...props }) => {
+        return (
+          <a {...props} target="_blank" rel="noreferrer">
+            {children}
+          </a>
+        );
+      },
       img: ({ src, alt, title }) => {
         return (
           <figure>

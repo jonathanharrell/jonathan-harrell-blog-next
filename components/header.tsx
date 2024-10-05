@@ -14,7 +14,7 @@ export const Header = () => {
             <span className="hidden md:inline" aria-hidden="true">
               ∙
             </span>
-            <span>Jonathan Harrell’s Creative Scrapbook</span>
+            <span>Jonathan Harrell’s Commonplace Book</span>
           </p>
           <DesktopNav />
           <MobileNav />
