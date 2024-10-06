@@ -6,13 +6,16 @@ const ArchivePage = async () => {
 
   return (
     <div className="wrapper flex flex-col gap-4 py-4 md:py-8 lg:py-12">
-      <ul className="prose prose-neutral prose-lg md:prose-xl mx-auto">
-        {postTeasers.map((teaser) => (
-          <li key={teaser.slug}>
-            <ArchiveTeaser teaser={teaser} />
-          </li>
-        ))}
-      </ul>
+      <div className="prose prose-neutral prose-lg md:prose-xl mx-auto">
+        <h1>Archive</h1>
+        <ul className="list-none !pl-0">
+          {postTeasers.map((teaser) => (
+            <li key={teaser.slug}>
+              <ArchiveTeaser teaser={teaser} />
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

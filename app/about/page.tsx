@@ -20,11 +20,10 @@ const AboutPage = () => {
           . Distinct from a journal or diary, such books have been kept from
           antiquity as repositories for notes, proverbs, poems, and more. I
           intend this digital space to serve much the same function: a creative
-          scrapbook where I can collect things I find interesting, useful, or
-          beautiful. This space is designed with an audience of one in mind: me.
-          But if anything here catches anyone’s attention, if it leads someone
-          to discover a new poet or author or artist, then I will be very
-          pleased indeed.
+          scrapbook where I collect things I find beautiful or interesting. This
+          space is designed with an audience of one in mind: me. But if anything
+          here catches anyone’s attention, if it leads someone to discover a new
+          poet or author or artist, then I will be very pleased indeed.
         </p>
         <p>
           Why not social media? There is something fulfilling about owning one’s
@@ -38,9 +37,9 @@ const AboutPage = () => {
           </a>
           . In a world where a handful of companies control everything we do,
           own, and share online, it is a small act of resistance to maintain a
-          personal website, to cultivate a blog over years, free from the whims
-          of capricious tech moguls. Perhaps some of you will join me in doing
-          the same.
+          personal website, to cultivate a blog over years, free of the whims of
+          capricious tech moguls. Perhaps some of you will join me in doing the
+          same.
         </p>
         <p>
           The title{" "}
@@ -56,10 +55,11 @@ const AboutPage = () => {
           involvement is integral in the decision-making or learning process of
           an AI system. Rather than a feed that is algorithmically curated, the
           inspirations collected here come primarily from being out in the
-          world: museum visits, trips to libraries, travels abroad. Building a
-          collection from the chaotic, the un&shy;predicted, the unforeseen, is
-          infinitely more interesting to me than regurgitating the same content
-          available cheaply on the nearest social media platform.
+          world: library visits, trips to museums and movie theaters, travels
+          abroad. Building a collection from the chaotic, the un&shy;predicted,
+          the unforeseen, is infinitely more interesting to me than
+          regurgitating the same content available cheaply on the nearest social
+          media platform.
         </p>
         <p className="text-lg">▪︎ Jonathan Harrell</p>
       </div>

@@ -12,7 +12,7 @@ export const Header = () => {
               Human in the Loop
             </Link>
             <span className="hidden md:inline" aria-hidden="true">
-              ∙
+              /
             </span>
             <span>Jonathan Harrell’s Commonplace Book</span>
           </p>
