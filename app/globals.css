@@ -2,36 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/*:root {*/
-/*  --foreground-rgb: 0, 0, 0;*/
-/*  --background-start-rgb: 214, 219, 220;*/
-/*  --background-end-rgb: 255, 255, 255;*/
-/*}*/
-
-/*@media (prefers-color-scheme: dark) {*/
-/*  :root {*/
-/*    --foreground-rgb: 255, 255, 255;*/
-/*    --background-start-rgb: 0, 0, 0;*/
-/*    --background-end-rgb: 0, 0, 0;*/
-/*  }*/
-/*}*/
-
-/*body {*/
-/*  color: rgb(var(--foreground-rgb));*/
-/*  background: linear-gradient(*/
-/*      to bottom,*/
-/*      transparent,*/
-/*      rgb(var(--background-end-rgb))*/
-/*    )*/
-/*    rgb(var(--background-start-rgb));*/
-/*}*/
-
-/*@layer utilities {*/
-/*  .text-balance {*/
-/*    text-wrap: balance;*/
-/*  }*/
-/*}*/
-
 @layer components {
   .wrapper {
     @apply w-full md:w-[95vw] lg:w-[90vw] 2xl:w-[80vw] max-w-[1300px] mx-auto px-8 sm:px-12;
@@ -101,83 +71,57 @@
   src: url("/fonts/RequiemOrnaments.woff") format("woff");
 }
 
-.prose {
-  @apply !leading-normal;
+@layer components {
+  .jh-prose {
+    @apply prose prose-neutral prose-lg md:prose-xl !leading-normal prose-h1:font-requiem-display prose-h1:text-3xl prose-h1:mt-8 prose-h1:mb-0 prose-h1:font-normal prose-h1:small-caps prose-blockquote:ps-0 prose-blockquote:border-none prose-blockquote:not-italic prose-video:w-full prose-ol:pl-4 prose-ol:marker:text-inherit prose-ul:pl-4 prose-ul:marker:text-inherit prose-li:my-0.5 prose-li:pl-0.5 prose-figcaption:text-lg prose-figcaption:text-neutral-800 hover:prose-a:no-underline prose-a:decoration-1 prose-a:underline-offset-4;
+  }
 }
 
-.prose h1 {
-  @apply font-requiem-display text-3xl mt-8 mb-0 font-normal small-caps;
-}
+@layer utilities {
+  .small-caps {
+    font-variant: small-caps;
+  }
 
-.prose blockquote {
-  @apply ps-0 border-none not-italic;
-}
+  .all-small-caps {
+    font-variant: all-small-caps;
+  }
 
-.prose blockquote p:before,
-.prose blockquote p:after {
-  @apply content-none;
-}
+  .prose blockquote p:before,
+  .prose blockquote p:after {
+    @apply content-none;
+  }
 
-.prose blockquote p cite {
-  @apply block not-italic mt-2 text-lg;
-}
+  .prose blockquote p cite {
+    @apply block not-italic mt-2 text-lg;
+  }
 
-.prose blockquote p cite::before {
-  @apply content-['—'];
-}
+  .prose blockquote p cite::before {
+    @apply content-['—'];
+  }
 
-.prose > *:last-child {
-  @apply mb-0;
-}
+  .prose > *:last-child {
+    @apply mb-0;
+  }
 
-.prose > *:last-child figure {
-  @apply mb-0;
-}
+  .prose > *:last-child figure {
+    @apply mb-0;
+  }
 
-.prose > *:last-child p:last-child {
-  @apply mb-0;
-}
+  .prose > *:last-child p:last-child {
+    @apply mb-0;
+  }
 
-.prose video {
-  @apply w-full;
-}
+  .prose figure img {
+    @apply my-0;
+  }
 
-.prose figure img {
-  @apply my-0;
-}
+  .prose p:has(+ ul),
+  .prose p:has(+ ol) {
+    @apply mb-2;
+  }
 
-.prose p:has(+ ul),
-.prose p:has(+ ol) {
-  @apply mb-2;
-}
-
-.prose p + ul,
-.prose p + ol {
-  @apply mt-2;
-}
-
-.prose ul,
-.prose ol {
-  @apply pl-4 marker:text-inherit;
-}
-
-.prose ul li,
-.prose ol li {
-  @apply my-0.5 pl-0.5;
-}
-
-.prose figcaption {
-  @apply text-lg text-neutral-800;
-}
-
-.prose a {
-  @apply hover:no-underline decoration-1 underline-offset-4;
-}
-
-.small-caps {
-  font-variant: small-caps;
-}
-
-.all-small-caps {
-  font-variant: all-small-caps;
+  .prose p + ul,
+  .prose p + ol {
+    @apply mt-2;
+  }
 }

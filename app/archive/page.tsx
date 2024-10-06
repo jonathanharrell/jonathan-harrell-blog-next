@@ -6,7 +6,7 @@ const ArchivePage = async () => {
 
   return (
     <div className="wrapper flex flex-col gap-4 py-4 md:py-8 lg:py-12">
-      <div className="prose prose-neutral prose-lg md:prose-xl mx-auto">
+      <div className="jh-prose mx-auto">
         <h1>Archive</h1>
         <ul className="list-none !pl-0">
           {postTeasers.map((teaser) => (

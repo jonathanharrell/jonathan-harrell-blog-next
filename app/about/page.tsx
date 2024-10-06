@@ -1,7 +1,7 @@
 const AboutPage = () => {
   return (
     <div className="wrapper py-4 md:py-8 lg:py-12">
-      <div className="prose prose-neutral prose-lg md:prose-xl mx-auto [&_p]:text-pretty">
+      <div className="jh-prose mx-auto [&_p]:text-pretty">
         <h1>About this Book</h1>
         <p>
           I’m Jonathan, a{" "}

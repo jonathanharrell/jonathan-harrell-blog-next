@@ -55,7 +55,7 @@ const BlogPage = async ({ searchParams }: BlogPageProps) => {
               <li key={slug}>
                 <Post
                   slug={slug}
-                  className="mx-auto py-8 sm:py-10 md:py-12 border-b border-neutral-200"
+                  className="mx-auto py-8 sm:py-10 border-b border-neutral-200"
                 />
               </li>
             ))}

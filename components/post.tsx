@@ -19,14 +19,9 @@ export const Post = async ({ slug, className }: PostProps) => {
   const filteredTags = frontmatter.tags.filter((tag) => tag !== "jdch");
 
   return (
-    <article
-      className={classNames(
-        "prose prose-neutral prose-lg md:prose-xl",
-        className,
-      )}
-    >
+    <article className={classNames("jh-prose", className)}>
       <header className="mb-4">
-        <h3 className="!my-0">
+        <h3 className="!my-0 leading-none">
           <Link href={`/blog/${slug}`} className="no-underline">
             <time
               dateTime={frontmatter.date}
