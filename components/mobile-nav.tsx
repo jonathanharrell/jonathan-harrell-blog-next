@@ -48,7 +48,7 @@ export const MobileNav = () => {
   return (
     <div className="lg:hidden">
       <button
-        className="py-1.5 px-3 rounded-full border border-neutral-200 hover:border-neutral-400 leading-none transition-colors duration-200 ease-in-out"
+        className="py-1.5 px-3 rounded-full border border-neutral-200 dark:border-neutral-700 hover:border-neutral-400 leading-none transition-colors duration-200 ease-in-out"
         onClick={showModal}
       >
         menu

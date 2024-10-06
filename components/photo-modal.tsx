@@ -51,7 +51,7 @@ export const PhotoModal = ({ slug, width, height }: PhotoModalProps) => {
   return (
     <dialog
       className={classNames(
-        "bg-transparent backdrop:bg-gray-950 backdrop:bg-opacity-90",
+        "bg-transparent backdrop:bg-neutral-900 backdrop:bg-opacity-90",
         isModalOpen ? "flex flex-col" : "",
       )}
       style={{ viewTransitionName: "modal" }}
