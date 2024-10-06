@@ -5,7 +5,7 @@ const ArchivePage = async () => {
   const postTeasers = await getPostTeasers();
 
   return (
-    <div className="wrapper flex flex-col gap-4 py-4 md:py-8 lg:py-12">
+    <div className="wrapper flex flex-col gap-4 py-4 md:py-8">
       <div className="jh-prose mx-auto">
         <h1>Archive</h1>
         <ul className="list-none !pl-0">

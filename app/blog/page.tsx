@@ -37,36 +37,36 @@ const BlogPage = async ({ searchParams }: BlogPageProps) => {
   }
 
   return (
-    <div>
-      <h1 className="sr-only">Blog</h1>
+    <div className="wrapper">
+      <header className="jh-prose mx-auto pt-4 md:pt-8 pb-6 border-b border-neutral-200 border-dashed">
+        <h1>Human in the Loop</h1>
+      </header>
+      <section>
+        <h2 id="posts-label" className="sr-only">
+          Posts
+        </h2>
+        <ul className="flex flex-col" aria-labelledby="posts-label">
+          {slugs.map((slug) => (
+            <li key={slug}>
+              <Post
+                slug={slug}
+                className="mx-auto py-8 sm:py-10 border-b border-neutral-200 border-dashed"
+              />
+            </li>
+          ))}
+        </ul>
+        <Pagination
+          totalPages={totalPages}
+          currentPage={currentPage}
+          pageLinkPrefix={pageLinkPrefix}
+        />
+      </section>
       <Filters
         tags={tags}
         months={months}
         selectedTag={selectedTag}
         selectedMonth={selectedMonth}
       />
-      <section>
-        <div className="wrapper">
-          <h2 id="posts-label" className="sr-only">
-            Posts
-          </h2>
-          <ul className="flex flex-col" aria-labelledby="posts-label">
-            {slugs.map((slug) => (
-              <li key={slug}>
-                <Post
-                  slug={slug}
-                  className="mx-auto py-8 sm:py-10 border-b border-neutral-200"
-                />
-              </li>
-            ))}
-          </ul>
-          <Pagination
-            totalPages={totalPages}
-            currentPage={currentPage}
-            pageLinkPrefix={pageLinkPrefix}
-          />
-        </div>
-      </section>
     </div>
   );
 };

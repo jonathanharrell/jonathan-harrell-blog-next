@@ -17,11 +17,11 @@ export const Filters = ({
   selectedMonth,
 }: FiltersProps) => {
   return (
-    <section id="filters" className="hidden sm:block py-10 bg-neutral-50">
+    <section id="filters" className="hidden sm:block mt-8">
       <h2 className="sr-only">Filters</h2>
-      <div className="wrapper grid grid-cols-12 md:text-lg">
+      <div className="grid grid-cols-12 gap-8 lg:gap-0 py-8 md:text-lg border-y border-neutral-200">
         {Boolean(tags.length) && (
-          <div className="col-span-7 flex flex-col gap-1">
+          <div className="col-span-12 lg:col-span-8 xl:col-span-7 flex flex-col gap-1">
             <h3 id="tags-label" className="sr-only" aria-hidden="true">
               Tags
             </h3>
@@ -30,8 +30,10 @@ export const Filters = ({
                 <Link
                   href={`?tag=`}
                   className={twMerge(
-                    "py-1.5 px-3 rounded-full bg-neutral-200 hover:bg-neutral-300 transition-colors duration-150 ease-in-out",
-                    !selectedTag ? "bg-neutral-300" : undefined,
+                    "py-1.5 px-3 rounded-full border border-neutral-200 hover:border-neutral-400 text-neutral-500 transition-colors duration-200 ease-in-out",
+                    !selectedTag
+                      ? "border-neutral-400 text-neutral-800"
+                      : undefined,
                   )}
                   aria-label="Show all posts"
                 >
@@ -45,9 +47,9 @@ export const Filters = ({
                     <Link
                       href={`?tag=${tag}`}
                       className={twMerge(
-                        "py-1.5 px-3 rounded-full bg-neutral-200 hover:bg-neutral-300 transition-colors duration-150 ease-in-out",
+                        "py-1.5 px-3 rounded-full border border-neutral-200 hover:border-neutral-400 text-neutral-500 transition-colors duration-200 ease-in-out",
                         selectedTag?.includes(tag)
-                          ? "bg-neutral-300"
+                          ? "border-neutral-400 text-neutral-800"
                           : undefined,
                       )}
                       aria-label={`Filter posts by ${tag} tag`}
@@ -59,7 +61,7 @@ export const Filters = ({
             </ul>
           </div>
         )}
-        <div className="col-start-10 pl-16 border-l border-neutral-200">
+        <div className="col-span-12 lg:col-start-10 lg:pl-16 lg:border-l lg:border-neutral-200">
           <FilterMonths months={months} selectedMonth={selectedMonth} />
         </div>
       </div>

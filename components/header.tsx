@@ -6,7 +6,7 @@ export const Header = () => {
   return (
     <header className="group">
       <div className="wrapper">
-        <div className="flex flex-col sm:flex-row items-center md:items-baseline justify-between gap-4 pt-8 pb-6 border-b border-neutral-200 group-has-[+_main_#filters]:!border-0">
+        <div className="flex flex-col sm:flex-row items-center md:items-baseline justify-between gap-4 pt-8 pb-6 border-b border-neutral-200">
           <p className="flex flex-col md:flex-row items-center sm:items-start md:items-center md:gap-2 text-lg">
             <Link href="/" className="small-caps">
               Human in the Loop

@@ -1,6 +1,6 @@
 const AboutPage = () => {
   return (
-    <div className="wrapper py-4 md:py-8 lg:py-12">
+    <div className="wrapper py-4 md:py-8">
       <div className="jh-prose mx-auto [&_p]:text-pretty">
         <h1>About this Book</h1>
         <p>

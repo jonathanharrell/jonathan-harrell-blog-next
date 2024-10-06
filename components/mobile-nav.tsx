@@ -3,6 +3,7 @@
 import { Link } from "next-view-transitions";
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
+import { flushSync } from "react-dom";
 
 export const MobileNav = () => {
   const modalRef = useRef<HTMLDialogElement | null>(null);
@@ -10,12 +11,28 @@ export const MobileNav = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const showModal = () => {
-    modalRef.current?.showModal();
-    setIsModalOpen(true);
+    if (typeof document.startViewTransition !== "undefined") {
+      document.startViewTransition(() => {
+        modalRef.current?.showModal();
+
+        flushSync(() => {
+          setIsModalOpen(true);
+        });
+      });
+    } else {
+      modalRef.current?.showModal();
+      setIsModalOpen(true);
+    }
   };
 
   const closeModal = () => {
-    modalRef.current?.close();
+    if (typeof document.startViewTransition !== "undefined") {
+      document.startViewTransition(() => {
+        modalRef.current?.close();
+      });
+    } else {
+      modalRef.current?.close();
+    }
   };
 
   const handleDialogClose = () => {
@@ -31,7 +48,7 @@ export const MobileNav = () => {
   return (
     <div className="lg:hidden">
       <button
-        className="py-1.5 px-3 rounded-full bg-neutral-200 leading-none"
+        className="py-1.5 px-3 rounded-full border border-neutral-200 hover:border-neutral-400 leading-none transition-colors duration-200 ease-in-out"
         onClick={showModal}
       >
         menu
