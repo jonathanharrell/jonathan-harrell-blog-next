@@ -17,12 +17,12 @@ export const Pagination = ({
   }
 
   return (
-    <section className="flex flex-wrap justify-center py-8">
+    <section id="pagination" className="py-8">
       <nav aria-labelledby="pagination-label">
         <h2 id="pagination-label" className="sr-only" aria-hidden="true">
           Post pagination
         </h2>
-        <ul>
+        <ul className="flex flex-wrap justify-center">
           {Array.from({ length: totalPages }).map((_, index) => (
             <Link
               key={index}

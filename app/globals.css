@@ -78,6 +78,10 @@
 }
 
 @layer utilities {
+  .no-caps {
+    font-variant: normal;
+  }
+
   .small-caps {
     font-variant: small-caps;
   }

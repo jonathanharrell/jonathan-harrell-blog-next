@@ -4,10 +4,11 @@ import classNames from "classnames";
 
 interface PostProps {
   slug: string;
+  single?: boolean;
   className?: string;
 }
 
-export const Post = async ({ slug, className }: PostProps) => {
+export const Post = async ({ slug, single, className }: PostProps) => {
   const { content, frontmatter } = await getPostData(slug);
 
   const formattedDate = new Date(frontmatter.date).toLocaleDateString("en-US", {
@@ -21,16 +22,26 @@ export const Post = async ({ slug, className }: PostProps) => {
   return (
     <article className={classNames("jh-prose", className)}>
       <header className="mb-4">
-        <h3 className="!my-0 leading-none">
-          <Link href={`/blog/${slug}`} className="no-underline">
-            <time
-              dateTime={frontmatter.date}
-              className="inline-block text-xl small-caps"
-            >
-              {formattedDate}
-            </time>
-          </Link>
-        </h3>
+        {single ? (
+          <h1 className="!my-0">
+            <Link href={`/blog/${slug}`} className="no-underline">
+              <time dateTime={frontmatter.date} className="inline-block">
+                {formattedDate}
+              </time>
+            </Link>
+          </h1>
+        ) : (
+          <h3 className="!my-0 leading-none">
+            <Link href={`/blog/${slug}`} className="no-underline">
+              <time
+                dateTime={frontmatter.date}
+                className="inline-block text-xl small-caps"
+              >
+                {formattedDate}
+              </time>
+            </Link>
+          </h3>
+        )}
         {Boolean(filteredTags.length) && (
           <div className="not-prose">
             <h4 id="post-tags-label" className="sr-only" aria-hidden="true">

@@ -37,20 +37,25 @@ const BlogPage = async ({ searchParams }: BlogPageProps) => {
   }
 
   return (
-    <div className="wrapper">
-      <header className="jh-prose mx-auto pt-4 md:pt-8 pb-6 border-b border-neutral-200 border-dashed">
-        <h1>Human in the Loop</h1>
+    <div className="wrapper pt-4 md:pt-8">
+      <header className="jh-prose mx-auto">
+        <h1>
+          Commonplaces
+          {selectedTag || selectedMonth ? (
+            <span className="no-caps"> / {selectedTag || selectedMonth}</span>
+          ) : null}
+        </h1>
       </header>
       <section>
         <h2 id="posts-label" className="sr-only">
           Posts
         </h2>
-        <ul className="flex flex-col" aria-labelledby="posts-label">
+        <ul className="group/list flex flex-col" aria-labelledby="posts-label">
           {slugs.map((slug) => (
-            <li key={slug}>
+            <li key={slug} className="group/post">
               <Post
                 slug={slug}
-                className="mx-auto py-8 sm:py-10 border-b border-neutral-200 border-dashed"
+                className="mx-auto py-8 sm:py-10 group-has-[+li]/post:border-b group-has-[+#pagination]/list:border-b border-neutral-200 border-dashed"
               />
             </li>
           ))}
