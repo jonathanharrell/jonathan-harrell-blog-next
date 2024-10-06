@@ -26,13 +26,7 @@ export const MobileNav = () => {
   };
 
   const closeModal = () => {
-    if (typeof document.startViewTransition !== "undefined") {
-      document.startViewTransition(() => {
-        modalRef.current?.close();
-      });
-    } else {
-      modalRef.current?.close();
-    }
+    modalRef.current?.close();
   };
 
   const handleDialogClose = () => {
