@@ -7,7 +7,7 @@ interface PhotoProps {
 
 export const PhotoLink = ({ slug }: PhotoProps) => {
   return (
-    <Link href={`/photo/${slug}`}>
+    <Link href={`/photo/${slug}`} aria-label="Enlarge photo">
       <Photo
         slug={slug}
         width={390}

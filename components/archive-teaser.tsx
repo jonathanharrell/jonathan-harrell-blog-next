@@ -19,14 +19,16 @@ export const ArchiveTeaser = ({ teaser }: ArchiveTeaserProps) => {
   });
 
   return (
-    <p>
-      <Link
-        href={`/blog/${teaser.slug}`}
-        className="underline hover:no-underline"
-      >
-        {formattedDate}
-      </Link>
-      : {teaser.text || "(image)"}
-    </p>
+    <article>
+      <p>
+        <Link
+          href={`/blog/${teaser.slug}`}
+          className="underline hover:no-underline"
+        >
+          {formattedDate}
+        </Link>
+        : {teaser.text || "(image)"}
+      </p>
+    </article>
   );
 };

@@ -36,7 +36,6 @@ export const Pagination = ({
                 currentPage === index ? "underline" : "",
               )}
               aria-label={`Go to page ${index + 1} of posts`}
-              aria-current={currentPage === index}
             >
               {index}
             </Link>

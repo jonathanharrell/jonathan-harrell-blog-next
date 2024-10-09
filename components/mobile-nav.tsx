@@ -45,7 +45,8 @@ export const MobileNav = () => {
         className="py-1.5 px-3 rounded-full border border-neutral-200 dark:border-neutral-700 hover:border-neutral-400 leading-none transition-colors duration-200 ease-in-out"
         onClick={showModal}
       >
-        menu
+        <span className="sr-only">Site Navigation Dialog</span>
+        <span aria-hidden="true">Menu</span>
       </button>
       <dialog
         onClose={handleDialogClose}
@@ -54,7 +55,7 @@ export const MobileNav = () => {
       >
         <div className="flex flex-col h-full">
           <button autoFocus onClick={closeModal}>
-            Close
+            Close <span className="sr-only">Site Navigation Dialog</span>
           </button>
           <nav aria-labelledby="mobile-navigation-label">
             <h2
