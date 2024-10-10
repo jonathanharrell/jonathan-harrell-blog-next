@@ -23,6 +23,7 @@ export const getPostData = async (slug: string) => {
       p: ({ children, ...props }) => {
         try {
           if (Children.only(children)) {
+            // TODO: fix this
             // @ts-ignore
             if (children?.props.src) {
               return <div {...props}>{children}</div>;
