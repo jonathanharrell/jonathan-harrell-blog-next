@@ -58,7 +58,7 @@ export const PhotoModal = ({ slug, width, height }: PhotoModalProps) => {
       ref={modalRef}
     >
       <button autoFocus onClick={goBack} className="text-neutral-100">
-        Close
+        Close<span className="sr-only"> Photo Dialog</span>
       </button>
       <div className="flex flex-col flex-1 min-h-0">
         <Photo
