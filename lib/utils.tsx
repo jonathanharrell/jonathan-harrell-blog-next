@@ -2,7 +2,7 @@ import path from "path";
 import fs from "fs";
 import { compileMDX } from "next-mdx-remote/rsc";
 import { DEFAULT_POSTS_PER_PAGE } from "@/constants";
-import { Children } from "react";
+import { Children, ReactNode } from "react";
 import markdownToTxt from "markdown-to-txt";
 import { truncate } from "lodash";
 import sharp from "sharp";
@@ -23,6 +23,7 @@ export const getPostData = async (slug: string) => {
       p: ({ children, ...props }) => {
         try {
           if (Children.only(children)) {
+            // @ts-ignore
             if (children?.props.src) {
               return <div {...props}>{children}</div>;
             }
