@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { KeyboardEventHandler, useEffect, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import { useTransitionRouter } from "next-view-transitions";
 import classNames from "classnames";
@@ -46,6 +46,18 @@ export const PhotoModal = ({ slug, width, height }: PhotoModalProps) => {
 
   useEffect(() => {
     showModal();
+
+    const handleKeydown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        goBack();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeydown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeydown);
+    };
   }, []);
 
   return (
