@@ -53,11 +53,10 @@ const BlogPage = async ({ searchParams }: BlogPageProps) => {
         <ul className="group/list flex flex-col" aria-labelledby="posts-label">
           {slugs.map((slug) => (
             <li key={slug} className="group/post">
-              {slug}
-              {/*<Post*/}
-              {/*  slug={slug}*/}
-              {/*  className="mx-auto py-8 sm:py-10 group-has-[+li]/post:border-b group-has-[+#pagination]/list:border-b border-neutral-200 dark:border-neutral-700 border-dashed"*/}
-              {/*/>*/}
+              <Post
+                slug={slug}
+                className="mx-auto py-8 sm:py-10 group-has-[+li]/post:border-b group-has-[+#pagination]/list:border-b border-neutral-200 dark:border-neutral-700 border-dashed"
+              />
             </li>
           ))}
         </ul>
