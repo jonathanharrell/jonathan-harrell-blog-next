@@ -140,7 +140,6 @@ export const getPostSlugs = async ({
   const directoryPath = path.resolve(".", "content/posts");
   const filePaths = fs.readdirSync(directoryPath);
 
-  console.time("slugsWithFrontmatter");
   const slugsWithFrontmatter = filePaths.map((file) => {
     const fullPath = path.resolve(".", "content/posts/", file);
     const fileContents = readSync(fullPath);
@@ -151,7 +150,6 @@ export const getPostSlugs = async ({
       frontmatter: fileContents.data.matter as Frontmatter,
     };
   });
-  console.timeEnd("slugsWithFrontmatter");
 
   const filteredPostSlugsWithFrontmatter = slugsWithFrontmatter.filter(
     (slugWithFrontmatter) => {

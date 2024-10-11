@@ -1,4 +1,4 @@
-import { getPostMonths, getPostSlugs, getPostTags } from "@/lib/utils";
+import { getPostSlugs } from "@/lib/utils";
 import { Filters } from "@/components/filters";
 import { Post } from "@/components/post";
 import { Pagination } from "@/components/pagination";
