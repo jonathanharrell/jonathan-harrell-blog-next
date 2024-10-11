@@ -1,4 +1,4 @@
-import { getPhotoSize } from "@/lib/utils";
+import { getAllPhotoSlugs, getPhotoSize, getPostSlugs } from "@/lib/utils";
 import { Photo } from "@/components/photo";
 
 interface PhotoPageProps {
@@ -18,3 +18,11 @@ const PhotoPage = async ({ params }: PhotoPageProps) => {
 };
 
 export default PhotoPage;
+
+export const generateStaticParams = async () => {
+  const slugs = await getAllPhotoSlugs();
+
+  return slugs.map((slug) => ({
+    slug,
+  }));
+};

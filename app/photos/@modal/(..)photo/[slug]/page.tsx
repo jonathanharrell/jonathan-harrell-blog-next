@@ -1,5 +1,5 @@
 import { PhotoModal } from "@/components/photo-modal";
-import { getPhotoSize } from "@/lib/utils";
+import { getAllPhotoSlugs, getPhotoSize } from "@/lib/utils";
 
 interface PhotoPageProps {
   params: {
