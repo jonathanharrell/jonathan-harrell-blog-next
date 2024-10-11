@@ -2,10 +2,12 @@ import path from "path";
 import fs from "fs";
 import { compileMDX } from "next-mdx-remote/rsc";
 import { DEFAULT_POSTS_PER_PAGE } from "@/constants";
-import { Children, ReactNode } from "react";
+import { Children } from "react";
 import markdownToTxt from "markdown-to-txt";
 import { truncate } from "lodash";
 import sharp from "sharp";
+import { read } from "to-vfile";
+import { matter } from "vfile-matter";
 
 export interface Frontmatter {
   date: string;
@@ -141,13 +143,12 @@ export const getPostSlugs = async ({
 
   const slugsWithFrontmatterPromises = postSlugs.map(async (slug) => {
     const fullPath = path.resolve(".", "content/posts/", `${slug}.mdx`);
-    const fileContents = fs.readFileSync(fullPath, "utf8");
-    const parsedContents = await compileMDX<Frontmatter>({
-      source: fileContents,
-      options: { parseFrontmatter: true },
-    });
 
-    return { slug, frontmatter: parsedContents.frontmatter };
+    const file = await read(fullPath);
+    matter(file);
+    const frontmatter = file.data.matter as Frontmatter;
+
+    return { slug, frontmatter };
   });
 
   const slugsWithFrontmatter = await Promise.all(slugsWithFrontmatterPromises);
