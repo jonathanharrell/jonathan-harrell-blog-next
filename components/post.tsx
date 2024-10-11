@@ -9,9 +9,7 @@ interface PostProps {
 }
 
 export const Post = async ({ slug, single, className }: PostProps) => {
-  console.time(`getPostData-${slug}`);
   const { content, frontmatter } = await getPostData(slug);
-  console.timeEnd(`getPostData-${slug}`);
 
   const formattedDate = new Date(frontmatter.date).toLocaleDateString("en-US", {
     month: "long",

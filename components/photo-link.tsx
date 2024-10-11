@@ -13,7 +13,7 @@ export const PhotoLink = ({ slug }: PhotoProps) => {
         width={390}
         height={390}
         quality={40}
-        className="w-full h-full aspect-square object-cover"
+        className="w-full h-full max-w-[390px] max-h-[390px] aspect-square object-cover"
       />
     </Link>
   );

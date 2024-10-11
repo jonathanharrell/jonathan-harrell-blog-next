@@ -1,4 +1,4 @@
-import { getAllPhotoSlugs, getPhotoSize, getPostSlugs } from "@/lib/utils";
+import { getAllPhotoSlugs } from "@/lib/utils";
 import { Photo } from "@/components/photo";
 
 interface PhotoPageProps {
@@ -10,7 +10,12 @@ interface PhotoPageProps {
 const PhotoPage = async ({ params }: PhotoPageProps) => {
   return (
     <div className="flex items-center justify-center p-12">
-      <Photo slug={params.slug} width={900} height={900} />
+      <Photo
+        slug={params.slug}
+        width={900}
+        height={900}
+        className="max-w-[900px] max-h-[900px]"
+      />
     </div>
   );
 };

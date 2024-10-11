@@ -77,7 +77,7 @@ export const PhotoModal = ({ slug, width, height }: PhotoModalProps) => {
           slug={slug}
           width={width}
           height={height}
-          className="flex-1 min-h-0"
+          className="flex-1 min-h-0 max-w-[900px] max-h-[900px]"
         />
       </div>
     </dialog>

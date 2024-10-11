@@ -5,6 +5,7 @@ interface PhotoProps {
   slug: string;
   width?: number;
   height?: number;
+  sizes?: string;
   quality?: number;
   className?: string;
 }
@@ -13,6 +14,7 @@ export const Photo = ({
   slug,
   width,
   height,
+  sizes,
   quality,
   className,
 }: PhotoProps) => {
@@ -22,11 +24,9 @@ export const Photo = ({
       alt=""
       width={width}
       height={height}
+      sizes={sizes}
       quality={quality ?? 100}
-      className={classNames(
-        "max-w-[900px] max-h-[900px] object-contain",
-        className,
-      )}
+      className={classNames("object-contain", className)}
     />
   );
 };
