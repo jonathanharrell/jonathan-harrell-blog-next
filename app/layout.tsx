@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, Suspense } from "react";
 import type { Metadata } from "next";
 import { ViewTransitions } from "next-view-transitions";
 import { Header } from "@/components/header";
@@ -20,7 +20,9 @@ export default function RootLayout({
       <html lang="en">
         <body className="flex flex-col min-h-screen font-requiem bg-white dark:bg-neutral-800 text-neutral-800 dark:text-neutral-100">
           <Header />
-          <main className="flex-1">{children}</main>
+          <main className="flex-1">
+            <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
+          </main>
           <Footer />
         </body>
       </html>

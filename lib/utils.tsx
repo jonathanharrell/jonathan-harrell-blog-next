@@ -143,12 +143,10 @@ export const getPostSlugs = async ({
 
   const slugsWithFrontmatterPromises = postSlugs.map(async (slug) => {
     const fullPath = path.resolve(".", "content/posts/", `${slug}.mdx`);
-
     const file = await read(fullPath);
     matter(file);
-    const frontmatter = file.data.matter as Frontmatter;
 
-    return { slug, frontmatter };
+    return { slug, frontmatter: file.data.matter as Frontmatter };
   });
 
   const slugsWithFrontmatter = await Promise.all(slugsWithFrontmatterPromises);
