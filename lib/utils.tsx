@@ -6,7 +6,7 @@ import { Children } from "react";
 import markdownToTxt from "markdown-to-txt";
 import { truncate } from "lodash";
 import sharp from "sharp";
-import { read } from "to-vfile";
+import { readSync } from "to-vfile";
 import { matter } from "vfile-matter";
 
 export interface Frontmatter {
@@ -138,28 +138,21 @@ export const getPostSlugs = async ({
   perPage = DEFAULT_POSTS_PER_PAGE,
 }: { tag?: string; month?: string; page?: number; perPage?: number } = {}) => {
   const directoryPath = path.resolve(".", "content/posts");
-  const files = fs.readdirSync(directoryPath);
-  const postSlugs = files.map((file) => file.replace(/\.mdx$/, ""));
+  const filePaths = fs.readdirSync(directoryPath);
 
-  const slugsWithFrontmatterPromises = postSlugs.map(async (slug) => {
-    const fullPath = path.resolve(".", "content/posts/", `${slug}.mdx`);
-    const file = await read(fullPath);
-    matter(file);
+  const slugsWithFrontmatter = filePaths.map((file) => {
+    const fullPath = path.resolve(".", "content/posts/", file);
+    const fileContents = readSync(fullPath);
+    matter(fileContents);
 
-    return { slug, frontmatter: file.data.matter as Frontmatter };
+    return {
+      slug: file.replace(".mdx", ""),
+      frontmatter: fileContents.data.matter as Frontmatter,
+    };
   });
 
-  const slugsWithFrontmatter = await Promise.all(slugsWithFrontmatterPromises);
-
-  const sortedSlugsWithFrontmatter = slugsWithFrontmatter.sort((a, b) => {
-    const dateA = new Date(a.frontmatter.date as string);
-    const dateB = new Date(b.frontmatter.date as string);
-
-    return dateB.getTime() - dateA.getTime();
-  });
-
-  const filteredPostSlugs = sortedSlugsWithFrontmatter
-    .filter((slugWithFrontmatter) => {
+  const filteredPostSlugsWithFrontmatter = slugsWithFrontmatter.filter(
+    (slugWithFrontmatter) => {
       if (tag) {
         const tags = tag.split(",");
         const positiveTags = tags.filter((t) => !t.startsWith("!"));
@@ -191,14 +184,23 @@ export const getPostSlugs = async ({
       }
 
       return true;
+    },
+  );
+
+  const sortedSlugs = filteredPostSlugsWithFrontmatter
+    .sort((a, b) => {
+      const dateA = new Date(a.frontmatter.date as string);
+      const dateB = new Date(b.frontmatter.date as string);
+
+      return dateB.getTime() - dateA.getTime();
     })
     .map((slugWithFrontmatter) => slugWithFrontmatter.slug);
 
   const skip = page ? page * perPage : 0;
-  const slugs = filteredPostSlugs.slice(skip, skip + perPage);
+  const slugs = sortedSlugs.slice(skip, skip + perPage);
   const pagination = {
     currentPage: page || 0,
-    totalPages: Math.ceil(filteredPostSlugs.length / perPage),
+    totalPages: Math.ceil(sortedSlugs.length / perPage),
   };
 
   return {
