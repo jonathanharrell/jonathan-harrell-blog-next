@@ -8,11 +8,9 @@ interface PhotoPageProps {
 }
 
 const PhotoPage = async ({ params }: PhotoPageProps) => {
-  const { width, height } = await getPhotoSize(params.slug);
-
   return (
     <div className="flex items-center justify-center p-12">
-      <Photo slug={params.slug} width={width} height={height} />
+      <Photo slug={params.slug} width={900} height={900} />
     </div>
   );
 };

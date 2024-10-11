@@ -1,5 +1,4 @@
 import { PhotoModal } from "@/components/photo-modal";
-import { getAllPhotoSlugs, getPhotoSize } from "@/lib/utils";
 
 interface PhotoPageProps {
   params: {
@@ -8,9 +7,7 @@ interface PhotoPageProps {
 }
 
 const PhotoPage = async ({ params }: PhotoPageProps) => {
-  const { width, height } = await getPhotoSize(params.slug);
-
-  return <PhotoModal slug={params.slug} width={width} height={height} />;
+  return <PhotoModal slug={params.slug} width={900} height={900} />;
 };
 
 export default PhotoPage;
