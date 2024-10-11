@@ -153,7 +153,6 @@ export const getPostSlugs = async ({
   });
   console.timeEnd("slugsWithFrontmatter");
 
-  console.time("filteringAndSorting");
   const filteredPostSlugsWithFrontmatter = slugsWithFrontmatter.filter(
     (slugWithFrontmatter) => {
       if (tag) {
@@ -205,55 +204,26 @@ export const getPostSlugs = async ({
     currentPage: page || 0,
     totalPages: Math.ceil(sortedSlugs.length / perPage),
   };
-  console.timeEnd("filteringAndSorting");
+
+  const tags = slugsWithFrontmatter.map(
+    (slugWithFrontmatter) => slugWithFrontmatter.frontmatter.tags,
+  );
+  const dates = slugsWithFrontmatter.map(
+    (slugWithFrontmatter) => slugWithFrontmatter.frontmatter.date as string,
+  );
+  const months = dates.map((date) =>
+    new Date(date).toLocaleDateString("default", {
+      month: "long",
+      year: "numeric",
+    }),
+  );
 
   return {
     slugs,
     pagination,
+    tags: Array.from(new Set(tags.flat())).sort(),
+    months: Array.from(new Set(months)),
   };
-};
-
-export const getPostTags = async () => {
-  const directoryPath = path.resolve(".", "content/posts");
-  const files = fs.readdirSync(directoryPath);
-
-  const monthPromises = files.reverse().map(async (file) => {
-    const fullPath = path.resolve(".", "content/posts/", file);
-    const fileContents = fs.readFileSync(fullPath, "utf8");
-    const parsedContents = await compileMDX({
-      source: fileContents,
-      options: { parseFrontmatter: true },
-    });
-
-    return parsedContents.frontmatter.tags;
-  }) as Promise<string[]>[];
-
-  const tags = await Promise.all(monthPromises);
-
-  return { tags: Array.from(new Set(tags.flat())).sort() };
-};
-
-export const getPostMonths = async () => {
-  const directoryPath = path.resolve(".", "content/posts");
-  const files = fs.readdirSync(directoryPath);
-
-  const monthPromises = files.reverse().map(async (file) => {
-    const fullPath = path.resolve(".", "content/posts/", file);
-    const fileContents = fs.readFileSync(fullPath, "utf8");
-    const parsedContents = await compileMDX({
-      source: fileContents,
-      options: { parseFrontmatter: true },
-    });
-    const date = parsedContents.frontmatter.date as string;
-    return new Date(date).toLocaleDateString("default", {
-      month: "long",
-      year: "numeric",
-    });
-  });
-
-  const months = await Promise.all(monthPromises);
-
-  return { months: Array.from(new Set(months)) };
 };
 
 export const getAllPhotoSlugs = async () => {
