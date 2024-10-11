@@ -153,6 +153,7 @@ export const getPostSlugs = async ({
   });
   console.timeEnd("slugsWithFrontmatter");
 
+  console.time("filteringAndSorting");
   const filteredPostSlugsWithFrontmatter = slugsWithFrontmatter.filter(
     (slugWithFrontmatter) => {
       if (tag) {
@@ -204,6 +205,7 @@ export const getPostSlugs = async ({
     currentPage: page || 0,
     totalPages: Math.ceil(sortedSlugs.length / perPage),
   };
+  console.timeEnd("filteringAndSorting");
 
   return {
     slugs,
