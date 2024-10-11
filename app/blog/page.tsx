@@ -23,8 +23,8 @@ const BlogPage = async ({ searchParams }: BlogPageProps) => {
     month: selectedMonth,
     page: selectedPage ? Number(selectedPage) : 0,
   });
-  const { tags } = await getPostTags();
-  const { months } = await getPostMonths();
+  // const { tags } = await getPostTags();
+  // const { months } = await getPostMonths();
 
   const { currentPage, totalPages } = pagination;
 
@@ -67,12 +67,12 @@ const BlogPage = async ({ searchParams }: BlogPageProps) => {
           pageLinkPrefix={pageLinkPrefix}
         />
       </section>
-      <Filters
-        tags={tags}
-        months={months}
-        selectedTag={selectedTag}
-        selectedMonth={selectedMonth}
-      />
+      {/*<Filters*/}
+      {/*  tags={tags}*/}
+      {/*  months={months}*/}
+      {/*  selectedTag={selectedTag}*/}
+      {/*  selectedMonth={selectedMonth}*/}
+      {/*/>*/}
     </div>
   );
 };
