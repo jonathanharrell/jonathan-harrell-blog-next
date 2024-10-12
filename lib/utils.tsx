@@ -5,7 +5,6 @@ import { DEFAULT_POSTS_PER_PAGE } from "@/constants";
 import { Children } from "react";
 import markdownToTxt from "markdown-to-txt";
 import { truncate } from "lodash";
-import sharp from "sharp";
 import { readSync } from "to-vfile";
 import { matter } from "vfile-matter";
 
@@ -228,20 +227,4 @@ export const getAllPhotoSlugs = async () => {
   const directoryPath = path.resolve(".", "public/assets/photos");
   const files = fs.readdirSync(directoryPath);
   return files.filter((file) => file.endsWith(".jpg")).reverse();
-};
-
-export const getPhotoSize = async (
-  slug: string,
-): Promise<{ width?: number; height?: number }> => {
-  const fullPath = path.resolve(".", "public/assets/photos", slug);
-
-  try {
-    const metadata = await sharp(fullPath).metadata();
-    return {
-      width: metadata.width,
-      height: metadata.height,
-    };
-  } catch (error) {
-    return {};
-  }
 };

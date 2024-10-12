@@ -10,9 +10,13 @@ const config: Config = {
   ],
   theme: {
     fontFamily: {
-      requiem: ["RequiemTextTDA", "RequiemTextTDB", "serif"],
-      "requiem-display": ["RequiemDispTDA", "RequiemDispTDB", "serif"],
-      "requiem-ornaments": ["RequiemOrnaments", "serif"],
+      requiem: ["RequiemTextTDA", "RequiemTextTDB", "Palatino", "serif"],
+      "requiem-display": [
+        "RequiemDispTDA",
+        "RequiemDispTDB",
+        "Palatino",
+        "serif",
+      ],
     },
     extend: {},
   },
