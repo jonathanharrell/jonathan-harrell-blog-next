@@ -73,7 +73,7 @@ export const PhotoModal = ({ slug, width, height }: PhotoModalProps) => {
       <button autoFocus onClick={goBack} className="text-neutral-100">
         Close<span className="sr-only"> Photo Dialog</span>
       </button>
-      <div className="flex flex-col flex-1 min-h-0">
+      <div className="flex flex-col flex-1">
         {!isLoaded && <span className="text-neutral-100">Loading...</span>}
         <Photo
           slug={slug}
