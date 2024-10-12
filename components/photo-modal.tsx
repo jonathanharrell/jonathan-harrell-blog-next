@@ -65,7 +65,7 @@ export const PhotoModal = ({ slug, width, height }: PhotoModalProps) => {
     <dialog
       className={classNames(
         "bg-transparent backdrop:bg-neutral-900 backdrop:bg-opacity-90",
-        isModalOpen ? "flex flex-col" : "",
+        isModalOpen ? "flex flex-col w-screen h-screen" : "",
       )}
       style={{ viewTransitionName: "modal" }}
       ref={modalRef}
@@ -73,13 +73,13 @@ export const PhotoModal = ({ slug, width, height }: PhotoModalProps) => {
       <button autoFocus onClick={goBack} className="text-neutral-100">
         Close<span className="sr-only"> Photo Dialog</span>
       </button>
-      <div className="flex flex-col flex-1">
+      <div className="flex flex-col items-center justify-center flex-1 w-full h-full">
         {!isLoaded && <span className="text-neutral-100">Loading...</span>}
         <Photo
           slug={slug}
           width={width}
           height={height}
-          className={classNames("flex-1 min-h-0 max-w-[900px] max-h-[900px]", {
+          className={classNames("w-full h-full max-w-[900px] max-h-[900px]", {
             block: isLoaded,
           })}
           onLoad={() => setIsLoaded(true)}
