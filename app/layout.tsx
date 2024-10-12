@@ -6,6 +6,7 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import "./globals.css";
 import { Spinner } from "@/components/spinner";
+import { SkipToContent } from "@/components/skip-to-content";
 
 export const metadata: Metadata = {
   title: "Human in the Loop",
@@ -38,8 +39,9 @@ export default function RootLayout({
         </head>
         <body className="flex flex-col min-h-dvh font-etbook bg-white dark:bg-neutral-800 text-neutral-800 dark:text-neutral-100">
           <NextTopLoader color="#737373" />
+          <SkipToContent />
           <Header />
-          <main className="flex flex-col flex-1">
+          <main id="main" className="flex flex-col flex-1" tabIndex={-1}>
             <Suspense
               fallback={
                 <div className="flex items-center justify-center flex-1">
