@@ -8,8 +8,12 @@ const AboutPage = () => {
           <a href="https://www.jonathan-harrell.com/" target="_blank">
             software engineer
           </a>{" "}
-          by trade, and a writer/photographer/designer in my free time. I’m
-          using this small corner of the web as a digital{" "}
+          by trade, and a writer/
+          <wbr />
+          photographer/
+          <wbr />
+          designer in my free time. I’m using this small corner of the web as a
+          digital{" "}
           <a
             href="https://en.wikipedia.org/wiki/Commonplace_book"
             target="_blank"

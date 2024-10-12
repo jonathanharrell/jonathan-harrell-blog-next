@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <ViewTransitions>
       <html lang="en">
-        <body className="flex flex-col min-h-dvh font-requiem bg-white dark:bg-neutral-800 text-neutral-800 dark:text-neutral-100">
+        <body className="flex flex-col min-h-dvh font-etbook bg-white dark:bg-neutral-800 text-neutral-800 dark:text-neutral-100">
           <NextTopLoader color="#737373" />
           <Header />
           <main className="flex flex-col flex-1">

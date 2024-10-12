@@ -17,6 +17,7 @@ const config: Config = {
         "Palatino",
         "serif",
       ],
+      etbook: ["ETBook", "Palatino", "serif"],
     },
     extend: {},
   },
