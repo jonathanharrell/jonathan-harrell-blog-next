@@ -1,6 +1,7 @@
 import { ReactNode, Suspense } from "react";
 import type { Metadata } from "next";
 import { ViewTransitions } from "next-view-transitions";
+import NextTopLoader from "nextjs-toploader";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import "./globals.css";
@@ -19,9 +20,18 @@ export default function RootLayout({
     <ViewTransitions>
       <html lang="en">
         <body className="flex flex-col min-h-screen font-requiem bg-white dark:bg-neutral-800 text-neutral-800 dark:text-neutral-100">
+          <NextTopLoader color="#737373" />
           <Header />
-          <main className="flex-1">
-            <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
+          <main className="flex flex-col flex-1">
+            <Suspense
+              fallback={
+                <div className="flex items-center justify-center flex-1">
+                  Loading...
+                </div>
+              }
+            >
+              {children}
+            </Suspense>
           </main>
           <Footer />
         </body>
