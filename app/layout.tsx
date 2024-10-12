@@ -20,6 +20,22 @@ export default function RootLayout({
   return (
     <ViewTransitions>
       <html lang="en">
+        <head>
+          <link
+            rel="preload"
+            href="/fonts/etbookot-roman-webfont.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
+          <link
+            rel="preload"
+            href="/fonts/etbookot-italic-webfont.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
+        </head>
         <body className="flex flex-col min-h-dvh font-etbook bg-white dark:bg-neutral-800 text-neutral-800 dark:text-neutral-100">
           <NextTopLoader color="#737373" />
           <Header />

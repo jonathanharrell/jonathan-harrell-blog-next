@@ -4,6 +4,7 @@ import { Link } from "next-view-transitions";
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { flushSync } from "react-dom";
+import { X } from "react-feather";
 
 export const MobileNav = () => {
   const modalRef = useRef<HTMLDialogElement | null>(null);
@@ -65,7 +66,8 @@ export const MobileNav = () => {
             onClick={closeModal}
             className="absolute top-0 right-0 p-3"
           >
-            Close <span className="sr-only">Site Navigation Dialog</span>
+            <X />
+            <span className="sr-only">Close Site Navigation Dialog</span>
           </button>
           <nav
             aria-labelledby="mobile-navigation-label"

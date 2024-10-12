@@ -219,7 +219,7 @@ export const getPostSlugs = async ({
     slugs,
     pagination,
     tags: Array.from(new Set(tags.flat())).sort(),
-    months: Array.from(new Set(months)),
+    months: Array.from(new Set(months)).reverse(),
   };
 };
 
