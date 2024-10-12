@@ -35,9 +35,9 @@ const BlogPage = async ({ searchParams }: BlogPageProps) => {
   }
 
   return (
-    <div className="wrapper pt-4 md:pt-8">
+    <div className="wrapper pt-8 sm:pt-10 md:pt-14">
       <header className="jh-prose mx-auto">
-        <h1>
+        <h1 className="mt-0">
           Commonplaces
           {selectedTag || selectedMonth ? (
             <span className="no-caps"> / {selectedTag || selectedMonth}</span>

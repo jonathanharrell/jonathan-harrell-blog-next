@@ -6,9 +6,9 @@ export const Header = () => {
   return (
     <header className="group">
       <div className="wrapper">
-        <div className="flex flex-col sm:flex-row items-center md:items-baseline justify-between gap-4 pt-8 pb-6 border-b border-neutral-200 dark:border-neutral-700">
+        <div className="flex flex-col sm:flex-row items-center md:items-baseline justify-between gap-2 md:gap-4 pt-6 md:pt-8 pb-6 border-b border-neutral-200 dark:border-neutral-700">
           <p className="flex flex-col md:flex-row items-center sm:items-start md:items-center md:gap-2 text-lg">
-            <Link href="/" className="small-caps">
+            <Link href="/" className="small-caps text-xl md:text-lg">
               Human in the Loop
             </Link>
             <span className="hidden md:inline" aria-hidden="true">

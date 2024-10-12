@@ -26,7 +26,13 @@ export const MobileNav = () => {
   };
 
   const closeModal = () => {
-    modalRef.current?.close();
+    if (typeof document.startViewTransition !== "undefined") {
+      document.startViewTransition(() => {
+        modalRef.current?.close();
+      });
+    } else {
+      modalRef.current?.close();
+    }
   };
 
   const handleDialogClose = () => {
@@ -50,14 +56,21 @@ export const MobileNav = () => {
       </button>
       <dialog
         onClose={handleDialogClose}
-        className="w-screen max-w-[100vw] h-screen max-h-[100vh] m-0 p-6 bg-neutral-100"
+        className="w-screen max-w-[100vw] h-dvh max-h-[100vh] m-0 p-6 bg-neutral-100"
         ref={modalRef}
       >
-        <div className="flex flex-col h-full">
-          <button autoFocus onClick={closeModal}>
+        <div className="flex flex-col relative h-full">
+          <button
+            autoFocus
+            onClick={closeModal}
+            className="absolute top-0 right-0 p-3"
+          >
             Close <span className="sr-only">Site Navigation Dialog</span>
           </button>
-          <nav aria-labelledby="mobile-navigation-label">
+          <nav
+            aria-labelledby="mobile-navigation-label"
+            className="flex flex-col flex-1"
+          >
             <h2
               id="mobile-navigation-label"
               className="sr-only"
@@ -65,7 +78,7 @@ export const MobileNav = () => {
             >
               Site navigation
             </h2>
-            <ul className="flex flex-col items-center gap-8 text-xl">
+            <ul className="flex flex-col items-center justify-center gap-8 flex-1 text-3xl">
               <li>
                 <Link href="/blog" onClick={closeModal}>
                   Blog

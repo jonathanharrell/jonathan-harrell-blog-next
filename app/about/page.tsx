@@ -1,8 +1,8 @@
 const AboutPage = () => {
   return (
-    <div className="wrapper py-4 md:py-8">
+    <div className="wrapper py-8 sm:py-10 md:py-14">
       <div className="jh-prose mx-auto [&_p]:text-pretty">
-        <h1>About this Book</h1>
+        <h1 className="mt-0">About this Book</h1>
         <p>
           I’m Jonathan, a{" "}
           <a href="https://www.jonathan-harrell.com/" target="_blank">

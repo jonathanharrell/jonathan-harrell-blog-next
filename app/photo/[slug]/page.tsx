@@ -9,12 +9,12 @@ interface PhotoPageProps {
 
 const PhotoPage = async ({ params }: PhotoPageProps) => {
   return (
-    <div className="flex items-center justify-center p-12">
+    <div className="wrapper flex items-center justify-center py-12">
       <Photo
         slug={params.slug}
         width={900}
         height={900}
-        className="max-w-[900px] max-h-[900px]"
+        className="w-full h-full max-w-[900px] max-h-[900px]"
       />
     </div>
   );

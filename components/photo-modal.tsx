@@ -5,6 +5,7 @@ import { flushSync } from "react-dom";
 import { useTransitionRouter } from "next-view-transitions";
 import classNames from "classnames";
 import { Photo } from "@/components/photo";
+import { Spinner } from "@/components/spinner";
 
 interface PhotoModalProps {
   slug: string;
@@ -65,16 +66,24 @@ export const PhotoModal = ({ slug, width, height }: PhotoModalProps) => {
     <dialog
       className={classNames(
         "bg-transparent backdrop:bg-neutral-900 backdrop:bg-opacity-90",
-        isModalOpen ? "flex flex-col w-screen h-screen" : "",
+        isModalOpen ? "flex flex-col w-dvw h-dvh" : "",
       )}
       style={{ viewTransitionName: "modal" }}
       ref={modalRef}
     >
-      <button autoFocus onClick={goBack} className="text-neutral-100">
+      <button
+        autoFocus
+        onClick={goBack}
+        className="absolute top-0 right-0 p-3 text-neutral-100"
+      >
         Close<span className="sr-only"> Photo Dialog</span>
       </button>
       <div className="flex flex-col items-center justify-center flex-1 w-full h-full">
-        {!isLoaded && <span className="text-neutral-100">Loading...</span>}
+        {!isLoaded && (
+          <span className="flex flex-col items-center justify-center absolute inset-0 z-10 w-full h-full text-neutral-100">
+            <Spinner />
+          </span>
+        )}
         <Photo
           slug={slug}
           width={width}
