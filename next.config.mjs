@@ -14,7 +14,7 @@ const nextConfig = {
     ];
   },
   images: {
-    deviceSizes: [640, 750, 828, 1080],
+    deviceSizes: [390, 600, 900],
   },
 };
 

@@ -18,6 +18,7 @@ export const PhotoModal = ({ slug, width, height }: PhotoModalProps) => {
   const modalRef = useRef<HTMLDialogElement | null>(null);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const showModal = () => {
     if (typeof document.startViewTransition !== "undefined") {
@@ -73,11 +74,15 @@ export const PhotoModal = ({ slug, width, height }: PhotoModalProps) => {
         Close<span className="sr-only"> Photo Dialog</span>
       </button>
       <div className="flex flex-col flex-1 min-h-0">
+        {!isLoaded && <span className="text-neutral-100">Loading...</span>}
         <Photo
           slug={slug}
           width={width}
           height={height}
-          className="flex-1 min-h-0 max-w-[900px] max-h-[900px]"
+          className={classNames("flex-1 min-h-0 max-w-[900px] max-h-[900px]", {
+            block: isLoaded,
+          })}
+          onLoad={() => setIsLoaded(true)}
         />
       </div>
     </dialog>

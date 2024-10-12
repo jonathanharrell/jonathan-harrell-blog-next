@@ -8,6 +8,7 @@ interface PhotoProps {
   sizes?: string;
   quality?: number;
   className?: string;
+  onLoad?: () => void;
 }
 
 export const Photo = ({
@@ -17,16 +18,20 @@ export const Photo = ({
   sizes,
   quality,
   className,
+  onLoad,
 }: PhotoProps) => {
   return (
-    <Image
-      src={`/assets/photos/${slug}`}
-      alt=""
-      width={width}
-      height={height}
-      sizes={sizes}
-      quality={quality ?? 100}
-      className={classNames("object-contain", className)}
-    />
+    <>
+      <Image
+        src={`/assets/photos/${slug}`}
+        alt=""
+        width={width}
+        height={height}
+        sizes={sizes}
+        quality={quality ?? 100}
+        className={classNames("object-contain", className)}
+        onLoad={onLoad}
+      />
+    </>
   );
 };
