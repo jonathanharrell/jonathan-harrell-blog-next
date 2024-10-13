@@ -8,8 +8,8 @@ export const Header = () => {
     <header className="group">
       <div className="wrapper">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-2 md:gap-4 pt-6 pb-4 border-b border-neutral-200 dark:border-neutral-700">
-          <p className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 md:gap-2">
-            <Link href="/">
+          <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 md:gap-2 mr-auto">
+            <Link href="/" className="block">
               <Glyph />
             </Link>
             <div className="flex flex-col md:flex-row items-center sm:items-start md:items-center md:gap-2 text-lg">
@@ -21,7 +21,7 @@ export const Header = () => {
               </span>
               <span>Jonathan Harrell’s Commonplace Book</span>
             </div>
-          </p>
+          </div>
           <DesktopNav />
           <MobileNav />
         </div>
