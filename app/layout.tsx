@@ -36,6 +36,16 @@ export default function RootLayout({
             type="font/woff2"
             crossOrigin="anonymous"
           />
+          <link rel="icon" href="/assets/favicon/favicon.ico" sizes="32x32" />
+          <link
+            rel="icon"
+            href="/assets/favicon/icon.svg"
+            type="image/svg+xml"
+          />
+          <link
+            rel="apple-touch-icon"
+            href="/assets/favicon/apple-touch-icon.png"
+          />
         </head>
         <body className="flex flex-col min-h-dvh font-etbook bg-white dark:bg-neutral-800 text-neutral-800 dark:text-neutral-100">
           <NextTopLoader color="#737373" />
