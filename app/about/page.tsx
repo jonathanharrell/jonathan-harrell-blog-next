@@ -65,7 +65,7 @@ const AboutPage = () => {
           regurgitating the same content available cheaply on the nearest social
           media platform.
         </p>
-        <p className="text-lg">▪︎ Jonathan Harrell</p>
+        <p className="text-lg">– Jonathan Harrell</p>
       </div>
     </div>
   );

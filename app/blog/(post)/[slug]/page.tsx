@@ -9,7 +9,7 @@ interface BlogPostProps {
 
 const BlogPost = async ({ params }: BlogPostProps) => {
   return (
-    <div className="wrapper py-8 lg:py-12">
+    <div className="wrapper py-8 sm:py-10 md:py-14">
       <Post slug={params.slug} single className="mx-auto" />
     </div>
   );

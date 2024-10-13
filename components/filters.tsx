@@ -25,12 +25,12 @@ export const Filters = ({
             <h3 id="tags-label" className="sr-only" aria-hidden="true">
               Tags
             </h3>
-            <ul className="flex flex-wrap gap-3" aria-labelledby="tags-label">
+            <ul className="flex flex-wrap gap-2" aria-labelledby="tags-label">
               <li>
                 <Link
                   href={`?tag=`}
                   className={twMerge(
-                    "py-1.5 px-3 rounded-full border border-neutral-200 dark:border-neutral-700 hover:border-neutral-400 text-neutral-500 transition-colors duration-200 ease-in-out",
+                    "block py-1.5 px-3 rounded-full border border-neutral-200 dark:border-neutral-700 hover:border-neutral-400 leading-none text-neutral-500 transition-colors duration-200 ease-in-out",
                     !selectedTag
                       ? "border-neutral-400 text-neutral-800 dark:text-neutral-100"
                       : undefined,
@@ -47,7 +47,7 @@ export const Filters = ({
                     <Link
                       href={`?tag=${tag}`}
                       className={twMerge(
-                        "py-1.5 px-3 rounded-full border border-neutral-200 dark:border-neutral-700 hover:border-neutral-400 text-neutral-500 transition-colors duration-200 ease-in-out",
+                        "block py-1.5 px-3 rounded-full border border-neutral-200 dark:border-neutral-700 hover:border-neutral-400 leading-none text-neutral-500 transition-colors duration-200 ease-in-out",
                         selectedTag?.includes(tag)
                           ? "border-neutral-400 text-neutral-800 dark:text-neutral-100"
                           : undefined,
