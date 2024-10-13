@@ -75,7 +75,7 @@ export const PhotoModal = ({ slug, width, height }: PhotoModalProps) => {
       <button
         autoFocus
         onClick={goBack}
-        className="absolute top-0 right-0 p-3 text-neutral-100"
+        className="absolute top-0 right-0 p-3 text-neutral-100 focus-visible:ring-0"
       >
         <X />
         <span className="sr-only">Close Photo Dialog</span>
