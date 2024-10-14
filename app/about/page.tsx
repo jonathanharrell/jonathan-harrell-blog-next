@@ -1,7 +1,17 @@
+import glyph from "/public/assets/glyphs/glyph-2.svg";
+
 const AboutPage = () => {
   return (
     <div className="wrapper py-8 sm:py-10 md:py-14">
       <div className="jh-prose mx-auto [&_p]:text-pretty">
+        <div className="not-prose mb-4">
+          <img
+            src={glyph.src}
+            alt=""
+            aria-hidden="true"
+            className="w-16 h-16"
+          />
+        </div>
         <h1 className="mt-0">About this Book</h1>
         <p>
           I’m Jonathan, a{" "}

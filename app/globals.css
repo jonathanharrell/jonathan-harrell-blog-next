@@ -34,7 +34,7 @@
 
 @layer components {
   .jh-prose {
-    @apply prose prose-neutral dark:prose-invert prose-lg lg:prose-xl !leading-normal prose-h1:font-etbook prose-h1:text-3xl prose-h1:mt-8 prose-h1:mb-0 prose-h1:font-normal prose-h1:small-caps prose-blockquote:ps-0 prose-blockquote:border-none prose-blockquote:not-italic prose-video:w-full prose-ol:pl-4 prose-ol:marker:text-inherit prose-ul:pl-4 prose-ul:marker:text-inherit prose-li:my-0.5 prose-li:pl-0.5 prose-figcaption:mt-3 prose-figcaption:md:text-lg prose-figcaption:text-neutral-800 hover:prose-a:no-underline prose-a:decoration-1 prose-a:underline-offset-2;
+    @apply prose prose-neutral dark:prose-invert prose-lg lg:prose-xl !leading-normal prose-h1:text-3xl prose-h1:mt-8 prose-h1:mb-0 prose-h1:font-normal prose-h1:small-caps prose-h2:text-2xl prose-h2:mb-0 prose-h2:font-normal prose-h2:small-caps prose-blockquote:ps-0 prose-blockquote:border-none prose-blockquote:not-italic prose-video:w-full prose-ol:pl-4 prose-ol:marker:text-inherit prose-ul:pl-4 prose-ul:marker:text-inherit prose-li:my-0.5 prose-li:pl-0.5 prose-figcaption:mt-3 prose-figcaption:md:text-lg prose-figcaption:text-neutral-800 hover:prose-a:no-underline prose-a:decoration-1 prose-a:underline-offset-2;
   }
 
   .select {

@@ -14,14 +14,14 @@ export const Footer = () => {
         >
           ET Book
         </a>
-        , Fe<sub>2</sub>O<sub>3</sub> glyphs by{" "}
+        , with{` `}
         <a
-          href="https://www.kickstarter.com/projects/mrcraigward/fe2o3-glyphs-a-conceptual-ornamental-type-system/creator_bio"
+          href="https://www.kickstarter.com/projects/mrcraigward/fe2o3-glyphs-a-conceptual-ornamental-type-system"
           target="_blank"
           rel="noreferrer"
           className="underline hover:no-underline"
         >
-          Craig Ward & Linden Gledhill
+          Fe<sub>2</sub>O<sub>3</sub> glyphs
         </a>
       </p>
     </footer>
