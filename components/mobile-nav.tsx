@@ -1,8 +1,7 @@
 "use client";
 
 import { Link } from "next-view-transitions";
-import { useEffect, useRef, useState } from "react";
-import { usePathname } from "next/navigation";
+import { useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import { X } from "react-feather";
 
@@ -39,12 +38,6 @@ export const MobileNav = () => {
   const handleDialogClose = () => {
     setIsModalOpen(false);
   };
-
-  const pathname = usePathname();
-
-  useEffect(() => {
-    closeModal();
-  }, [pathname]);
 
   return (
     <div className="lg:hidden">
