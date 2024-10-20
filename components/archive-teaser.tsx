@@ -1,5 +1,5 @@
 import { Link } from "next-view-transitions";
-import { Frontmatter } from "@/lib/utils";
+import { Frontmatter } from "@/types";
 
 interface ArchiveTeaserProps {
   teaser: {

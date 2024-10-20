@@ -1,7 +1,7 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { ChangeEventHandler } from "react";
+import { useRouter } from "next/navigation";
 
 interface FilterMonthsProps {
   months: string[];

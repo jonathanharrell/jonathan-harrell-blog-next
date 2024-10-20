@@ -1,5 +1,5 @@
-import { getAllPhotoSlugs } from "@/lib/utils";
 import { PhotoLink } from "@/components/photo-link";
+import { getAllPhotoSlugs } from "@/lib/get-all-post-slugs";
 
 const PhotosPage = async () => {
   const slugs = await getAllPhotoSlugs();

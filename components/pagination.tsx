@@ -33,7 +33,7 @@ export const Pagination = ({
                     : `?page=${index}`
                 }
                 className={classNames(
-                  "py-3 md:py-2 px-4 md:px-3 border border-neutral-200 dark:border-neutral-700 hover:border-neutral-400 rounded text-neutral-500 leading-none transition-colors duration-200 ease-in-out",
+                  "py-3 md:py-2 px-4 md:px-3 border border-neutral-200 dark:border-neutral-700 hover:border-neutral-400 rounded font-etbook-lining-figures text-neutral-500 leading-none transition-colors duration-200 ease-in-out",
                   currentPage === index
                     ? "border-neutral-400 text-neutral-800 dark:text-neutral-100"
                     : "",

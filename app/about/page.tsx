@@ -1,3 +1,4 @@
+import Image from "next/image";
 import glyph from "/public/assets/glyphs/glyph-2.svg";
 
 const AboutPage = () => {
@@ -5,8 +6,10 @@ const AboutPage = () => {
     <div className="wrapper py-8 sm:py-10 md:py-14">
       <div className="jh-prose mx-auto [&_p]:text-pretty">
         <div className="not-prose mb-4">
-          <img
+          <Image
             src={glyph.src}
+            width={64}
+            height={64}
             alt=""
             aria-hidden="true"
             className="w-16 h-16"

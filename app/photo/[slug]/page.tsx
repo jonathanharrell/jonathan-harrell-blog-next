@@ -1,5 +1,5 @@
-import { getAllPhotoSlugs } from "@/lib/utils";
 import { Photo } from "@/components/photo";
+import { getAllPhotoSlugs } from "@/lib/get-all-post-slugs";
 
 interface PhotoPageProps {
   params: {

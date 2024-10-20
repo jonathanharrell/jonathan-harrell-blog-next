@@ -21,17 +21,15 @@ export const Photo = ({
   onLoad,
 }: PhotoProps) => {
   return (
-    <>
-      <Image
-        src={`/assets/photos/${slug}`}
-        alt=""
-        width={width}
-        height={height}
-        sizes={sizes}
-        quality={quality ?? 100}
-        className={classNames("object-contain", className)}
-        onLoad={onLoad}
-      />
-    </>
+    <Image
+      src={`/assets/photos/${slug}`}
+      alt=""
+      width={width}
+      height={height}
+      sizes={sizes}
+      quality={quality ?? 100}
+      className={classNames("object-contain", className)}
+      onLoad={onLoad}
+    />
   );
 };

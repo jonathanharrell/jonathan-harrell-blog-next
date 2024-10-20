@@ -1,7 +1,7 @@
-import { getPostSlugs } from "@/lib/utils";
-import { Filters } from "@/components/filters";
 import { Post } from "@/components/post";
 import { Pagination } from "@/components/pagination";
+import { Filters } from "@/components/filters";
+import { getPostSlugs } from "@/lib/get-post-slugs";
 
 interface BlogPageProps {
   searchParams: {

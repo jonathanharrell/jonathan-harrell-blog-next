@@ -1,5 +1,5 @@
-import { getPostTeasers } from "@/lib/utils";
 import { ArchiveTeaser } from "@/components/archive-teaser";
+import { getPostTeasers } from "@/lib/get-post-teasers";
 
 const ArchivePage = async () => {
   const postTeasers = await getPostTeasers();

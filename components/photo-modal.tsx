@@ -1,12 +1,12 @@
 "use client";
 
-import { KeyboardEventHandler, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import { useTransitionRouter } from "next-view-transitions";
 import classNames from "classnames";
+import { X } from "react-feather";
 import { Photo } from "@/components/photo";
 import { Spinner } from "@/components/spinner";
-import { X } from "react-feather";
 
 interface PhotoModalProps {
   slug: string;
@@ -78,7 +78,7 @@ export const PhotoModal = ({ slug, width, height }: PhotoModalProps) => {
         className="absolute top-0 right-0 p-3 text-neutral-100 focus-visible:ring-0"
       >
         <X />
-        <span className="sr-only">Close Photo Dialog</span>
+        <span className="sr-only">Close photo dialog</span>
       </button>
       <div className="flex flex-col items-center justify-center flex-1 w-full h-full">
         {!isLoaded && (

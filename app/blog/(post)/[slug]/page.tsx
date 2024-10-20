@@ -1,5 +1,5 @@
-import { getPostSlugs } from "@/lib/utils";
 import { Post } from "@/components/post";
+import { getPostSlugs } from "@/lib/get-post-slugs";
 
 interface BlogPostProps {
   params: {
@@ -18,7 +18,7 @@ const BlogPost = async ({ params }: BlogPostProps) => {
 export default BlogPost;
 
 export const generateStaticParams = async () => {
-  const { slugs } = await getPostSlugs();
+  const { slugs } = await getPostSlugs({ perPage: Infinity });
 
   return slugs.map((slug) => ({
     slug,

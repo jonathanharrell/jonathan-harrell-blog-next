@@ -1,6 +1,6 @@
-import { getPostData } from "@/lib/utils";
 import { Link } from "next-view-transitions";
 import classNames from "classnames";
+import { getPostData } from "@/lib/get-post-data";
 
 interface PostProps {
   slug: string;

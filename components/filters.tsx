@@ -1,7 +1,7 @@
 import { Link } from "next-view-transitions";
-import { twMerge } from "tailwind-merge";
-import { FilterMonths } from "@/components/filter-months";
 import { capitalize } from "lodash";
+import classNames from "classnames";
+import { FilterMonths } from "@/components/filter-months";
 
 interface FiltersProps {
   tags: string[];
@@ -29,7 +29,7 @@ export const Filters = ({
               <li>
                 <Link
                   href={`?tag=`}
-                  className={twMerge(
+                  className={classNames(
                     "block py-1.5 px-3 rounded-full border border-neutral-200 dark:border-neutral-700 hover:border-neutral-400 leading-none text-neutral-500 transition-colors duration-200 ease-in-out",
                     !selectedTag
                       ? "border-neutral-400 text-neutral-800 dark:text-neutral-100"
@@ -46,7 +46,7 @@ export const Filters = ({
                   <li key={tag}>
                     <Link
                       href={`?tag=${tag}`}
-                      className={twMerge(
+                      className={classNames(
                         "block py-1.5 px-3 rounded-full border border-neutral-200 dark:border-neutral-700 hover:border-neutral-400 leading-none text-neutral-500 transition-colors duration-200 ease-in-out",
                         selectedTag?.includes(tag)
                           ? "border-neutral-400 text-neutral-800 dark:text-neutral-100"

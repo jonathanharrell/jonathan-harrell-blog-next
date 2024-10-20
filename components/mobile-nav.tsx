@@ -1,14 +1,14 @@
 "use client";
 
-import { Link } from "next-view-transitions";
 import { useRef, useState } from "react";
 import { flushSync } from "react-dom";
+import { Link } from "next-view-transitions";
 import { X } from "react-feather";
 
 export const MobileNav = () => {
   const modalRef = useRef<HTMLDialogElement | null>(null);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [_isModalOpen, setIsModalOpen] = useState(false);
 
   const showModal = () => {
     if (typeof document.startViewTransition !== "undefined") {
@@ -60,7 +60,7 @@ export const MobileNav = () => {
             className="absolute top-0 right-0 p-3"
           >
             <X />
-            <span className="sr-only">Close Site Navigation Dialog</span>
+            <span className="sr-only">Close site navigation dialog</span>
           </button>
           <nav
             aria-labelledby="mobile-navigation-label"

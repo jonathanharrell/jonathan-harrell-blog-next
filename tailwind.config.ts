@@ -11,6 +11,12 @@ const config: Config = {
   theme: {
     fontFamily: {
       etbook: ["ETBook", "Palatino", "serif"],
+      "etbook-lining-figures": [
+        "ETBookLiningFigures",
+        "ETBook",
+        "Palatino",
+        "serif",
+      ],
     },
     extend: {},
   },

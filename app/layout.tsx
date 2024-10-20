@@ -4,13 +4,13 @@ import { ViewTransitions } from "next-view-transitions";
 import NextTopLoader from "nextjs-toploader";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
-import "./globals.css";
 import { Spinner } from "@/components/spinner";
 import { SkipToContent } from "@/components/skip-to-content";
+import "@/styles/index.css";
 
 export const metadata: Metadata = {
   title: "Human in the Loop",
-  description: "Jonathan Harrell's creative scrapbook",
+  description: "Jonathan Harrell’s Commonplace Book",
 };
 
 export default function RootLayout({
@@ -47,7 +47,7 @@ export default function RootLayout({
             href="/assets/favicon/apple-touch-icon.png"
           />
         </head>
-        <body className="flex flex-col min-h-dvh font-etbook bg-white dark:bg-neutral-800 text-neutral-800 dark:text-neutral-100">
+        <body className="flex flex-col min-h-dvh font-etbook bg-white text-neutral-800">
           <NextTopLoader color="#737373" />
           <SkipToContent />
           <Header />
