@@ -1,5 +1,11 @@
 import { ArchiveTeaser } from "@/components/archive-teaser";
 import { getPostTeasers } from "@/lib/get-post-teasers";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Archive | Human in the Loop",
+  description: "An archive of Jonathan Harrell’s commonplace book",
+};
 
 const ArchivePage = async () => {
   const postTeasers = await getPostTeasers();

@@ -85,7 +85,7 @@ export const MobileNav = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/archive" onClick={closeModal}>
+                <Link href="/archive" rel="archives" onClick={closeModal}>
                   Archive
                 </Link>
               </li>

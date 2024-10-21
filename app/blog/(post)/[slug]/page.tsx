@@ -1,5 +1,6 @@
 import { Post } from "@/components/post";
 import { getPostSlugs } from "@/lib/get-post-slugs";
+import { getPostData } from "@/lib/get-post-data";
 
 interface BlogPostProps {
   params: {
@@ -16,6 +17,24 @@ const BlogPost = async ({ params }: BlogPostProps) => {
 };
 
 export default BlogPost;
+
+export const generateMetadata = async ({ params }: BlogPostProps) => {
+  const { frontmatter } = await getPostData(params.slug);
+
+  const formattedDate = new Date(frontmatter.date).toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+
+  return {
+    title: `${formattedDate} | Human in the Loop`,
+    description: `Commonplace from ${formattedDate}`,
+    author: [{ name: "Jonathan" }],
+    creator: "Jonathan Harrell",
+    publisher: "Jonathan Harrell",
+  };
+};
 
 export const generateStaticParams = async () => {
   const { slugs } = await getPostSlugs({ perPage: Infinity });

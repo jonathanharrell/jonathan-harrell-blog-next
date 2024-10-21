@@ -30,7 +30,11 @@ export const DesktopNav = () => {
           </Link>
         </li>
         <li>
-          <Link href="/archive" className={getClasses("/archive")}>
+          <Link
+            href="/archive"
+            rel="archives"
+            className={getClasses("/archive")}
+          >
             Archive
           </Link>
         </li>

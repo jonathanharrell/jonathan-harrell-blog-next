@@ -7,10 +7,14 @@ import { Footer } from "@/components/footer";
 import { Spinner } from "@/components/spinner";
 import { SkipToContent } from "@/components/skip-to-content";
 import "@/styles/index.css";
+import { openGraphImage } from "@/app/shared-metadata";
 
 export const metadata: Metadata = {
   title: "Human in the Loop",
-  description: "Jonathan Harrell’s Commonplace Book",
+  description: "Jonathan Harrell’s commonplace book",
+  openGraph: {
+    ...openGraphImage,
+  },
 };
 
 export default function RootLayout({
@@ -46,6 +50,7 @@ export default function RootLayout({
             rel="apple-touch-icon"
             href="/assets/favicon/apple-touch-icon.png"
           />
+          <meta name="color-scheme" content="light" />
         </head>
         <body className="flex flex-col min-h-dvh font-etbook bg-white text-neutral-800">
           <NextTopLoader color="#737373" />

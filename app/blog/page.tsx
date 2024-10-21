@@ -2,6 +2,12 @@ import { Post } from "@/components/post";
 import { Pagination } from "@/components/pagination";
 import { Filters } from "@/components/filters";
 import { getPostSlugs } from "@/lib/get-post-slugs";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Blog | Human in the Loop",
+  description: "Entries of Jonathan Harrell’s commonplace book",
+};
 
 interface BlogPageProps {
   searchParams: {

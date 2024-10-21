@@ -53,7 +53,7 @@ export const Post = async ({ slug, single, className }: PostProps) => {
             >
               {filteredTags.map((tag) => (
                 <li key={tag}>
-                  <Link href={`?tag=${tag}`} className="no-underline">
+                  <Link href={`?tag=${tag}`} rel="tag" className="no-underline">
                     <span className="aria-hidden">/</span>
                     {tag}
                   </Link>

@@ -1,5 +1,11 @@
 import { Photo } from "@/components/photo";
 import { getAllPhotoSlugs } from "@/lib/get-all-post-slugs";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Photo | Human in the Loop",
+  description: "Photo from Jonathan Harrell’s commonplace book",
+};
 
 interface PhotoPageProps {
   params: {
