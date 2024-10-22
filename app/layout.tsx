@@ -7,13 +7,12 @@ import { Footer } from "@/components/footer";
 import { Spinner } from "@/components/spinner";
 import { SkipToContent } from "@/components/skip-to-content";
 import "@/styles/index.css";
-import { openGraphImage } from "@/app/shared-metadata";
 
 export const metadata: Metadata = {
   title: "Human in the Loop",
   description: "Jonathan Harrell’s commonplace book",
   openGraph: {
-    ...openGraphImage,
+    images: ["/api/og"],
   },
 };
 

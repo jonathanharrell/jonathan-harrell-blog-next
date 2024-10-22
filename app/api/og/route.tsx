@@ -1,19 +1,25 @@
 import { ImageResponse } from "next/og";
+import { NextApiRequest } from "next";
+import { NextRequest } from "next/server";
 
 export const runtime = "edge";
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  const searchParams = request.nextUrl.searchParams;
+  const title = searchParams.get("title");
+
   return new ImageResponse(
     (
       <div
         style={{
-          background: "white",
-          width: "100%",
-          height: "100%",
           display: "flex",
-          textAlign: "center",
+          flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
+          width: "100%",
+          height: "100%",
+          background: "#fff",
+          textAlign: "center",
         }}
       >
         <svg
@@ -28,6 +34,7 @@ export async function GET() {
             transform="translate(-451 -112)"
           />
         </svg>
+        {title && <p style={{ fontSize: 48 }}>{title}</p>}
       </div>
     ),
     {
