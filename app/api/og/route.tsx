@@ -1,5 +1,4 @@
 import { ImageResponse } from "next/og";
-import { NextApiRequest } from "next";
 import { NextRequest } from "next/server";
 
 export const runtime = "edge";

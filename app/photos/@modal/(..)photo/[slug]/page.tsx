@@ -1,10 +1,4 @@
 import { PhotoModal } from "@/components/photo-modal";
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Photo | Human in the Loop",
-  description: "Photo from Jonathan Harrell’s commonplace book",
-};
 
 interface PhotoPageProps {
   params: {
@@ -17,3 +11,13 @@ const PhotoPage = async ({ params }: PhotoPageProps) => {
 };
 
 export default PhotoPage;
+
+export const generateMetadata = async ({ params }: PhotoPageProps) => {
+  return {
+    title: "Photo | Human in the Loop",
+    description: "Photo from Jonathan Harrell’s commonplace book",
+    openGraph: {
+      images: [`/assets/photos/${params.slug}`],
+    },
+  };
+};

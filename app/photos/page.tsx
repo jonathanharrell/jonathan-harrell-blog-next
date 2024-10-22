@@ -1,11 +1,5 @@
 import { PhotoLink } from "@/components/photo-link";
 import { getAllPhotoSlugs } from "@/lib/get-all-post-slugs";
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Photos | Human in the Loop",
-  description: "Photos from Jonathan Harrell’s commonplace book",
-};
 
 const PhotosPage = async () => {
   const slugs = await getAllPhotoSlugs();
@@ -25,3 +19,15 @@ const PhotosPage = async () => {
 };
 
 export default PhotosPage;
+
+export const generateMetadata = async () => {
+  const slugs = await getAllPhotoSlugs();
+
+  return {
+    title: "Photos | Human in the Loop",
+    description: "Photos from Jonathan Harrell’s commonplace book",
+    openGraph: {
+      images: [`/assets/photos/${slugs[0]}`],
+    },
+  };
+};
