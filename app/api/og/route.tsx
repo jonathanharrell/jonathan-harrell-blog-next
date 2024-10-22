@@ -18,14 +18,14 @@ export async function GET(request: NextRequest) {
           justifyContent: "center",
           width: "100%",
           height: "100%",
-          background: "#fff",
+          background: "#f5f5f5",
           textAlign: "center",
         }}
       >
         <svg
           viewBox="0 0 33 32"
-          width="256"
-          height="256"
+          width="384"
+          height="384"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
