@@ -33,6 +33,9 @@ export const generateMetadata = async ({ params }: BlogPostProps) => {
     author: [{ name: "Jonathan" }],
     creator: "Jonathan Harrell",
     publisher: "Jonathan Harrell",
+    openGraph: {
+      images: ["/api/og"],
+    },
   };
 };
 

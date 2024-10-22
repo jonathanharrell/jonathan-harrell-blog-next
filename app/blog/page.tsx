@@ -7,6 +7,9 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Blog | Human in the Loop",
   description: "Entries of Jonathan Harrell’s commonplace book",
+  openGraph: {
+    images: ["/api/og"],
+  },
 };
 
 interface BlogPageProps {

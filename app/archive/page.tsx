@@ -5,6 +5,9 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Archive | Human in the Loop",
   description: "An archive of Jonathan Harrell’s commonplace book",
+  openGraph: {
+    images: ["/api/og"],
+  },
 };
 
 const ArchivePage = async () => {
