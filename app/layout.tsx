@@ -8,12 +8,24 @@ import { Footer } from "@/components/footer";
 import { Spinner } from "@/components/spinner";
 import { SkipToContent } from "@/components/skip-to-content";
 import "@/styles/index.css";
+import { SITE_URL } from "@/constants";
 
 export const metadata: Metadata = {
   title: "Human in the Loop",
   description: "Jonathan Harrell’s commonplace book",
   openGraph: {
     images: ["/api/og"],
+  },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Human in the Loop",
+  url: SITE_URL,
+  author: {
+    "@type": "Person",
+    name: "Jonathan Harrell",
   },
 };
 
@@ -68,6 +80,10 @@ export default function RootLayout({
             </Suspense>
           </main>
           <Footer />
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          />
         </body>
         <GoogleAnalytics gaId="G-Y5GGV8P1XP" />
       </html>
