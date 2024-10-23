@@ -23,10 +23,11 @@ export const Post = async ({ slug, single, className }: PostProps) => {
   const jsonLd = {
     "@context": "https://schema.org/",
     "@type": "BlogPosting",
-    headline: frontmatter.title,
+    headline: frontmatter.title ?? formattedDate,
     author: {
       "@type": "Person",
       name: "Jonathan Harrell",
+      url: SITE_URL,
     },
     datePublished: frontmatter.date,
     dateCreated: frontmatter.date,
