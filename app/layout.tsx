@@ -1,5 +1,6 @@
 import { ReactNode, Suspense } from "react";
 import type { Metadata } from "next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { ViewTransitions } from "next-view-transitions";
 import NextTopLoader from "nextjs-toploader";
 import { Header } from "@/components/header";
@@ -68,6 +69,7 @@ export default function RootLayout({
           </main>
           <Footer />
         </body>
+        <GoogleAnalytics gaId="G-Y5GGV8P1XP" />
       </html>
     </ViewTransitions>
   );
