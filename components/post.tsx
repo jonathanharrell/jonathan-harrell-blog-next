@@ -1,6 +1,7 @@
 import { Link } from "next-view-transitions";
 import classNames from "classnames";
 import { getPostData } from "@/lib/get-post-data";
+import { SITE_URL } from "@/constants";
 
 interface PostProps {
   slug: string;
@@ -18,6 +19,22 @@ export const Post = async ({ slug, single, className }: PostProps) => {
   });
 
   const filteredTags = frontmatter.tags.filter((tag) => tag !== "jdch");
+
+  const jsonLd = {
+    "@context": "https://schema.org/",
+    "@type": "BlogPosting",
+    headline: frontmatter.title,
+    author: {
+      "@type": "Person",
+      name: "Jonathan Harrell",
+    },
+    datePublished: frontmatter.date,
+    dateCreated: frontmatter.date,
+    url: `${SITE_URL}${slug}`,
+    "inLanguage ": "en-US",
+    // image: imageURL,
+    keywords: filteredTags.join(","),
+  };
 
   return (
     <article className={classNames("jh-prose", className)}>
@@ -64,6 +81,12 @@ export const Post = async ({ slug, single, className }: PostProps) => {
         )}
       </header>
       {content}
+      {single && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      )}
     </article>
   );
 };
