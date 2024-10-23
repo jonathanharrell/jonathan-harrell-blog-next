@@ -1,12 +1,24 @@
 import Image from "next/image";
 import glyph from "/public/assets/glyphs/glyph-2.svg";
 import type { Metadata } from "next";
+import { SITE_URL } from "@/constants";
 
 export const metadata: Metadata = {
   title: "About | Human in the Loop",
   description: "About Jonathan Harrell’s commonplace book",
   openGraph: {
     images: ["/api/og"],
+  },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org/",
+  "@type": "WebPage",
+  name: "About Human in the Loop",
+  description: "About Jonathan Harrell’s commonplace book",
+  author: {
+    "@type": "Person",
+    name: "Jonathan Harrell",
   },
 };
 
@@ -89,6 +101,10 @@ const AboutPage = () => {
         </p>
         <p className="text-lg">– Jonathan Harrell</p>
       </div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
     </div>
   );
 };

@@ -32,7 +32,7 @@ export const Post = async ({ slug, single, className }: PostProps) => {
     dateCreated: frontmatter.date,
     url: `${SITE_URL}${slug}`,
     "inLanguage ": "en-US",
-    // image: imageURL,
+    image: `${SITE_URL}api/og`,
     keywords: filteredTags.join(","),
   };
 
