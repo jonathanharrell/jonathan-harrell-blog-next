@@ -3,9 +3,8 @@ export const Footer = () => {
 
   return (
     <footer className="wrapper mt-6 py-6 text-center sm:text-left">
-      <p>Copyright ©{currentYear} Jonathan Harrell</p>
       <p>
-        Typeset in{" "}
+        Copyright ©{currentYear} Jonathan Harrell. Typeset in{" "}
         <a
           href="https://edwardtufte.github.io/et-book/"
           target="_blank"
@@ -24,6 +23,7 @@ export const Footer = () => {
           Fe<sub>2</sub>O<sub>3</sub> glyphs
         </a>
       </p>
+      <p>If an image or text lacks a citation, it is my own.</p>
     </footer>
   );
 };
