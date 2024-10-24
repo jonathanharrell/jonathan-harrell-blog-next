@@ -9,7 +9,7 @@ export const Header = () => {
       <div className="wrapper">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-2 md:gap-4 pt-6 pb-4 border-b border-neutral-200 dark:border-neutral-700">
           <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 md:gap-2 sm:mr-auto">
-            <Link href="/" className="block">
+            <Link href="/" className="block w-8 h-8">
               <Glyph />
               <span className="sr-only">Go to homepage</span>
             </Link>
