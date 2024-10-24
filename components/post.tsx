@@ -62,12 +62,16 @@ export const Post = async ({ slug, single, className }: PostProps) => {
         )}
         {Boolean(filteredTags.length) && (
           <div className="not-prose">
-            <h4 id="post-tags-label" className="sr-only" aria-hidden="true">
+            <h4
+              id={`${slug}-post-tags-label`}
+              className="sr-only"
+              aria-hidden="true"
+            >
               Post tags
             </h4>
             <ul
               className="flex flex-wrap gap-3 !pl-0 text-lg"
-              aria-labelledby="post-tags-label"
+              aria-labelledby={`${slug}-post-tags-label`}
             >
               {filteredTags.map((tag) => (
                 <li key={tag}>

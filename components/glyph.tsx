@@ -48,7 +48,6 @@ export const Glyph = () => {
             "not-sr-only": index === activeIndex,
             "sr-only": index !== activeIndex,
           })}
-          aria-hidden="true"
         />
       ))}
     </span>
