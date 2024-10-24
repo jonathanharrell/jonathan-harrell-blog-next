@@ -45,7 +45,6 @@ export const Glyph = () => {
           width={32}
           height={32}
           className={classNames("w-8 h-8", {
-            "not-sr-only": index === activeIndex,
             "sr-only": index !== activeIndex,
           })}
         />
