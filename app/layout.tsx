@@ -67,18 +67,20 @@ export default function RootLayout({
         <body className="flex flex-col min-h-dvh font-etbook bg-white text-neutral-800">
           <NextTopLoader color="#737373" />
           <SkipToContent />
-          <Header />
-          <main id="main" className="flex flex-col flex-1" tabIndex={-1}>
-            <Suspense
-              fallback={
-                <div className="flex items-center justify-center flex-1">
-                  <Spinner />
-                </div>
-              }
-            >
-              {children}
-            </Suspense>
-          </main>
+          <div className="min-h-screen">
+            <Header />
+            <main id="main" className="flex flex-col" tabIndex={-1}>
+              <Suspense
+                fallback={
+                  <div className="flex items-center justify-center flex-1">
+                    <Spinner />
+                  </div>
+                }
+              >
+                {children}
+              </Suspense>
+            </main>
+          </div>
           <Footer />
           <script
             type="application/ld+json"
