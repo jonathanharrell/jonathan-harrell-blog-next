@@ -15,7 +15,7 @@ export const FilterMonths = ({
   const router = useRouter();
 
   const filterByMonth: ChangeEventHandler<HTMLSelectElement> = (event) => {
-    router.replace(`?month=${event.target.value}`);
+    router.replace(`/blog/filtered?month=${event.target.value}`);
   };
 
   if (!months.length) {

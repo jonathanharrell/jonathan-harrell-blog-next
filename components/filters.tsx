@@ -28,7 +28,7 @@ export const Filters = ({
             <ul className="flex flex-wrap gap-2" aria-labelledby="tags-label">
               <li>
                 <Link
-                  href={`?tag=`}
+                  href={`/blog/filtered?tag=`}
                   className={classNames(
                     "block py-1.5 px-3 rounded-full border border-neutral-200 dark:border-neutral-700 hover:border-neutral-400 leading-none text-neutral-500 transition-colors duration-200 ease-in-out",
                     !selectedTag
@@ -45,7 +45,7 @@ export const Filters = ({
                 .map((tag) => (
                   <li key={tag}>
                     <Link
-                      href={`?tag=${tag}`}
+                      href={`/blog/filtered?tag=${tag}`}
                       className={classNames(
                         "block py-1.5 px-3 rounded-full border border-neutral-200 dark:border-neutral-700 hover:border-neutral-400 leading-none text-neutral-500 transition-colors duration-200 ease-in-out",
                         selectedTag?.includes(tag)

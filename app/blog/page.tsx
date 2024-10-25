@@ -1,8 +1,8 @@
-import { Post } from "@/components/post";
+import type { Metadata } from "next";
+import { Posts } from "@/components/posts";
 import { Pagination } from "@/components/pagination";
 import { Filters } from "@/components/filters";
 import { getPostSlugs } from "@/lib/get-post-slugs";
-import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Blog | Human in the Loop",
@@ -12,73 +12,21 @@ export const metadata: Metadata = {
   },
 };
 
-interface BlogPageProps {
-  searchParams: {
-    tag?: string;
-    month?: string;
-    page?: string;
-  };
-}
-
-const BlogPage = async ({ searchParams }: BlogPageProps) => {
-  const {
-    tag: selectedTag,
-    month: selectedMonth,
-    page: selectedPage,
-  } = searchParams;
-
-  const { slugs, pagination, tags, months } = await getPostSlugs({
-    tag: selectedTag,
-    month: selectedMonth,
-    page: selectedPage ? Number(selectedPage) : 0,
-  });
+const BlogPage = async () => {
+  const { slugs, pagination, tags, months } = await getPostSlugs();
 
   const { currentPage, totalPages } = pagination;
-
-  let pageLinkPrefix = selectedTag ? `tag=${selectedTag}` : "";
-
-  if (selectedMonth) {
-    pageLinkPrefix = pageLinkPrefix
-      ? `${pageLinkPrefix}&month=${selectedMonth}`
-      : `month=${selectedMonth}`;
-  }
 
   return (
     <div className="wrapper pt-8 sm:pt-10 md:pt-14">
       <header className="jh-prose mx-auto">
-        <h1 className="mt-0">
-          Commonplaces
-          {selectedTag || selectedMonth ? (
-            <span className="no-caps"> / {selectedTag || selectedMonth}</span>
-          ) : null}
-        </h1>
+        <h1 className="mt-0">Commonplaces</h1>
       </header>
       <section>
-        <h2 id="posts-label" className="sr-only">
-          Posts
-        </h2>
-        <ul className="group/list flex flex-col" aria-labelledby="posts-label">
-          {slugs.map((slug) => (
-            <li key={slug} className="group/post">
-              <Post
-                slug={slug}
-                className="mx-auto py-8 sm:py-10 group-has-[+li]/post:border-b group-has-[+#pagination]/list:border-b border-neutral-200 dark:border-neutral-700 border-dashed"
-              />
-            </li>
-          ))}
-        </ul>
-        <Pagination
-          totalPages={totalPages}
-          currentPage={currentPage}
-          pageLinkPrefix={pageLinkPrefix}
-        />
+        <Posts slugs={slugs} />
+        <Pagination totalPages={totalPages} currentPage={currentPage} />
       </section>
-      <Filters
-        tags={tags}
-        months={months}
-        selectedTag={selectedTag}
-        selectedMonth={selectedMonth}
-      />
+      <Filters tags={tags} months={months} />
     </div>
   );
 };
