@@ -20,11 +20,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly",
       priority: 0.8,
     },
-    ...postSlugs.map((slug) => ({
+    ...postSlugs.map(({ slug, lastModified }) => ({
       url: `${SITE_URL}blog/${slug}`,
-      lastModified: new Date(),
+      lastModified,
       changeFrequency:
-        "yearly" as MetadataRoute.Sitemap[number]["changeFrequency"],
+        "never" as MetadataRoute.Sitemap[number]["changeFrequency"],
       priority: 0.8,
     })),
     {
@@ -33,9 +33,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly",
       priority: 0.5,
     },
-    ...photoSlugs.map((slug) => ({
+    ...photoSlugs.map(({ slug, lastModified }) => ({
       url: `${SITE_URL}photo/${slug}`,
-      lastModified: new Date(),
+      lastModified,
       changeFrequency:
         "never" as MetadataRoute.Sitemap[number]["changeFrequency"],
       priority: 0.5,

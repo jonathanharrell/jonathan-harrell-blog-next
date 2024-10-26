@@ -1,7 +1,12 @@
 import { Post } from "@/components/post";
+import { Frontmatter } from "@/types";
 
 interface PostsProps {
-  slugs: string[];
+  slugs: {
+    slug: string;
+    frontmatter: Frontmatter;
+    lastModified: Date;
+  }[];
 }
 
 export const Posts = ({ slugs }: PostsProps) => {
@@ -11,7 +16,7 @@ export const Posts = ({ slugs }: PostsProps) => {
         Posts
       </h2>
       <ul className="group/list flex flex-col" aria-labelledby="posts-label">
-        {slugs.map((slug) => (
+        {slugs.map(({ slug }) => (
           <li key={slug} className="group/post">
             <Post
               slug={slug}

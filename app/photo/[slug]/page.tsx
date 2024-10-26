@@ -36,7 +36,7 @@ export const generateMetadata = async ({ params }: PhotoPageProps) => {
 export const generateStaticParams = async () => {
   const slugs = await getAllPhotoSlugs();
 
-  return slugs.map((slug) => ({
+  return slugs.map(({ slug }) => ({
     slug,
   }));
 };

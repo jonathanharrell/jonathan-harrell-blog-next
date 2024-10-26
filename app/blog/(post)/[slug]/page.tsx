@@ -42,7 +42,7 @@ export const generateMetadata = async ({ params }: BlogPostProps) => {
 export const generateStaticParams = async () => {
   const { slugs } = await getPostSlugs({ perPage: Infinity });
 
-  return slugs.map((slug) => ({
+  return slugs.map(({ slug }) => ({
     slug,
   }));
 };

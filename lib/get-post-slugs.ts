@@ -17,10 +17,12 @@ export const getPostSlugs = async ({
   const slugsWithFrontmatter = filePaths.map((file) => {
     const fullPath = path.resolve(".", "content/posts/", file);
     const fileContents = readSync(fullPath);
+    const stat = fs.statSync(fullPath);
     matter(fileContents);
 
     return {
       slug: file.replace(".mdx", ""),
+      lastModified: stat.mtime,
       frontmatter: fileContents.data.matter as Frontmatter,
     };
   });
@@ -62,20 +64,20 @@ export const getPostSlugs = async ({
     },
   );
 
-  const sortedSlugs = filteredPostSlugsWithFrontmatter
-    .sort((a, b) => {
+  const sortedSlugsWithFrontmatter = filteredPostSlugsWithFrontmatter.sort(
+    (a, b) => {
       const dateA = new Date(a.frontmatter.date as string);
       const dateB = new Date(b.frontmatter.date as string);
 
       return dateB.getTime() - dateA.getTime();
-    })
-    .map((slugWithFrontmatter) => slugWithFrontmatter.slug);
+    },
+  );
 
   const skip = page ? page * perPage : 0;
-  const slugs = sortedSlugs.slice(skip, skip + perPage);
+  const slugs = sortedSlugsWithFrontmatter.slice(skip, skip + perPage);
   const pagination = {
     currentPage: page || 0,
-    totalPages: Math.ceil(sortedSlugs.length / perPage),
+    totalPages: Math.ceil(sortedSlugsWithFrontmatter.length / perPage),
   };
 
   const tags = slugsWithFrontmatter.map(
