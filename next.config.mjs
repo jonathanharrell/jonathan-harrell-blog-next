@@ -10,11 +10,6 @@ const nextConfig = {
         destination: "/blog",
         permanent: true,
       },
-      {
-        source: "https://blog.jonathanharrell.com/:path*",
-        destination: "https://blog.jonathan-harrell.com/:path*",
-        permanent: true,
-      },
     ];
   },
   images: {
