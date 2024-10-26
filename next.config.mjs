@@ -14,6 +14,12 @@ const nextConfig = {
   },
   images: {
     deviceSizes: [390, 600, 900, 1200],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**.vercel.app",
+      },
+    ],
   },
 };
 
