@@ -20,7 +20,12 @@ export const DesktopNav = () => {
       </h2>
       <ul className="flex justify-center gap-8 [&_a:hover]:underline [&_a:hover]:decoration-1 underline-offset-4 text-lg">
         <li>
-          <Link href="/blog" className={getClasses("/blog")}>
+          <Link
+            href="/blog"
+            className={classNames({
+              "underline decoration-1": pathname.includes("/blog"),
+            })}
+          >
             Blog
           </Link>
         </li>
