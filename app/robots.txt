@@ -1,6 +1,6 @@
 User-Agent: *
 Allow: /
 Disallow: /blog/filtered/
-Disallow: /api/op/
+Disallow: /api/og/
 Disallow: /fonts/*
 Sitemap: https://blog.jonathan-harrell.com/sitemap.xml
