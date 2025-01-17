@@ -67,8 +67,8 @@ export const getPostTeasers = async ({
         .filter((t) => t.startsWith("!"))
         .map((t) => t.replace("!", ""));
       return (
-        positiveTags.every((t) => postTeaser.frontmatter.tags.includes(t)) &&
-        negativeTags.every((t) => !postTeaser.frontmatter.tags.includes(t))
+        positiveTags.every((t) => postTeaser.frontmatter.tags?.includes(t)) &&
+        negativeTags.every((t) => !postTeaser.frontmatter.tags?.includes(t))
       );
     }
 

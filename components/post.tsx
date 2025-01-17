@@ -18,7 +18,7 @@ export const Post = async ({ slug, single, className }: PostProps) => {
     year: "numeric",
   });
 
-  const filteredTags = frontmatter.tags.filter((tag) => tag !== "jdch");
+  const filteredTags = frontmatter.tags?.filter((tag) => tag !== "jdch") ?? [];
 
   const jsonLd = {
     "@context": "https://schema.org/",

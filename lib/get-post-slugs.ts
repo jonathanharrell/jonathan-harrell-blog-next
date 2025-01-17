@@ -38,10 +38,10 @@ export const getPostSlugs = async ({
 
         return (
           positiveTags.every((t) =>
-            slugWithFrontmatter.frontmatter.tags.includes(t),
+            slugWithFrontmatter.frontmatter.tags?.includes(t),
           ) &&
           negativeTags.every(
-            (t) => !slugWithFrontmatter.frontmatter.tags.includes(t),
+            (t) => !slugWithFrontmatter.frontmatter.tags?.includes(t),
           )
         );
       }
