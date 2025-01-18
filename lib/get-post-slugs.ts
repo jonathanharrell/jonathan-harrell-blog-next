@@ -80,9 +80,9 @@ export const getPostSlugs = async ({
     totalPages: Math.ceil(sortedSlugsWithFrontmatter.length / perPage),
   };
 
-  const tags = slugsWithFrontmatter.map(
-    (slugWithFrontmatter) => slugWithFrontmatter.frontmatter.tags,
-  );
+  const tags = slugsWithFrontmatter
+    .map((slugWithFrontmatter) => slugWithFrontmatter.frontmatter.tags)
+    .filter(Boolean);
   const dates = slugsWithFrontmatter.map(
     (slugWithFrontmatter) => slugWithFrontmatter.frontmatter.date as string,
   );
