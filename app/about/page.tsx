@@ -75,9 +75,8 @@ const AboutPage = () => {
           </a>
           . In a world where a handful of companies control everything we do,
           own, and share online, it is a small act of resistance to maintain a
-          personal website, to cultivate a blog over years, free from the whims
-          of a capricious technopoly. Perhaps some of you will join me in doing
-          the same.
+          personal website, to cultivate a blog over years. Perhaps some of you
+          will join me in doing the same.
         </p>
         <p>
           The title{" "}
