@@ -31,7 +31,7 @@ export const Post = async ({ slug, single, className }: PostProps) => {
     },
     datePublished: frontmatter.date,
     dateCreated: frontmatter.date,
-    url: `${SITE_URL}${slug}`,
+    url: `${SITE_URL}blog/${slug}`,
     "inLanguage ": "en-US",
     image: `${SITE_URL}api/og`,
     keywords: filteredTags.join(","),
