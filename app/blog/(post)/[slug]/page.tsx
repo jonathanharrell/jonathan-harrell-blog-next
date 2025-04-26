@@ -30,7 +30,7 @@ export const generateMetadata = async ({ params }: BlogPostProps) => {
   return {
     title: `${formattedDate} | Human in the Loop`,
     description: `Commonplace from ${formattedDate}`,
-    author: [{ name: "Jonathan" }],
+    author: [{ name: "Jonathan Harrell" }],
     creator: "Jonathan Harrell",
     publisher: "Jonathan Harrell",
     openGraph: {
