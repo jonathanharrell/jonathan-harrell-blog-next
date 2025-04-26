@@ -3,4 +3,5 @@ Allow: /
 Disallow: /blog/filtered/
 Disallow: /api/og/
 Disallow: /fonts/*
+Disallow: /seo/*
 Sitemap: https://blog.jonathan-harrell.com/sitemap.xml
