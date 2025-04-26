@@ -34,7 +34,7 @@ export const generateMetadata = async ({ params }: BlogPostProps) => {
     creator: "Jonathan Harrell",
     publisher: "Jonathan Harrell",
     openGraph: {
-      images: ["/api/og"],
+      images: ["/assets/api/og.png"],
     },
   };
 };

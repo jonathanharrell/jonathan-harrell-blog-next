@@ -1,13 +1,12 @@
 import Image from "next/image";
 import glyph from "/public/assets/glyphs/glyph-2.svg";
 import type { Metadata } from "next";
-import { SITE_URL } from "@/constants";
 
 export const metadata: Metadata = {
   title: "About | Human in the Loop",
   description: "About Jonathan Harrell’s commonplace book",
   openGraph: {
-    images: ["/api/og"],
+    images: ["/assets/api/og.png"],
   },
 };
 
