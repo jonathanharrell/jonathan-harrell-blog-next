@@ -52,7 +52,7 @@ export default function RootLayout({
             type="font/woff2"
             crossOrigin="anonymous"
           />
-          <link rel="icon" href="/assets/favicon/favicon.ico" sizes="32x32" />
+          <link rel="icon" href="/assets/favicon/favicon.ico" sizes="48x48" />
           <link
             rel="icon"
             href="/assets/favicon/icon.svg"
