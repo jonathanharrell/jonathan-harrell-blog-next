@@ -2,8 +2,8 @@ export const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="wrapper mt-6 py-6 text-center sm:text-left">
-      <p>
+    <footer className="wrapper flex flex-col lg:flex-row items-center lg:items-start lg:justify-between gap-4 mt-6 py-6 text-center">
+      <p className="text-center lg:text-left">
         Copyright ©{currentYear} Jonathan Harrell. Typeset in{" "}
         <a
           href="https://edwardtufte.github.io/et-book/"
@@ -22,8 +22,47 @@ export const Footer = () => {
         >
           Fe<sub>2</sub>O<sub>3</sub> glyphs
         </a>
+        <br />
+        If an image or text lacks a citation, it is my own.
       </p>
-      <p>If an image or text lacks a citation, it is my own.</p>
+      <section>
+        <h2 id="social-label" className="sr-only">
+          Social links
+        </h2>
+        <ul
+          className="flex flex-wrap items-center justify-center gap-y-2 gap-x-6"
+          aria-labelledby="social-label"
+        >
+          <li>
+            <a
+              href="https://www.jonathan-harrell.com/"
+              target="_blank"
+              className="underline hover:no-underline underline-offset-2"
+            >
+              Dev Blog
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://www.instagram.com/harrellofdurham/"
+              target="_blank"
+              rel="noreferrer"
+              className="underline hover:no-underline underline-offset-2"
+            >
+              Instagram
+            </a>
+          </li>
+          <li>
+            <a
+              href="/rss"
+              target="_blank"
+              className="underline hover:no-underline underline-offset-2"
+            >
+              RSS
+            </a>
+          </li>
+        </ul>
+      </section>
     </footer>
   );
 };

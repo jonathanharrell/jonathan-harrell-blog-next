@@ -11,6 +11,11 @@ const nextConfig = {
         destination: "/blog",
         permanent: true,
       },
+      {
+        source: "/rss.xml",
+        destination: "/rss",
+        permanent: true,
+      },
     ];
   },
   images: {
