@@ -27,7 +27,7 @@ export const Post = async ({ slug, single, className }: PostProps) => {
     author: {
       "@type": "Person",
       name: "Jonathan Harrell",
-      url: "https://www.jonathan-harrell.com",
+      url: "https://www.jonathanharrell.com",
     },
     datePublished: frontmatter.date,
     dateCreated: frontmatter.date,

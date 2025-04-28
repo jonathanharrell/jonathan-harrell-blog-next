@@ -32,7 +32,7 @@ export const generateMetadata = async ({ params }: BlogPostProps) => {
     title: `${formattedDate} | Human in the Loop`,
     description: `Commonplace from ${formattedDate}`,
     author: [
-      { name: "Jonathan Harrell", url: "https://www.jonathan-harrell.com" },
+      { name: "Jonathan Harrell", url: "https://www.jonathanharrell.com" },
     ],
     creator: "Jonathan Harrell",
     publisher: "Jonathan Harrell",

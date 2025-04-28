@@ -18,7 +18,7 @@ const jsonLd = {
   author: {
     "@type": "Person",
     name: "Jonathan Harrell",
-    url: "https://www.jonathan-harrell.com",
+    url: "https://www.jonathanharrell.com",
   },
 };
 
@@ -39,7 +39,7 @@ const AboutPage = () => {
         <h1 className="mt-0">About this Book</h1>
         <p>
           I’m Jonathan, a{" "}
-          <a href="https://www.jonathan-harrell.com/" target="_blank">
+          <a href="https://www.jonathanharrell.com/" target="_blank">
             software engineer
           </a>{" "}
           by trade, and a writer/
