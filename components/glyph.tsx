@@ -22,14 +22,23 @@ export const Glyph = () => {
 
   useEffect(() => {
     if (isHovering) {
+      let lastIndex = -1; // track last index
+
       intervalRef.current = setInterval(() => {
-        const randomIndex = Math.floor(Math.random() * glyphs.length);
+        let randomIndex;
+        do {
+          randomIndex = Math.floor(Math.random() * glyphs.length);
+        } while (randomIndex === lastIndex); // re-roll if same
+
+        lastIndex = randomIndex; // update last used index
         setActiveIndex(randomIndex);
       }, 300);
     } else {
       clearInterval(intervalRef.current);
       setActiveIndex(defaultIndex);
     }
+
+    return () => clearInterval(intervalRef.current);
   }, [isHovering]);
 
   return (
