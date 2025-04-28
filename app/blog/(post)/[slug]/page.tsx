@@ -1,6 +1,7 @@
 import { Post } from "@/components/post";
 import { getPostSlugs } from "@/lib/get-post-slugs";
 import { getPostData } from "@/lib/get-post-data";
+import { SITE_URL } from "@/constants";
 
 interface BlogPostProps {
   params: {
@@ -35,6 +36,9 @@ export const generateMetadata = async ({ params }: BlogPostProps) => {
     ],
     creator: "Jonathan Harrell",
     publisher: "Jonathan Harrell",
+    alternates: {
+      canonical: `${SITE_URL}blog/${params.slug}`,
+    },
     openGraph: {
       images: ["/assets/api/og.png"],
     },
