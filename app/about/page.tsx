@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: "About | Human in the Loop",
   description: "About Jonathan Harrell’s commonplace book",
   openGraph: {
-    images: ["/assets/api/og.png"],
+    images: ["/assets/seo/og.png"],
   },
 };
 

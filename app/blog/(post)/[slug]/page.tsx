@@ -40,7 +40,7 @@ export const generateMetadata = async ({ params }: BlogPostProps) => {
       canonical: `${SITE_URL}blog/${params.slug}`,
     },
     openGraph: {
-      images: ["/assets/api/og.png"],
+      images: ["/assets/seo/og.png"],
     },
   };
 };
