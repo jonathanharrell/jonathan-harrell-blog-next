@@ -32,7 +32,7 @@ export const FilterMonths = ({
         <select
           value={selectedMonth}
           onChange={filterByMonth}
-          className="select appearance-none w-full sm:w-auto py-2.5 sm:py-1.5 pl-3 pr-8 rounded-full border border-neutral-200 dark:border-neutral-700 hover:border-neutral-400 bg-transparent leading-none transition-colors duration-200 ease-in-out cursor-pointer"
+          className="select appearance-none w-full sm:w-auto py-2.5 sm:py-1.5 pl-3 pr-8 rounded-full border border-neutral-200 dark:border-neutral-700 hover:border-neutral-400 bg-transparent sm:leading-none transition-colors duration-200 ease-in-out cursor-pointer"
           aria-labelledby="months-label"
         >
           <option value="">All Time</option>
