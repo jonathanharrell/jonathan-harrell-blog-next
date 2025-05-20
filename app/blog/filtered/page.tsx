@@ -61,12 +61,7 @@ const FilteredBlogPage = async ({ searchParams }: FilteredBlogPageProps) => {
           pageLinkPrefix={pageLinkPrefix}
         />
       </section>
-      <Filters
-        tags={tags}
-        months={months}
-        selectedTag={selectedTag}
-        selectedMonth={selectedMonth}
-      />
+      <Filters tags={tags} months={months} />
     </div>
   );
 };

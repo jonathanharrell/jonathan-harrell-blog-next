@@ -1,17 +1,16 @@
 "use client";
 
 import { ChangeEventHandler } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 interface FilterMonthsProps {
   months: string[];
-  selectedMonth?: string;
 }
 
-export const FilterMonths = ({
-  months,
-  selectedMonth = "",
-}: FilterMonthsProps) => {
+export const FilterMonths = ({ months }: FilterMonthsProps) => {
+  const searchParams = useSearchParams();
+  const selectedMonth = searchParams.get("month");
+
   const router = useRouter();
 
   const filterByMonth: ChangeEventHandler<HTMLSelectElement> = (event) => {
@@ -30,7 +29,7 @@ export const FilterMonths = ({
       </p>
       <div>
         <select
-          value={selectedMonth}
+          value={selectedMonth ?? ""}
           onChange={filterByMonth}
           className="select appearance-none w-full sm:w-auto py-2.5 sm:py-1.5 pl-3 pr-8 rounded-full border border-neutral-200 dark:border-neutral-700 hover:border-neutral-400 bg-transparent sm:leading-none transition-colors duration-200 ease-in-out cursor-pointer"
           aria-labelledby="months-label"
