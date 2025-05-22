@@ -7,14 +7,21 @@ import classNames from "classnames";
 import { X } from "react-feather";
 import { Photo } from "@/components/photo";
 import { Spinner } from "@/components/spinner";
+import { PhotoMetadata } from "@/lib/get-photo-metadata";
 
 interface PhotoModalProps {
   slug: string;
   width?: number;
   height?: number;
+  metadata?: PhotoMetadata;
 }
 
-export const PhotoModal = ({ slug, width, height }: PhotoModalProps) => {
+export const PhotoModal = ({
+  slug,
+  width,
+  height,
+  metadata,
+}: PhotoModalProps) => {
   const router = useTransitionRouter();
 
   const modalRef = useRef<HTMLDialogElement | null>(null);
@@ -50,15 +57,23 @@ export const PhotoModal = ({ slug, width, height }: PhotoModalProps) => {
   useEffect(() => {
     showModal();
 
+    const handleClick = (event: MouseEvent) => {
+      if (modalRef.current === event.target) {
+        goBack();
+      }
+    };
+
     const handleKeydown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         goBack();
       }
     };
 
+    document.addEventListener("click", handleClick);
     window.addEventListener("keydown", handleKeydown);
 
     return () => {
+      document.removeEventListener("click", handleClick);
       window.removeEventListener("keydown", handleKeydown);
     };
   }, []);
@@ -66,8 +81,7 @@ export const PhotoModal = ({ slug, width, height }: PhotoModalProps) => {
   return (
     <dialog
       className={classNames(
-        "bg-transparent backdrop:bg-neutral-900 backdrop:bg-opacity-90",
-        isModalOpen ? "flex flex-col w-dvw h-dvh" : "",
+        "flex flex-col items-center justify-center !max-w-none !max-h-none bg-transparent backdrop:bg-neutral-900 backdrop:bg-opacity-90",
       )}
       style={{ viewTransitionName: "modal" }}
       ref={modalRef}
@@ -75,27 +89,26 @@ export const PhotoModal = ({ slug, width, height }: PhotoModalProps) => {
       <button
         autoFocus
         onClick={goBack}
-        className="absolute top-0 right-0 p-3 text-neutral-100 focus-visible:ring-0"
+        className="fixed top-0 right-0 p-3 text-neutral-100 focus-visible:ring-0"
       >
         <X />
         <span className="sr-only">Close photo dialog</span>
       </button>
-      <div className="flex flex-col items-center justify-center flex-1 w-full h-full">
-        {!isLoaded && (
-          <span className="flex flex-col items-center justify-center absolute inset-0 z-10 w-full h-full text-neutral-100">
-            <Spinner />
-          </span>
+      {!isLoaded && (
+        <span className="flex flex-col items-center justify-center absolute inset-0 z-10 w-full h-full text-neutral-100">
+          <Spinner />
+        </span>
+      )}
+      <Photo
+        slug={slug}
+        width={width}
+        height={height}
+        metadata={metadata}
+        className={classNames(
+          "block h-[min(calc(100dvh-4rem),1200px)] max-w-[min(calc(100dvw-4rem),1200px)]",
         )}
-        <Photo
-          slug={slug}
-          width={width}
-          height={height}
-          className={classNames("w-full h-full max-w-[900px] max-h-[900px]", {
-            block: isLoaded,
-          })}
-          onLoad={() => setIsLoaded(true)}
-        />
-      </div>
+        onLoad={() => setIsLoaded(true)}
+      />
     </dialog>
   );
 };

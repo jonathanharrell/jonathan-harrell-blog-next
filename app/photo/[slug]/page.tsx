@@ -1,6 +1,10 @@
 import { Photo } from "@/components/photo";
 import { getAllPhotoSlugs } from "@/lib/get-all-post-slugs";
-import { getPostData } from "@/lib/get-post-data";
+import path from "path";
+import fs from "fs";
+import ExifReader from "exifreader";
+import * as Sentry from "@sentry/nextjs";
+import { getPhotoMetadata } from "@/lib/get-photo-metadata";
 
 interface PhotoPageProps {
   params: {
@@ -9,13 +13,16 @@ interface PhotoPageProps {
 }
 
 const PhotoPage = async ({ params }: PhotoPageProps) => {
+  const metadata = await getPhotoMetadata(params.slug);
+
   return (
     <div className="wrapper flex items-center justify-center py-12">
       <Photo
         slug={params.slug}
-        width={900}
-        height={900}
-        className="w-full h-full max-w-[900px] max-h-[900px]"
+        width={1600}
+        height={1600}
+        metadata={metadata}
+        className="w-full h-full max-w-[1200px] max-h-[1200px]"
       />
     </div>
   );

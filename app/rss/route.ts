@@ -1,8 +1,5 @@
 import { Feed } from "feed";
 import { SITE_URL } from "@/constants";
-import path from "path";
-import fs from "fs";
-import { compileMDX } from "next-mdx-remote/rsc";
 import { getPostSlugs } from "@/lib/get-post-slugs";
 import { convertPostDataForRss } from "@/lib/convert-post-data-for-rss";
 
