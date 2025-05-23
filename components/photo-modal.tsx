@@ -118,6 +118,7 @@ export const PhotoModal = ({
             className={classNames(
               "block w-auto sm:max-w-[min(calc(100%,1600px)] h-auto max-h-[min(calc(100dvh-6rem),1600px)]",
             )}
+            captionClassName="wrapper text-sm text-center text-neutral-400"
             isLoaded={isLoaded}
             onLoad={() => setIsLoaded(true)}
           />

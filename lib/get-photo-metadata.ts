@@ -11,6 +11,7 @@ export interface PhotoMetadata {
   aperture?: string;
   iso?: string;
   cameraModel?: string;
+  date?: string;
 }
 
 export const getPhotoMetadata = async (
@@ -37,6 +38,7 @@ export const getPhotoMetadata = async (
           metadata.FNumber?.description || metadata.ApertureValue?.description,
         iso: metadata.ISOSpeedRatings?.description,
         cameraModel: metadata.Model?.description,
+        date: metadata.CreateDate?.value,
       }
     : undefined;
 };

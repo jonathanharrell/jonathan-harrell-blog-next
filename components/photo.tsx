@@ -12,6 +12,7 @@ interface PhotoProps {
   quality?: number;
   className?: string;
   style?: CSSProperties;
+  captionClassName?: string;
   isLoaded?: boolean;
   onLoad?: () => void;
 }
@@ -25,6 +26,7 @@ export const Photo = ({
   quality,
   className,
   style,
+  captionClassName,
   isLoaded,
   onLoad,
 }: PhotoProps) => {
@@ -41,6 +43,14 @@ export const Photo = ({
     metadata?.aperture,
     metadata?.iso ? `ISO ${metadata.iso}` : undefined,
   ].filter(Boolean);
+
+  const formattedDate = metadata?.date
+    ? new Date(metadata.date).toLocaleDateString("en-US", {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+      })
+    : undefined;
 
   return (
     <div className="flex flex-col items-center justify-center gap-4">
@@ -61,17 +71,17 @@ export const Photo = ({
         style={style}
         onLoad={onLoad}
       />
-      {isLoaded && metadata && (
-        <div className="wrapper">
-          <p className="text-sm text-neutral-400 text-center">
-            {locationData.length > 0 && <span>{locationData.join(", ")}</span>}
-            {locationData.length > 0 && cameraData.length > 0 && (
-              <span className="mx-2">•</span>
-            )}
-            {cameraData.length > 0 && <span>{cameraData.join(", ")}</span>}
-            {/*date*/}
-          </p>
-        </div>
+      {(isLoaded || isLoaded === undefined) && metadata && (
+        <p className={classNames("w-full", captionClassName)}>
+          {locationData.length > 0 && <span>{locationData.join(", ")}</span>}
+          {locationData.length > 0 && cameraData.length > 0 && (
+            <span className="mx-2">•</span>
+          )}
+          {cameraData.length > 0 && <span>{cameraData.join(", ")}</span>}
+          {(locationData.length > 0 || cameraData.length > 0) &&
+            formattedDate && <span className="mx-2">•</span>}
+          {formattedDate && <span>{formattedDate}</span>}
+        </p>
       )}
     </div>
   );
