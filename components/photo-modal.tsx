@@ -105,18 +105,18 @@ export const PhotoModal = ({
           <span className="sr-only">Close photo dialog</span>
         </button>
         {!isLoaded && (
-          <div className="flex flex-col items-center justify-center text-neutral-100">
+          <div className="flex flex-col items-center justify-center absolute inset-0 text-neutral-100">
             <Spinner />
           </div>
         )}
-        <div className="sm:wrapper pt-4 md:pt-0">
+        <div className="pt-4 md:pt-0">
           <Photo
             slug={slug}
             width={width}
             height={height}
             metadata={metadata}
             className={classNames(
-              "block w-auto sm:max-w-[min(calc(100%,1600px)] h-auto max-h-[min(calc(100dvh-6rem),1600px)]",
+              "block w-auto sm:max-w-[min(calc(100dvw-6rem),calc(1300px-6rem))] h-auto max-h-[min(calc(100dvh-6rem),calc(1300px-6rem))]",
             )}
             captionClassName="wrapper text-sm text-center text-neutral-400"
             isLoaded={isLoaded}
@@ -128,7 +128,7 @@ export const PhotoModal = ({
             <Link
               href={`/photo/${previousSlug}`}
               scroll={false}
-              className="block p-1 sm:p-2 text-neutral-100 sm:text-neutral-400 hover:text-neutral-100 transition-colors duration-200 ease-in-out"
+              className="block p-1 lg:p-2 text-neutral-100 sm:text-neutral-400 hover:text-neutral-100 transition-colors duration-200 ease-in-out"
             >
               <ChevronLeft size={36} />
               <span className="sr-only">Previous image</span>
@@ -140,7 +140,7 @@ export const PhotoModal = ({
             <Link
               href={`/photo/${nextSlug}`}
               scroll={false}
-              className="block p-1 sm:p-2 text-neutral-100 sm:text-neutral-400 hover:text-neutral-100 transition-colors duration-200 ease-in-out"
+              className="block p-1 lg:p-2 text-neutral-100 sm:text-neutral-400 hover:text-neutral-100 transition-colors duration-200 ease-in-out"
             >
               <ChevronRight size={36} />
               <span className="sr-only">Next image</span>
