@@ -51,13 +51,13 @@ export const PhotoModal = ({
   const goBack = useCallback(() => {
     if (typeof document.startViewTransition !== "undefined") {
       document.startViewTransition(() => {
-        router.replace("/photos", {
+        router.replace(`/photos?from=${slug}`, {
           scroll: false,
         });
         router.refresh();
       });
     } else {
-      router.replace("/photos", {
+      router.replace(`/photos?from=${slug}`, {
         scroll: false,
       });
       router.refresh();
