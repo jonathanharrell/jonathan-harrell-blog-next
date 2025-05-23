@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { flushSync } from "react-dom";
-import { useTransitionRouter } from "next-view-transitions";
+import { Link, useTransitionRouter } from "next-view-transitions";
 import classNames from "classnames";
-import { X } from "react-feather";
+import { X, ChevronLeft, ChevronRight } from "react-feather";
 import { Photo } from "@/components/photo";
 import { Spinner } from "@/components/spinner";
 import { PhotoMetadata } from "@/lib/get-photo-metadata";
@@ -14,6 +14,8 @@ interface PhotoModalProps {
   width?: number;
   height?: number;
   metadata?: PhotoMetadata;
+  previousSlug?: string;
+  nextSlug?: string;
 }
 
 export const PhotoModal = ({
@@ -21,6 +23,8 @@ export const PhotoModal = ({
   width,
   height,
   metadata,
+  previousSlug,
+  nextSlug,
 }: PhotoModalProps) => {
   const router = useTransitionRouter();
 
@@ -44,15 +48,21 @@ export const PhotoModal = ({
     }
   };
 
-  const goBack = () => {
+  const goBack = useCallback(() => {
     if (typeof document.startViewTransition !== "undefined") {
       document.startViewTransition(() => {
-        router.back();
+        router.replace("/photos", {
+          scroll: false,
+        });
+        router.refresh();
       });
     } else {
-      router.back();
+      router.replace("/photos", {
+        scroll: false,
+      });
+      router.refresh();
     }
-  };
+  }, [router]);
 
   useEffect(() => {
     showModal();
@@ -76,39 +86,67 @@ export const PhotoModal = ({
       document.removeEventListener("click", handleClick);
       window.removeEventListener("keydown", handleKeydown);
     };
-  }, []);
+  }, [goBack]);
 
   return (
     <dialog
       className={classNames(
-        "flex flex-col items-center justify-center !max-w-none !max-h-none bg-transparent backdrop:bg-neutral-900 backdrop:bg-opacity-90",
+        "flex flex-col items-center justify-center !max-w-none !max-h-none bg-transparent backdrop:bg-neutral-900 backdrop:bg-opacity-95",
       )}
-      style={{ viewTransitionName: "modal" }}
       ref={modalRef}
     >
-      <button
-        autoFocus
-        onClick={goBack}
-        className="fixed top-0 right-0 p-3 text-neutral-100 focus-visible:ring-0"
-      >
-        <X />
-        <span className="sr-only">Close photo dialog</span>
-      </button>
-      {!isLoaded && (
-        <span className="flex flex-col items-center justify-center absolute inset-0 z-10 w-full h-full text-neutral-100">
-          <Spinner />
-        </span>
-      )}
-      <Photo
-        slug={slug}
-        width={width}
-        height={height}
-        metadata={metadata}
-        className={classNames(
-          "block h-[min(calc(100dvh-4rem),1200px)] max-w-[min(calc(100dvw-4rem),1200px)]",
+      <div className="flex flex-col">
+        <button
+          autoFocus
+          onClick={goBack}
+          className="fixed top-0 right-0 p-3 text-neutral-400 hover:text-neutral-100 transition-colors duration-200 ease-in-out focus-visible:ring-0"
+        >
+          <X />
+          <span className="sr-only">Close photo dialog</span>
+        </button>
+        {!isLoaded && (
+          <div className="flex flex-col items-center justify-center text-neutral-100">
+            <Spinner />
+          </div>
         )}
-        onLoad={() => setIsLoaded(true)}
-      />
+        <div className="sm:wrapper pt-4 md:pt-0">
+          <Photo
+            slug={slug}
+            width={width}
+            height={height}
+            metadata={metadata}
+            className={classNames(
+              "block w-auto sm:max-w-[min(calc(100%,1600px)] h-auto max-h-[min(calc(100dvh-6rem),1600px)]",
+            )}
+            isLoaded={isLoaded}
+            onLoad={() => setIsLoaded(true)}
+          />
+        </div>
+        {previousSlug && (
+          <div className="fixed top-1/2 left-0 sm:left-2 z-10 -translate-1/2 text-white">
+            <Link
+              href={`/photo/${previousSlug}`}
+              scroll={false}
+              className="block p-1 sm:p-2 text-neutral-100 sm:text-neutral-400 hover:text-neutral-100 transition-colors duration-200 ease-in-out"
+            >
+              <ChevronLeft size={36} />
+              <span className="sr-only">Previous image</span>
+            </Link>
+          </div>
+        )}
+        {nextSlug && (
+          <div className="fixed top-1/2 right-0 sm:right-2 z-10 -translate-1/2 text-white">
+            <Link
+              href={`/photo/${nextSlug}`}
+              scroll={false}
+              className="block p-1 sm:p-2 text-neutral-100 sm:text-neutral-400 hover:text-neutral-100 transition-colors duration-200 ease-in-out"
+            >
+              <ChevronRight size={36} />
+              <span className="sr-only">Next image</span>
+            </Link>
+          </div>
+        )}
+      </div>
     </dialog>
   );
 };
