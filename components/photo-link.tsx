@@ -20,7 +20,7 @@ export const PhotoLink = ({ slug }: PhotoProps) => {
   useEffect(() => {
     if (from === slug) {
       wrapperRef.current?.querySelector("a")?.focus();
-      router.replace("photos");
+      router.replace("photos", { scroll: false });
     }
   }, [from, router, slug]);
 
