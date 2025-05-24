@@ -1,5 +1,6 @@
 import { PhotoModal } from "@/components/photo-modal";
 import { getImagesManifest } from "@/lib/get-images-manifest";
+import { Spinner } from "@/components/spinner";
 
 interface PhotoPageProps {
   params: {

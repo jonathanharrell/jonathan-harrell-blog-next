@@ -92,6 +92,9 @@ export const PhotoModal = ({
     <dialog
       className={classNames(
         "flex flex-col items-center justify-center !max-w-none !max-h-none bg-transparent backdrop:bg-neutral-900 backdrop:bg-opacity-95",
+        {
+          "min-w-6 min-h-6": !isLoaded,
+        },
       )}
       ref={modalRef}
     >
