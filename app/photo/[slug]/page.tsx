@@ -1,6 +1,6 @@
 import { Photo } from "@/components/photo";
 import { getAllPhotoSlugs } from "@/lib/get-all-post-slugs";
-import { getPhotoMetadata } from "@/lib/get-photo-metadata";
+// import { getPhotoMetadata } from "@/lib/get-photo-metadata";
 
 interface PhotoPageProps {
   params: {
@@ -9,7 +9,7 @@ interface PhotoPageProps {
 }
 
 const PhotoPage = async ({ params }: PhotoPageProps) => {
-  const metadata = await getPhotoMetadata(params.slug);
+  // const metadata = await getPhotoMetadata(params.slug);
 
   return (
     <div className="wrapper flex items-center justify-center py-12">
@@ -17,7 +17,7 @@ const PhotoPage = async ({ params }: PhotoPageProps) => {
         slug={params.slug}
         width={1600}
         height={1600}
-        metadata={metadata}
+        // metadata={metadata}
         className="w-full h-full max-w-[1200px] max-h-[1200px]"
       />
     </div>
