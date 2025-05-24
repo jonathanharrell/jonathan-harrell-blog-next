@@ -1,20 +1,31 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { flushSync } from "react-dom";
-import { useTransitionRouter } from "next-view-transitions";
+import { Link, useTransitionRouter } from "next-view-transitions";
 import classNames from "classnames";
-import { X } from "react-feather";
+import { X, ChevronLeft, ChevronRight } from "react-feather";
 import { Photo } from "@/components/photo";
 import { Spinner } from "@/components/spinner";
+import { PhotoMetadata } from "@/types";
 
 interface PhotoModalProps {
   slug: string;
   width?: number;
   height?: number;
+  metadata?: PhotoMetadata;
+  previousSlug?: string;
+  nextSlug?: string;
 }
 
-export const PhotoModal = ({ slug, width, height }: PhotoModalProps) => {
+export const PhotoModal = ({
+  slug,
+  width,
+  height,
+  metadata,
+  previousSlug,
+  nextSlug,
+}: PhotoModalProps) => {
   const router = useTransitionRouter();
 
   const modalRef = useRef<HTMLDialogElement | null>(null);
@@ -37,18 +48,30 @@ export const PhotoModal = ({ slug, width, height }: PhotoModalProps) => {
     }
   };
 
-  const goBack = () => {
+  const goBack = useCallback(() => {
     if (typeof document.startViewTransition !== "undefined") {
       document.startViewTransition(() => {
-        router.back();
+        router.replace(`/photos?from=${slug}`, {
+          scroll: false,
+        });
+        router.refresh();
       });
     } else {
-      router.back();
+      router.replace(`/photos?from=${slug}`, {
+        scroll: false,
+      });
+      router.refresh();
     }
-  };
+  }, [router, slug]);
 
   useEffect(() => {
     showModal();
+
+    const handleClick = (event: MouseEvent) => {
+      if (modalRef.current === event.target) {
+        goBack();
+      }
+    };
 
     const handleKeydown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -56,46 +79,83 @@ export const PhotoModal = ({ slug, width, height }: PhotoModalProps) => {
       }
     };
 
+    document.addEventListener("click", handleClick);
     window.addEventListener("keydown", handleKeydown);
 
     return () => {
+      document.removeEventListener("click", handleClick);
       window.removeEventListener("keydown", handleKeydown);
     };
-  }, []);
+  }, [goBack]);
 
   return (
-    <dialog
-      className={classNames(
-        "bg-transparent backdrop:bg-neutral-900 backdrop:bg-opacity-90",
-        isModalOpen ? "flex flex-col w-dvw h-dvh" : "",
+    <>
+      {!isModalOpen && (
+        <div className="flex items-center justify-center fixed inset-0 w-screen h-screen bg-neutral-900 bg-opacity-95" />
       )}
-      style={{ viewTransitionName: "modal" }}
-      ref={modalRef}
-    >
-      <button
-        autoFocus
-        onClick={goBack}
-        className="absolute top-0 right-0 p-3 text-neutral-100 focus-visible:ring-0"
-      >
-        <X />
-        <span className="sr-only">Close photo dialog</span>
-      </button>
-      <div className="flex flex-col items-center justify-center flex-1 w-full h-full">
-        {!isLoaded && (
-          <span className="flex flex-col items-center justify-center absolute inset-0 z-10 w-full h-full text-neutral-100">
-            <Spinner />
-          </span>
+      <dialog
+        className={classNames(
+          "flex flex-col items-center justify-center !max-w-none !max-h-none bg-transparent backdrop:bg-neutral-900 backdrop:bg-opacity-95",
+          {
+            "min-w-6 min-h-6": !isLoaded,
+          },
         )}
-        <Photo
-          slug={slug}
-          width={width}
-          height={height}
-          className={classNames("w-full h-full max-w-[900px] max-h-[900px]", {
-            block: isLoaded,
-          })}
-          onLoad={() => setIsLoaded(true)}
-        />
-      </div>
-    </dialog>
+        ref={modalRef}
+      >
+        <div className="flex flex-col">
+          <button
+            autoFocus
+            onClick={goBack}
+            className="fixed top-0 right-0 p-3 text-neutral-400 hover:text-neutral-100 transition-colors duration-200 ease-in-out focus-visible:ring-0"
+          >
+            <X />
+            <span className="sr-only">Close photo dialog</span>
+          </button>
+          {!isLoaded && (
+            <div className="flex flex-col items-center justify-center absolute inset-0 text-neutral-100">
+              <Spinner />
+            </div>
+          )}
+          <div className="pt-4 md:pt-0">
+            <Photo
+              slug={slug}
+              width={width}
+              height={height}
+              metadata={metadata}
+              className={classNames(
+                "block w-auto sm:max-w-[min(calc(100dvw-6rem),calc(1300px-6rem))] h-auto max-h-[min(calc(100dvh-6rem),calc(1300px-6rem))]",
+              )}
+              captionClassName="wrapper text-sm text-center text-neutral-400"
+              isLoaded={isLoaded}
+              onLoad={() => setIsLoaded(true)}
+            />
+            {previousSlug && (
+              <div className="fixed top-1/2 left-0 sm:left-2 z-10 -mt-8 md:mt-0 -translate-1/2 text-white">
+                <Link
+                  href={`/photo/${previousSlug}`}
+                  scroll={false}
+                  className="block p-1 lg:p-2 text-neutral-100 sm:text-neutral-400 hover:text-neutral-100 transition-colors duration-200 ease-in-out"
+                >
+                  <ChevronLeft size={36} />
+                  <span className="sr-only">Previous image</span>
+                </Link>
+              </div>
+            )}
+            {nextSlug && (
+              <div className="fixed top-1/2 right-0 sm:right-2 z-10 -mt-8 md:mt-0 -translate-1/2 text-white">
+                <Link
+                  href={`/photo/${nextSlug}`}
+                  scroll={false}
+                  className="block p-1 lg:p-2 text-neutral-100 sm:text-neutral-400 hover:text-neutral-100 transition-colors duration-200 ease-in-out"
+                >
+                  <ChevronRight size={36} />
+                  <span className="sr-only">Next image</span>
+                </Link>
+              </div>
+            )}
+          </div>
+        </div>
+      </dialog>
+    </>
   );
 };

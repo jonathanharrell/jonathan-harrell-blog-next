@@ -1,6 +1,5 @@
 import { Photo } from "@/components/photo";
-import { getAllPhotoSlugs } from "@/lib/get-all-post-slugs";
-import { getPostData } from "@/lib/get-post-data";
+import { getImagesManifest } from "@/lib/get-images-manifest";
 
 interface PhotoPageProps {
   params: {
@@ -9,13 +8,21 @@ interface PhotoPageProps {
 }
 
 const PhotoPage = async ({ params }: PhotoPageProps) => {
+  const imagesManifest = getImagesManifest();
+
+  const matchingIndex = imagesManifest.findIndex(
+    (image) => image.slug === params.slug,
+  );
+  const matchingImage = imagesManifest[matchingIndex];
+
   return (
     <div className="wrapper flex items-center justify-center py-12">
       <Photo
         slug={params.slug}
-        width={900}
-        height={900}
-        className="w-full h-full max-w-[900px] max-h-[900px]"
+        width={1600}
+        height={1600}
+        metadata={matchingImage?.metadata}
+        className="w-full h-full max-w-[1200px] max-h-[1200px]"
       />
     </div>
   );
@@ -34,9 +41,10 @@ export const generateMetadata = async ({ params }: PhotoPageProps) => {
 };
 
 export const generateStaticParams = async () => {
-  const slugs = await getAllPhotoSlugs();
+  const imagesManifest = getImagesManifest();
+  const slugs = imagesManifest.map((image) => image.slug);
 
-  return slugs.map(({ slug }) => ({
+  return slugs.map((slug) => ({
     slug,
   }));
 };
