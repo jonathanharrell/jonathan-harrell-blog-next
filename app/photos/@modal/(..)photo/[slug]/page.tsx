@@ -1,5 +1,5 @@
 import { PhotoModal } from "@/components/photo-modal";
-import { getPhotoMetadata } from "@/lib/get-photo-metadata";
+// import { getPhotoMetadata } from "@/lib/get-photo-metadata";
 import { getAllPhotoSlugs } from "@/lib/get-all-post-slugs";
 
 interface PhotoPageProps {
@@ -9,7 +9,7 @@ interface PhotoPageProps {
 }
 
 const PhotoPage = async ({ params }: PhotoPageProps) => {
-  const metadata = await getPhotoMetadata(params.slug);
+  // const metadata = await getPhotoMetadata(params.slug);
   const slugs = await getAllPhotoSlugs();
 
   const matchingIndex = slugs.findIndex((item) => item.slug === params.slug);
@@ -22,7 +22,7 @@ const PhotoPage = async ({ params }: PhotoPageProps) => {
       slug={params.slug}
       width={1600}
       height={1600}
-      metadata={metadata}
+      // metadata={metadata}
       previousSlug={previousSlug?.slug}
       nextSlug={nextSlug?.slug}
     />
