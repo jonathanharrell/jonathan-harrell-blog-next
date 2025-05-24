@@ -8,6 +8,7 @@ import { X, ChevronLeft, ChevronRight } from "react-feather";
 import { Photo } from "@/components/photo";
 import { Spinner } from "@/components/spinner";
 import { PhotoMetadata } from "@/lib/get-photo-metadata";
+import NextTopLoader from "nextjs-toploader";
 
 interface PhotoModalProps {
   slug: string;
@@ -122,31 +123,31 @@ export const PhotoModal = ({
             isLoaded={isLoaded}
             onLoad={() => setIsLoaded(true)}
           />
+          {previousSlug && (
+            <div className="fixed top-1/2 left-0 sm:left-2 z-10 -mt-8 md:mt-0 -translate-1/2 text-white">
+              <Link
+                href={`/photo/${previousSlug}`}
+                scroll={false}
+                className="block p-1 lg:p-2 text-neutral-100 sm:text-neutral-400 hover:text-neutral-100 transition-colors duration-200 ease-in-out"
+              >
+                <ChevronLeft size={36} />
+                <span className="sr-only">Previous image</span>
+              </Link>
+            </div>
+          )}
+          {nextSlug && (
+            <div className="fixed top-1/2 right-0 sm:right-2 z-10 -mt-8 md:mt-0 -translate-1/2 text-white">
+              <Link
+                href={`/photo/${nextSlug}`}
+                scroll={false}
+                className="block p-1 lg:p-2 text-neutral-100 sm:text-neutral-400 hover:text-neutral-100 transition-colors duration-200 ease-in-out"
+              >
+                <ChevronRight size={36} />
+                <span className="sr-only">Next image</span>
+              </Link>
+            </div>
+          )}
         </div>
-        {previousSlug && (
-          <div className="fixed top-1/2 left-0 sm:left-2 z-10 -translate-1/2 text-white">
-            <Link
-              href={`/photo/${previousSlug}`}
-              scroll={false}
-              className="block p-1 lg:p-2 text-neutral-100 sm:text-neutral-400 hover:text-neutral-100 transition-colors duration-200 ease-in-out"
-            >
-              <ChevronLeft size={36} />
-              <span className="sr-only">Previous image</span>
-            </Link>
-          </div>
-        )}
-        {nextSlug && (
-          <div className="fixed top-1/2 right-0 sm:right-2 z-10 -translate-1/2 text-white">
-            <Link
-              href={`/photo/${nextSlug}`}
-              scroll={false}
-              className="block p-1 lg:p-2 text-neutral-100 sm:text-neutral-400 hover:text-neutral-100 transition-colors duration-200 ease-in-out"
-            >
-              <ChevronRight size={36} />
-              <span className="sr-only">Next image</span>
-            </Link>
-          </div>
-        )}
       </div>
     </dialog>
   );
