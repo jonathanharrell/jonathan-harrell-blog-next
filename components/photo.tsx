@@ -1,7 +1,7 @@
 import { CSSProperties } from "react";
 import Image from "next/image";
 import classNames from "classnames";
-import { PhotoMetadata } from "@/lib/get-photo-metadata";
+import { PhotoMetadata } from "@/types";
 
 interface PhotoProps {
   slug: string;

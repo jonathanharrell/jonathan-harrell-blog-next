@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run generate-images-manifest && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate-images-manifest": "node scripts/generate-images-manifest.js"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.0.1",
@@ -26,6 +27,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-feather": "^2.0.10",
+    "sharp": "^0.34.2",
     "tailwind-merge": "^2.5.2",
     "to-vfile": "^8.0.0"
   },

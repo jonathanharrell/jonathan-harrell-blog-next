@@ -1,6 +1,5 @@
 import { PhotoModal } from "@/components/photo-modal";
-// import { getPhotoMetadata } from "@/lib/get-photo-metadata";
-// import { getAllPhotoSlugs } from "@/lib/get-all-post-slugs";
+import { getImagesManifest } from "@/lib/get-images-manifest";
 
 interface PhotoPageProps {
   params: {
@@ -9,22 +8,25 @@ interface PhotoPageProps {
 }
 
 const PhotoPage = async ({ params }: PhotoPageProps) => {
-  // const metadata = await getPhotoMetadata(params.slug);
-  // const slugs = await getAllPhotoSlugs();
-  //
-  // const matchingIndex = slugs.findIndex((item) => item.slug === params.slug);
-  //
-  // const previousSlug = slugs[matchingIndex - 1];
-  // const nextSlug = slugs[matchingIndex + 1];
+  const imagesManifest = getImagesManifest();
+
+  const matchingIndex = imagesManifest.findIndex(
+    (image) => image.slug === params.slug,
+  );
+  const matchingImage = imagesManifest[matchingIndex];
+  const metadata = matchingImage?.metadata;
+
+  const previousSlug = imagesManifest[matchingIndex - 1]?.slug;
+  const nextSlug = imagesManifest[matchingIndex + 1]?.slug;
 
   return (
     <PhotoModal
       slug={params.slug}
       width={1600}
       height={1600}
-      // metadata={metadata}
-      // previousSlug={previousSlug?.slug}
-      // nextSlug={nextSlug?.slug}
+      metadata={metadata}
+      previousSlug={previousSlug}
+      nextSlug={nextSlug}
     />
   );
 };

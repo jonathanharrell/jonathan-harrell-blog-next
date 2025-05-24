@@ -7,8 +7,7 @@ import classNames from "classnames";
 import { X, ChevronLeft, ChevronRight } from "react-feather";
 import { Photo } from "@/components/photo";
 import { Spinner } from "@/components/spinner";
-import { PhotoMetadata } from "@/lib/get-photo-metadata";
-import NextTopLoader from "nextjs-toploader";
+import { PhotoMetadata } from "@/types";
 
 interface PhotoModalProps {
   slug: string;

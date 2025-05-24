@@ -1,5 +1,5 @@
 import { Photo } from "@/components/photo";
-// import { getPhotoMetadata } from "@/lib/get-photo-metadata";
+import { getImagesManifest } from "@/lib/get-images-manifest";
 
 interface PhotoPageProps {
   params: {
@@ -8,7 +8,12 @@ interface PhotoPageProps {
 }
 
 const PhotoPage = async ({ params }: PhotoPageProps) => {
-  // const metadata = await getPhotoMetadata(params.slug);
+  const imagesManifest = getImagesManifest();
+
+  const matchingIndex = imagesManifest.findIndex(
+    (image) => image.slug === params.slug,
+  );
+  const matchingImage = imagesManifest[matchingIndex];
 
   return (
     <div className="wrapper flex items-center justify-center py-12">
@@ -16,7 +21,7 @@ const PhotoPage = async ({ params }: PhotoPageProps) => {
         slug={params.slug}
         width={1600}
         height={1600}
-        // metadata={metadata}
+        metadata={matchingImage?.metadata}
         className="w-full h-full max-w-[1200px] max-h-[1200px]"
       />
     </div>
@@ -33,4 +38,13 @@ export const generateMetadata = async ({ params }: PhotoPageProps) => {
       images: [`/assets/photos/${params.slug}`],
     },
   };
+};
+
+export const generateStaticParams = async () => {
+  const imagesManifest = getImagesManifest();
+  const slugs = imagesManifest.map((image) => image.slug);
+
+  return slugs.map((slug) => ({
+    slug,
+  }));
 };
