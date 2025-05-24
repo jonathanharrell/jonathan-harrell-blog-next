@@ -89,68 +89,73 @@ export const PhotoModal = ({
   }, [goBack]);
 
   return (
-    <dialog
-      className={classNames(
-        "flex flex-col items-center justify-center !max-w-none !max-h-none bg-transparent backdrop:bg-neutral-900 backdrop:bg-opacity-95",
-        {
-          "min-w-6 min-h-6": !isLoaded,
-        },
+    <>
+      {!isModalOpen && (
+        <div className="flex items-center justify-center fixed inset-0 w-screen h-screen bg-neutral-900 bg-opacity-95" />
       )}
-      ref={modalRef}
-    >
-      <div className="flex flex-col">
-        <button
-          autoFocus
-          onClick={goBack}
-          className="fixed top-0 right-0 p-3 text-neutral-400 hover:text-neutral-100 transition-colors duration-200 ease-in-out focus-visible:ring-0"
-        >
-          <X />
-          <span className="sr-only">Close photo dialog</span>
-        </button>
-        {!isLoaded && (
-          <div className="flex flex-col items-center justify-center absolute inset-0 text-neutral-100">
-            <Spinner />
-          </div>
+      <dialog
+        className={classNames(
+          "flex flex-col items-center justify-center !max-w-none !max-h-none bg-transparent backdrop:bg-neutral-900 backdrop:bg-opacity-95",
+          {
+            "min-w-6 min-h-6": !isLoaded,
+          },
         )}
-        <div className="pt-4 md:pt-0">
-          <Photo
-            slug={slug}
-            width={width}
-            height={height}
-            metadata={metadata}
-            className={classNames(
-              "block w-auto sm:max-w-[min(calc(100dvw-6rem),calc(1300px-6rem))] h-auto max-h-[min(calc(100dvh-6rem),calc(1300px-6rem))]",
+        ref={modalRef}
+      >
+        <div className="flex flex-col">
+          <button
+            autoFocus
+            onClick={goBack}
+            className="fixed top-0 right-0 p-3 text-neutral-400 hover:text-neutral-100 transition-colors duration-200 ease-in-out focus-visible:ring-0"
+          >
+            <X />
+            <span className="sr-only">Close photo dialog</span>
+          </button>
+          {!isLoaded && (
+            <div className="flex flex-col items-center justify-center absolute inset-0 text-neutral-100">
+              <Spinner />
+            </div>
+          )}
+          <div className="pt-4 md:pt-0">
+            <Photo
+              slug={slug}
+              width={width}
+              height={height}
+              metadata={metadata}
+              className={classNames(
+                "block w-auto sm:max-w-[min(calc(100dvw-6rem),calc(1300px-6rem))] h-auto max-h-[min(calc(100dvh-6rem),calc(1300px-6rem))]",
+              )}
+              captionClassName="wrapper text-sm text-center text-neutral-400"
+              isLoaded={isLoaded}
+              onLoad={() => setIsLoaded(true)}
+            />
+            {previousSlug && (
+              <div className="fixed top-1/2 left-0 sm:left-2 z-10 -mt-8 md:mt-0 -translate-1/2 text-white">
+                <Link
+                  href={`/photo/${previousSlug}`}
+                  scroll={false}
+                  className="block p-1 lg:p-2 text-neutral-100 sm:text-neutral-400 hover:text-neutral-100 transition-colors duration-200 ease-in-out"
+                >
+                  <ChevronLeft size={36} />
+                  <span className="sr-only">Previous image</span>
+                </Link>
+              </div>
             )}
-            captionClassName="wrapper text-sm text-center text-neutral-400"
-            isLoaded={isLoaded}
-            onLoad={() => setIsLoaded(true)}
-          />
-          {previousSlug && (
-            <div className="fixed top-1/2 left-0 sm:left-2 z-10 -mt-8 md:mt-0 -translate-1/2 text-white">
-              <Link
-                href={`/photo/${previousSlug}`}
-                scroll={false}
-                className="block p-1 lg:p-2 text-neutral-100 sm:text-neutral-400 hover:text-neutral-100 transition-colors duration-200 ease-in-out"
-              >
-                <ChevronLeft size={36} />
-                <span className="sr-only">Previous image</span>
-              </Link>
-            </div>
-          )}
-          {nextSlug && (
-            <div className="fixed top-1/2 right-0 sm:right-2 z-10 -mt-8 md:mt-0 -translate-1/2 text-white">
-              <Link
-                href={`/photo/${nextSlug}`}
-                scroll={false}
-                className="block p-1 lg:p-2 text-neutral-100 sm:text-neutral-400 hover:text-neutral-100 transition-colors duration-200 ease-in-out"
-              >
-                <ChevronRight size={36} />
-                <span className="sr-only">Next image</span>
-              </Link>
-            </div>
-          )}
+            {nextSlug && (
+              <div className="fixed top-1/2 right-0 sm:right-2 z-10 -mt-8 md:mt-0 -translate-1/2 text-white">
+                <Link
+                  href={`/photo/${nextSlug}`}
+                  scroll={false}
+                  className="block p-1 lg:p-2 text-neutral-100 sm:text-neutral-400 hover:text-neutral-100 transition-colors duration-200 ease-in-out"
+                >
+                  <ChevronRight size={36} />
+                  <span className="sr-only">Next image</span>
+                </Link>
+              </div>
+            )}
+          </div>
         </div>
-      </div>
-    </dialog>
+      </dialog>
+    </>
   );
 };
