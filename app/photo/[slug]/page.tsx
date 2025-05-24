@@ -1,5 +1,4 @@
 import { Photo } from "@/components/photo";
-import { getAllPhotoSlugs } from "@/lib/get-all-post-slugs";
 // import { getPhotoMetadata } from "@/lib/get-photo-metadata";
 
 interface PhotoPageProps {
@@ -34,12 +33,4 @@ export const generateMetadata = async ({ params }: PhotoPageProps) => {
       images: [`/assets/photos/${params.slug}`],
     },
   };
-};
-
-export const generateStaticParams = async () => {
-  const slugs = await getAllPhotoSlugs();
-
-  return slugs.map(({ slug }) => ({
-    slug,
-  }));
 };
