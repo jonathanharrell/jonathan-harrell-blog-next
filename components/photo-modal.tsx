@@ -63,7 +63,7 @@ export const PhotoModal = ({
       });
       router.refresh();
     }
-  }, [router]);
+  }, [router, slug]);
 
   useEffect(() => {
     showModal();
