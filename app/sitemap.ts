@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/constants";
 import { getPostSlugs } from "@/lib/get-post-slugs";
-import { getAllPhotoSlugs } from "@/lib/get-all-post-slugs";
+import { getAllPhotoSlugs } from "@/lib/get-all-photo-slugs";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const { slugs: postSlugs = [] } = await getPostSlugs({ perPage: Infinity });

@@ -2,6 +2,7 @@ import { Link } from "next-view-transitions";
 import classNames from "classnames";
 import { getPostData } from "@/lib/get-post-data";
 import { SITE_URL } from "@/constants";
+import { getPreviousAndNextPosts } from "@/lib/get-previous-and-next-posts";
 
 interface PostProps {
   slug: string;
@@ -10,7 +11,10 @@ interface PostProps {
 }
 
 export const Post = async ({ slug, single, className }: PostProps) => {
-  const { content, frontmatter } = await getPostData(slug);
+  const [{ content, frontmatter }, { previous, next }] = await Promise.all([
+    getPostData(slug),
+    getPreviousAndNextPosts(slug),
+  ]);
 
   const formattedDate = new Date(frontmatter.date).toLocaleDateString("en-US", {
     month: "long",
@@ -90,6 +94,32 @@ export const Post = async ({ slug, single, className }: PostProps) => {
         )}
       </header>
       {content}
+      {single && (
+        <footer className="pt-6 mt-12 border-t border-neutral-200 border-dashed">
+          <h2 id="other-articles-label" className="sr-only">
+            Other articles
+          </h2>
+          <nav
+            aria-labelledby="other-aticles-label"
+            className="flex flex-col sm:flex-row items-center md:justify-between gap-8 text-lg text-center"
+          >
+            <div className="flex-1 sm:text-left">
+              {next && (
+                <Link href={`/blog/${next.slug}`} rel="next">
+                  Next post
+                </Link>
+              )}
+            </div>
+            <div className="flex-1 sm:ml-auto sm:text-right">
+              {previous && (
+                <Link href={`/blog/${previous.slug}`} rel="prev">
+                  Previous post
+                </Link>
+              )}
+            </div>
+          </nav>
+        </footer>
+      )}
       {single && (
         <script
           type="application/ld+json"
