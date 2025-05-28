@@ -112,7 +112,10 @@ export const PhotoModal = ({
             <span className="sr-only">Close photo dialog</span>
           </button>
           {!isLoaded && (
-            <div className="flex flex-col items-center justify-center absolute inset-0 text-neutral-100">
+            <div
+              className="flex flex-col items-center justify-center absolute inset-0 text-neutral-100"
+              style={{ viewTransitionName: "none" }}
+            >
               <Spinner />
             </div>
           )}
