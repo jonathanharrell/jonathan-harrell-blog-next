@@ -30,7 +30,7 @@ export const PhotoModal = ({
 
   const modalRef = useRef<HTMLDialogElement | null>(null);
 
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
 
   const showModal = () => {
