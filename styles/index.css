@@ -16,6 +16,10 @@
   ::selection {
     @apply bg-neutral-300 !bg-opacity-50;
   }
+
+  body:has(dialog[open]) {
+    @apply overflow-hidden;
+  }
 }
 
 @layer components {
