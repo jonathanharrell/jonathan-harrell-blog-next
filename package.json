@@ -24,6 +24,7 @@
     "next-mdx-remote": "^5.0.0",
     "next-view-transitions": "^0.3.2",
     "nextjs-toploader": "^3.7.15",
+    "probe-image-size": "^7.2.3",
     "react": "^18",
     "react-dom": "^18",
     "react-feather": "^2.0.10",

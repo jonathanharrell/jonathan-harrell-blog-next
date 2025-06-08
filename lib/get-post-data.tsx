@@ -3,6 +3,7 @@ import fs from "fs";
 import { Children, ReactElement } from "react";
 import { compileMDX } from "next-mdx-remote/rsc";
 import Image from "next/image";
+import probe from "probe-image-size";
 
 export const getPostData = async (slug: string) => {
   const fullPath = path.resolve(".", "content/posts/", `${slug}.mdx`);
@@ -32,18 +33,22 @@ export const getPostData = async (slug: string) => {
           </a>
         );
       },
-      img: ({ src, alt, title }) => {
+      img: async ({ src, alt, title }) => {
         if (!src) {
           return null;
         }
+
+        const imagePath = `/public${src}`;
+        const image = fs.createReadStream(path.join(process.cwd(), imagePath));
+        const probedImage = await probe(image);
 
         return (
           <figure>
             <Image
               src={src}
               alt={alt ?? ""}
-              width={0}
-              height={0}
+              width={probedImage.width}
+              height={probedImage.height}
               sizes="100vw"
               className="w-full h-auto"
             />
