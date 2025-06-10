@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { PhotoLink } from "@/components/photo-link";
-import { getImagesManifest } from "@/lib/get-images-manifest";
+import { getPhotosManifest } from "@/lib/get-photos-manifest";
 
 const PhotosLayout = async ({
   children,
@@ -9,7 +9,7 @@ const PhotosLayout = async ({
   children: ReactNode;
   modal: ReactNode;
 }>) => {
-  const imagesManifest = getImagesManifest();
+  const imagesManifest = getPhotosManifest();
   const slugs = imagesManifest.map((image) => image.slug);
 
   return (

@@ -1,5 +1,5 @@
 import { PhotoModal } from "@/components/photo-modal";
-import { getImagesManifest } from "@/lib/get-images-manifest";
+import { getPhotosManifest } from "@/lib/get-photos-manifest";
 import { Spinner } from "@/components/spinner";
 
 interface PhotoPageProps {
@@ -9,16 +9,16 @@ interface PhotoPageProps {
 }
 
 const PhotoPage = async ({ params }: PhotoPageProps) => {
-  const imagesManifest = getImagesManifest();
+  const photosManifest = getPhotosManifest();
 
-  const matchingIndex = imagesManifest.findIndex(
+  const matchingIndex = photosManifest.findIndex(
     (image) => image.slug === params.slug,
   );
-  const matchingImage = imagesManifest[matchingIndex];
-  const metadata = matchingImage?.metadata;
+  const matchingPhoto = photosManifest[matchingIndex];
+  const metadata = matchingPhoto?.metadata;
 
-  const previousSlug = imagesManifest[matchingIndex - 1]?.slug;
-  const nextSlug = imagesManifest[matchingIndex + 1]?.slug;
+  const previousSlug = photosManifest[matchingIndex - 1]?.slug;
+  const nextSlug = photosManifest[matchingIndex + 1]?.slug;
 
   return (
     <PhotoModal

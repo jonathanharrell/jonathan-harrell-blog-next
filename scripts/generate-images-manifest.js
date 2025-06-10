@@ -1,64 +1,54 @@
 const path = require("path");
 const fs = require("fs");
-const ExifReader = require("exifreader");
+const probe = require("probe-image-size");
 
-const getPhotoMetadata = async (slug) => {
-  const imagePath = path.resolve(".", "public/assets/photos", slug);
+const getAllImageSlugs = async () => {
+  const photosDirectoryPath = path.resolve(".", "public/assets/photos");
+  const artDirectoryPath = path.resolve(".", "public/assets/art");
+  const photoFiles = fs.readdirSync(photosDirectoryPath);
+  const artFiles = fs.readdirSync(artDirectoryPath);
 
-  let metadata;
-
-  try {
-    metadata = await ExifReader.load(imagePath);
-  } catch (error) {
-    console.error(error);
-  }
-
-  return metadata
-    ? {
-        city: metadata.City?.description,
-        state: metadata.State?.description,
-        country: metadata.Country?.description,
-        focalLength: metadata.FocalLengthIn35mmFilm?.description,
-        exposure: metadata.ExposureTime?.description,
-        aperture:
-          metadata.FNumber?.description || metadata.ApertureValue?.description,
-        iso: metadata.ISOSpeedRatings?.description,
-        cameraModel: metadata.Model?.description,
-        date: metadata.CreateDate?.value,
-      }
-    : undefined;
-};
-
-const getAllPhotoSlugs = async () => {
-  const directoryPath = path.resolve(".", "public/assets/photos");
-  const files = fs.readdirSync(directoryPath);
-
-  return files
+  const photoPromises = photoFiles
     .filter((file) => file.endsWith(".jpg"))
     .reverse()
-    .map((file) => {
+    .map(async (file) => {
       const filePath = path.resolve(".", "public/assets/photos", file);
-      const stat = fs.statSync(filePath);
+
+      const image = fs.createReadStream(filePath);
+      const { width, height } = await probe(image);
 
       return {
-        slug: file,
-        lastModified: stat.mtime,
+        slug: `/assets/photos/${file}`,
+        width,
+        height,
       };
     });
+
+  const photos = await Promise.all(photoPromises);
+
+  const artPromises = artFiles
+    .filter((file) => file.endsWith(".jpg"))
+    .reverse()
+    .map(async (file) => {
+      const filePath = path.resolve(".", "public/assets/art", file);
+
+      const image = fs.createReadStream(filePath);
+      const { width, height } = await probe(image);
+
+      return {
+        slug: `/assets/art/${file}`,
+        width,
+        height,
+      };
+    });
+
+  const art = await Promise.all(artPromises);
+
+  return [...photos, ...art];
 };
 
 const generateManifest = async () => {
-  const photos = await getAllPhotoSlugs();
-  const promises = photos.map(async (photo) => {
-    const metadata = await getPhotoMetadata(photo.slug);
-
-    return {
-      ...photo,
-      metadata,
-    };
-  });
-
-  const data = await Promise.all(promises);
+  const data = await getAllImageSlugs();
   const json = JSON.stringify(data, null, 2);
   fs.writeFileSync("public/images-manifest.json", json, "utf-8");
 };

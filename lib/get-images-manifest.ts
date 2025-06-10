@@ -1,11 +1,10 @@
 import path from "path";
 import fs from "fs";
-import { PhotoMetadata } from "@/types";
 
 interface Image {
   slug: string;
-  lastModified: string;
-  metadata: PhotoMetadata;
+  width: number;
+  height: number;
 }
 
 export const getImagesManifest = () => {

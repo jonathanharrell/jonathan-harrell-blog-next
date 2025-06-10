@@ -3,6 +3,7 @@ import fs from "fs";
 import { Children, ReactElement } from "react";
 import { compileMDX } from "next-mdx-remote/rsc";
 import Image from "next/image";
+import { getImagesManifest } from "@/lib/get-images-manifest";
 
 export const getPostData = async (slug: string) => {
   const fullPath = path.resolve(".", "content/posts/", `${slug}.mdx`);
@@ -37,13 +38,19 @@ export const getPostData = async (slug: string) => {
           return null;
         }
 
+        const imagesManifest = getImagesManifest();
+        const matchingIndex = imagesManifest.findIndex(
+          (image) => image.slug === src,
+        );
+        const matchingImage = imagesManifest[matchingIndex];
+
         return (
           <figure>
             <Image
               src={src}
               alt={alt ?? ""}
-              width={635}
-              height={476}
+              width={matchingImage?.width ?? 635}
+              height={matchingImage?.height ?? 476}
               sizes="100vw"
               className="w-full h-auto"
             />
