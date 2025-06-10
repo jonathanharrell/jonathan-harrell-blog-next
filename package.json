@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "npm run generate-photos-manifest && npm run generate-posts-manifest && next dev",
-    "build": "npm run generate-photos-manifest && npm run generate-posts-manifest && next build",
+    "dev": "npm run generate-images-manifest && npm run generate-photos-manifest && npm run generate-posts-manifest && next dev",
+    "build": "npm run generate-images-manifest && npm run generate-photos-manifest && npm run generate-posts-manifest && next build",
     "start": "next start",
     "lint": "next lint",
     "generate-images-manifest": "node scripts/generate-images-manifest.js",
