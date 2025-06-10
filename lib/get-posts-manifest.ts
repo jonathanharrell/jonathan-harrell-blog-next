@@ -5,6 +5,7 @@ import { Frontmatter } from "@/types";
 interface Post {
   slug: string;
   frontmatter: Frontmatter;
+  lastModified: Date;
 }
 
 export const getPostsManifest = () => {
