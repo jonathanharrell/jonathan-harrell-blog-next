@@ -20,7 +20,9 @@ const BlogPost = async ({ params }: BlogPostProps) => {
 export default BlogPost;
 
 export const generateMetadata = async ({ params }: BlogPostProps) => {
-  const { frontmatter } = await getPostData(params.slug);
+  const { frontmatter, imageUrls } = await getPostData(params.slug);
+
+  const firstImage = imageUrls[0];
 
   const formattedDate = new Date(frontmatter.date).toLocaleDateString("en-US", {
     month: "long",
@@ -40,7 +42,7 @@ export const generateMetadata = async ({ params }: BlogPostProps) => {
       canonical: `${SITE_URL}blog/${params.slug}`,
     },
     openGraph: {
-      images: ["/assets/seo/og.png"],
+      images: [firstImage ?? "/assets/seo/og.png"],
     },
   };
 };

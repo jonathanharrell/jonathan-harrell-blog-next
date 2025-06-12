@@ -2,14 +2,28 @@ import path from "path";
 import fs from "fs";
 import { Children, ReactElement } from "react";
 import { compileMDX } from "next-mdx-remote/rsc";
+import { notFound } from "next/navigation";
 import Image from "next/image";
+import { extractImageUrlsFromMdx } from "@/lib/extract-image-rules-from-mdx";
 import { getImagesManifest } from "@/lib/get-images-manifest";
 
 export const getPostData = async (slug: string) => {
   const fullPath = path.resolve(".", "content/posts/", `${slug}.mdx`);
-  const fileContents = fs.readFileSync(fullPath, "utf8");
+  let fileContents;
 
-  return await compileMDX<{ title: string; date: string; tags: string[] }>({
+  try {
+    fileContents = fs.readFileSync(fullPath, "utf8");
+  } catch (e) {
+    notFound();
+  }
+
+  const imageUrls = await extractImageUrlsFromMdx(fileContents);
+
+  const result = await compileMDX<{
+    title: string;
+    date: string;
+    tags: string[];
+  }>({
     source: fileContents,
     options: { parseFrontmatter: true },
     components: {
@@ -62,4 +76,9 @@ export const getPostData = async (slug: string) => {
       },
     },
   });
+
+  return {
+    ...result,
+    imageUrls,
+  };
 };
