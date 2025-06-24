@@ -7,10 +7,11 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { Spinner } from "@/components/spinner";
 import { SkipToContent } from "@/components/skip-to-content";
-import "@/styles/index.css";
 import { SITE_URL } from "@/constants";
+import "@/styles/index.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "Human in the Loop",
   description: "Jonathan Harrell’s commonplace book",
   openGraph: {

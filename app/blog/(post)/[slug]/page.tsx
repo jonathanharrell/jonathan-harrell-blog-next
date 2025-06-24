@@ -39,7 +39,7 @@ export const generateMetadata = async ({ params }: BlogPostProps) => {
     creator: "Jonathan Harrell",
     publisher: "Jonathan Harrell",
     alternates: {
-      canonical: `${SITE_URL}blog/${params.slug}`,
+      canonical: `/blog/${params.slug}`,
     },
     openGraph: {
       images: [firstImage ?? "/assets/seo/og.png"],

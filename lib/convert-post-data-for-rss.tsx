@@ -3,8 +3,6 @@ import fs from "fs";
 import { compileMDX } from "next-mdx-remote/rsc";
 import { SITE_URL } from "@/constants";
 
-const siteUrlWithoutTrailingSlash = SITE_URL.substring(0, SITE_URL.length - 1);
-
 export const convertPostDataForRss = async (slug: string) => {
   const fullPath = path.resolve(".", "content/posts/", `${slug}.mdx`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
@@ -17,7 +15,7 @@ export const convertPostDataForRss = async (slug: string) => {
     components: {
       a: ({ children, href, ...props }) => {
         const augmentedHref = href?.startsWith("/")
-          ? `${siteUrlWithoutTrailingSlash}${href}`
+          ? `${SITE_URL}${href}`
           : href;
 
         return (
@@ -29,7 +27,7 @@ export const convertPostDataForRss = async (slug: string) => {
       img: ({ src, alt, title }) => {
         return (
           <figure>
-            <img src={`${siteUrlWithoutTrailingSlash}${src}`} alt={alt} />
+            <img src={`${SITE_URL}${src}`} alt={alt} />
             {title && <figcaption>{title}</figcaption>}
           </figure>
         );
