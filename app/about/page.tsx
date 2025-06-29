@@ -58,10 +58,11 @@ const AboutPage = () => {
           . Distinct from a journal or diary, such books have been kept from
           antiquity as repositories for notes, proverbs, poems, and more. I
           intend this digital space to serve much the same function: a creative
-          scrapbook where I collect things I find interesting or beautiful. This
-          space is designed with an audience of one in mind: me. But if anything
-          here catches anyone’s attention, if it leads someone to discover a new
-          poet or author or artist, then I will be very pleased indeed.
+          scrapbook where I collect things that I find interesting or beautiful.
+          This space is designed with an audience of one in mind: me. But if
+          anything here catches anyone’s attention, if it leads someone to
+          discover a new poet or author or artist, then I will be very pleased
+          indeed.
         </p>
         <p>
           Why not social media? There is something fulfilling about owning one’s
