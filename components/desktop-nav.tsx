@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { Link } from "next-view-transitions";
+import { Search } from "react-feather";
 import classNames from "classnames";
 
 export const DesktopNav = () => {
@@ -46,6 +47,12 @@ export const DesktopNav = () => {
         <li>
           <Link href="/about" className={getClasses("/about")}>
             About
+          </Link>
+        </li>
+        <li>
+          <Link href="/search">
+            <Search className="w-5" />
+            <span className="sr-only">Search</span>
           </Link>
         </li>
       </ul>

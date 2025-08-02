@@ -9,7 +9,7 @@ export const Footer = () => {
           href="https://edwardtufte.github.io/et-book/"
           target="_blank"
           rel="noreferrer"
-          className="underline hover:no-underline"
+          className="underline hover:no-underline decoration-1 underline-offset-2"
         >
           ET Book
         </a>
@@ -18,7 +18,7 @@ export const Footer = () => {
           href="https://www.kickstarter.com/projects/mrcraigward/fe2o3-glyphs-a-conceptual-ornamental-type-system"
           target="_blank"
           rel="noreferrer"
-          className="underline hover:no-underline"
+          className="underline hover:no-underline decoration-1 underline-offset-2"
         >
           Fe<sub>2</sub>O<sub>3</sub> glyphs
         </a>
@@ -37,7 +37,7 @@ export const Footer = () => {
             <a
               href="https://www.jonathanharrell.com/"
               target="_blank"
-              className="underline hover:no-underline underline-offset-2"
+              className="underline hover:no-underline decoration-1 underline-offset-2"
             >
               Dev Blog
             </a>
@@ -47,7 +47,7 @@ export const Footer = () => {
               href="https://www.instagram.com/harrellofdurham/"
               target="_blank"
               rel="noreferrer"
-              className="underline hover:no-underline underline-offset-2"
+              className="underline hover:no-underline decoration-1 underline-offset-2"
             >
               Instagram
             </a>
@@ -56,7 +56,7 @@ export const Footer = () => {
             <a
               href="/rss"
               target="_blank"
-              className="underline hover:no-underline underline-offset-2"
+              className="underline hover:no-underline decoration-1 underline-offset-2"
             >
               RSS
             </a>

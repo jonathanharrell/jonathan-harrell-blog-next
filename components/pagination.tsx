@@ -22,7 +22,7 @@ export const Pagination = ({
         <h2 id="pagination-label" className="sr-only" aria-hidden="true">
           Post pagination
         </h2>
-        <div className="prose prose-neutral dark:prose-invert mx-auto">
+        <div className="prose prose-neutral mx-auto">
           <ul className="not-prose flex flex-wrap justify-center gap-2">
             {Array.from({ length: totalPages }).map((_, index) => (
               <li key={index}>
@@ -33,9 +33,9 @@ export const Pagination = ({
                       : `/blog/filtered?page=${index}`
                   }
                   className={classNames(
-                    "block py-3 md:py-2 px-4 md:px-3 border border-neutral-200 dark:border-neutral-700 hover:border-neutral-400 rounded font-etbook-lining-figures text-neutral-500 leading-none transition-colors duration-200 ease-in-out",
+                    "block py-3 md:py-2 px-4 md:px-3 border border-neutral-200 hover:border-neutral-400 rounded font-etbook-lining-figures text-neutral-500 leading-none transition-colors duration-200 ease-in-out",
                     currentPage === index
-                      ? "border-neutral-400 text-neutral-800 dark:text-neutral-100"
+                      ? "border-neutral-400 text-neutral-800"
                       : "",
                   )}
                   aria-label={`Go to page ${index + 1} of posts`}

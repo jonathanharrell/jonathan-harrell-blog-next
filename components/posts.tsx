@@ -20,7 +20,7 @@ export const Posts = ({ slugs }: PostsProps) => {
           <li key={slug} className="group/post">
             <Post
               slug={slug}
-              className="mx-auto py-8 sm:py-10 group-has-[+li]/post:border-b group-has-[+#pagination]/list:border-b border-neutral-200 dark:border-neutral-700 border-dashed"
+              className="mx-auto py-8 sm:py-10 group-has-[+li]/post:border-b group-has-[+#pagination]/list:border-b border-neutral-200 border-dashed"
             />
           </li>
         ))}

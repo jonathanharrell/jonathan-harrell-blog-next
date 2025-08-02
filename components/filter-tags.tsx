@@ -38,7 +38,7 @@ export const FilterTags = ({ tags }: FilterTagsProps) => {
           <select
             value={selectedTag ?? ""}
             onChange={filterByTag}
-            className="select appearance-none w-full py-2.5 pl-3 pr-8 rounded-full border border-neutral-200 dark:border-neutral-700 hover:border-neutral-400 bg-transparent sm:leading-none transition-colors duration-200 ease-in-out cursor-pointer"
+            className="select appearance-none w-full py-2.5 pl-3 pr-8 rounded-full border border-neutral-200 hover:border-neutral-400 bg-transparent sm:leading-none transition-colors duration-200 ease-in-out cursor-pointer"
             aria-labelledby="months-label"
           >
             <option value="">All Tags</option>
@@ -58,10 +58,8 @@ export const FilterTags = ({ tags }: FilterTagsProps) => {
           <Link
             href={`/blog/filtered?tag=`}
             className={classNames(
-              "block py-1.5 px-3 rounded-full border border-neutral-200 dark:border-neutral-700 hover:border-neutral-400 leading-none text-neutral-500 transition-colors duration-200 ease-in-out",
-              !selectedTag
-                ? "border-neutral-400 text-neutral-800 dark:text-neutral-100"
-                : undefined,
+              "block py-1.5 px-3 rounded-full border border-neutral-200 hover:border-neutral-400 leading-none text-neutral-500 transition-colors duration-200 ease-in-out",
+              !selectedTag ? "border-neutral-400 text-neutral-800" : undefined,
             )}
             aria-label="Show all posts"
           >
@@ -75,9 +73,9 @@ export const FilterTags = ({ tags }: FilterTagsProps) => {
               <Link
                 href={`/blog/filtered?tag=${tag}`}
                 className={classNames(
-                  "block py-1.5 px-3 rounded-full border border-neutral-200 dark:border-neutral-700 hover:border-neutral-400 leading-none text-neutral-500 transition-colors duration-200 ease-in-out",
+                  "block py-1.5 px-3 rounded-full border border-neutral-200 hover:border-neutral-400 leading-none text-neutral-500 transition-colors duration-200 ease-in-out",
                   selectedTag?.includes(tag)
-                    ? "border-neutral-400 text-neutral-800 dark:text-neutral-100"
+                    ? "border-neutral-400 text-neutral-800"
                     : undefined,
                 )}
                 aria-label={`Filter posts by ${tag} tag`}
