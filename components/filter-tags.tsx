@@ -2,7 +2,7 @@
 
 import { ChangeEventHandler } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Link } from "next-view-transitions";
+import Link from "next/link";
 import { capitalize } from "lodash";
 import classNames from "classnames";
 
