@@ -4,12 +4,13 @@ import { getPostData } from "@/lib/get-post-data";
 import { SITE_URL } from "@/constants";
 
 interface BlogPostProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
-const BlogPost = async ({ params }: BlogPostProps) => {
+const BlogPost = async (props: BlogPostProps) => {
+  const params = await props.params;
   return (
     <div className="wrapper py-8 sm:py-10 md:py-14">
       <Post slug={params.slug} single className="mx-auto" />
@@ -19,7 +20,8 @@ const BlogPost = async ({ params }: BlogPostProps) => {
 
 export default BlogPost;
 
-export const generateMetadata = async ({ params }: BlogPostProps) => {
+export const generateMetadata = async (props: BlogPostProps) => {
+  const params = await props.params;
   const { frontmatter, imageUrls } = await getPostData(params.slug);
 
   const firstImage = imageUrls[0];
