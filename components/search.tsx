@@ -62,6 +62,7 @@ const CustomSearchBox = (props: UseSearchBoxProps) => {
         placeholder="Search posts"
         value={query}
         autoFocus={true}
+        autoComplete="off"
         onChange={(event) => refine(event.target.value)}
         ref={searchInputRef}
         className="block w-full py-1.5 px-3 border border-neutral-800 text-lg placeholder:text-neutral-500"

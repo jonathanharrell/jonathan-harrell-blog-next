@@ -20,6 +20,7 @@ const nextConfig = {
   },
   images: {
     deviceSizes: [390, 600, 900, 1200, 1600],
+    qualities: [40, 100],
     remotePatterns: [
       {
         protocol: "https",
@@ -28,6 +29,7 @@ const nextConfig = {
       },
     ],
   },
+  cacheComponents: true,
 };
 
 const withMdx = NextMdx({
