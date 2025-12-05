@@ -47,7 +47,7 @@ export const getPostData = async (slug: string) => {
           </a>
         );
       },
-      img: async ({ src, alt, title }) => {
+      img: ({ src, alt, title }) => {
         if (!src) {
           return null;
         }
