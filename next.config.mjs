@@ -29,6 +29,7 @@ const nextConfig = {
       },
     ],
   },
+  cacheComponents: true,
 };
 
 const withMdx = NextMdx({

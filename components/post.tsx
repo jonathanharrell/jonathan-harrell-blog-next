@@ -11,6 +11,7 @@ interface PostProps {
 }
 
 export const Post = async ({ slug, single, className }: PostProps) => {
+  "use cache";
   const [{ content, frontmatter }, { previous, next }] = await Promise.all([
     getPostData(slug),
     getPreviousAndNextPosts(slug),
