@@ -30,6 +30,9 @@ const nextConfig = {
     ],
   },
   cacheComponents: true,
+  // experimental: {
+  //   viewTransition: true,
+  // },
 };
 
 const withMdx = NextMdx({

@@ -1,5 +1,6 @@
 import { Photo } from "@/components/photo";
 import { getPhotosManifest } from "@/lib/get-photos-manifest";
+import { Metadata } from "next";
 
 interface PhotoPageProps {
   params: Promise<{
@@ -31,15 +32,13 @@ const PhotoPage = async (props: PhotoPageProps) => {
 
 export default PhotoPage;
 
-export const generateMetadata = async (props: PhotoPageProps) => {
-  const params = await props.params;
-  return {
-    title: "Photo | Human in the Loop",
-    description: "Photo from Jonathan Harrell’s commonplace book",
-    openGraph: {
-      images: [`/assets/photos/${params.slug}`],
-    },
-  };
+export const metadata: Metadata = {
+  title: "Photo | Human in the Loop",
+  description: "Photo from Jonathan Harrell’s commonplace book",
+  // issue using this with cache components
+  // openGraph: {
+  //   images: [`/assets/photos/${params.slug}`],
+  // },
 };
 
 export const generateStaticParams = async () => {

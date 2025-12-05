@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Link } from "next-view-transitions";
+import Link from "next/link";
 import { algoliasearch } from "algoliasearch";
 import {
   Snippet,
@@ -23,7 +23,13 @@ const searchClient = algoliasearch(
 export const Search = () => {
   return (
     <search>
-      <InstantSearchNext searchClient={searchClient} indexName="posts_index">
+      <InstantSearchNext
+        searchClient={searchClient}
+        indexName="posts_index"
+        future={{
+          preserveSharedStateOnUnmount: false,
+        }}
+      >
         <div className="grid grid-cols-12 gap-y-12 md:gap-y-6 md:gap-x-8">
           <div className="col-start-1 col-end-13 md:col-start-4 lg:col-end-11 md:row-start-1 flex flex-col gap-4">
             <header>

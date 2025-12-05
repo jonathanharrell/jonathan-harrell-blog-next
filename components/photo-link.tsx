@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Link } from "next-view-transitions";
+import Link from "next/link";
 import { Photo } from "@/components/photo";
 
 interface PhotoProps {

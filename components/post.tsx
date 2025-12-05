@@ -1,4 +1,4 @@
-import { Link } from "next-view-transitions";
+import Link from "next/link";
 import classNames from "classnames";
 import { getPostData } from "@/lib/get-post-data";
 import { SITE_URL } from "@/constants";
