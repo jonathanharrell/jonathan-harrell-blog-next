@@ -22,7 +22,7 @@ const jsonLd = {
   },
 };
 
-const SearchPage = () => {
+const SearchPage = async () => {
   return (
     <div className="wrapper py-8 sm:py-10 md:py-14">
       <Search />

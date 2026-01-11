@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { algoliasearch } from "algoliasearch";
 import {
+  InstantSearch,
   Snippet,
   useInfiniteHits,
   UseInfiniteHitsProps,
@@ -12,18 +12,14 @@ import {
   useSearchBox,
   UseSearchBoxProps,
 } from "react-instantsearch";
-import { InstantSearchNext } from "react-instantsearch-nextjs";
 import { useRef } from "react";
+import { searchClient } from "@/lib/algolia-client";
 
-const searchClient = algoliasearch(
-  process.env.NEXT_PUBLIC_ALGOLIA_APP_ID!,
-  process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY!,
-);
-
+// TODO: convert to InstantSearchNext when can get working with Next cache components
 export const Search = () => {
   return (
     <search>
-      <InstantSearchNext
+      <InstantSearch
         searchClient={searchClient}
         indexName="posts_index"
         future={{
@@ -42,7 +38,7 @@ export const Search = () => {
             <CustomRefinementList attribute="tags" sortBy={["name"]} />
           </div>
         </div>
-      </InstantSearchNext>
+      </InstantSearch>
     </search>
   );
 };
