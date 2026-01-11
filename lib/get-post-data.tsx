@@ -30,7 +30,7 @@ export const getPostData = async (slug: string) => {
       p: ({ children, ...props }) => {
         try {
           if (Children.only(children)) {
-            if ((children as ReactElement)?.props.src) {
+            if ((children as ReactElement<any>)?.props.src) {
               return <div {...props}>{children}</div>;
             }
           }
@@ -47,7 +47,7 @@ export const getPostData = async (slug: string) => {
           </a>
         );
       },
-      img: async ({ src, alt, title }) => {
+      img: ({ src, alt, title }) => {
         if (!src) {
           return null;
         }

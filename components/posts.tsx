@@ -19,12 +19,10 @@ export const Posts = ({ slugs }: PostsProps) => {
       <ul className="group/list flex flex-col" aria-labelledby="posts-label">
         {slugs.map(({ slug }) => (
           <li key={slug} className="group/post">
-            <Suspense fallback={<div className="min-h-[75vh]"></div>}>
-              <Post
-                slug={slug}
-                className="mx-auto py-8 sm:py-10 group-has-[+li]/post:border-b group-has-[+#pagination]/list:border-b border-neutral-200 border-dashed"
-              />
-            </Suspense>
+            <Post
+              slug={slug}
+              className="mx-auto py-8 sm:py-10 group-has-[+li]/post:border-b group-has-[+#pagination]/list:border-b border-neutral-200 border-dashed"
+            />
           </li>
         ))}
       </ul>

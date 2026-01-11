@@ -3,12 +3,13 @@ import { getPhotosManifest } from "@/lib/get-photos-manifest";
 import { Spinner } from "@/components/spinner";
 
 interface PhotoPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
-const PhotoPage = async ({ params }: PhotoPageProps) => {
+const PhotoPage = async (props: PhotoPageProps) => {
+  const params = await props.params;
   const photosManifest = getPhotosManifest();
 
   const matchingIndex = photosManifest.findIndex(
@@ -34,7 +35,8 @@ const PhotoPage = async ({ params }: PhotoPageProps) => {
 
 export default PhotoPage;
 
-export const generateMetadata = async ({ params }: PhotoPageProps) => {
+export const generateMetadata = async (props: PhotoPageProps) => {
+  const params = await props.params;
   return {
     title: "Photo | Human in the Loop",
     description: "Photo from Jonathan Harrell’s commonplace book",

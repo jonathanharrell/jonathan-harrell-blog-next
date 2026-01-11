@@ -2,7 +2,8 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { flushSync } from "react-dom";
-import { Link, useTransitionRouter } from "next-view-transitions";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import classNames from "classnames";
 import { X, ChevronLeft, ChevronRight } from "react-feather";
 import { Photo } from "@/components/photo";
@@ -26,7 +27,7 @@ export const PhotoModal = ({
   previousSlug,
   nextSlug,
 }: PhotoModalProps) => {
-  const router = useTransitionRouter();
+  const router = useRouter();
 
   const modalRef = useRef<HTMLDialogElement | null>(null);
 

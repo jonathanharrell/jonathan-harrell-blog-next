@@ -1,3 +1,4 @@
+import React from "react";
 import type { Metadata } from "next";
 import { Search } from "@/components/search";
 
@@ -21,7 +22,7 @@ const jsonLd = {
   },
 };
 
-const SearchPage = () => {
+const SearchPage = async () => {
   return (
     <div className="wrapper py-8 sm:py-10 md:py-14">
       <Search />
@@ -34,5 +35,3 @@ const SearchPage = () => {
 };
 
 export default SearchPage;
-
-export const dynamic = "force-dynamic";
