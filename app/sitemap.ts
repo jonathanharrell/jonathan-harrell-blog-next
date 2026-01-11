@@ -35,7 +35,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     ...photosManifest.map(({ slug, lastModified }) => ({
       url: `${SITE_URL}/photo/${slug}`,
-      lastModified,
+      lastModified: new Date(lastModified),
       changeFrequency:
         "never" as MetadataRoute.Sitemap[number]["changeFrequency"],
       priority: 0.5,
