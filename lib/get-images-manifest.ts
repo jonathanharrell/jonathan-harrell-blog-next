@@ -8,7 +8,7 @@ interface Image {
 }
 
 export const getImagesManifest = () => {
-  const filePath = path.join(process.cwd(), "public", "images-manifest.json");
+  const filePath = path.join(process.cwd(), "data", "images-manifest.json");
   const file = fs.readFileSync(filePath, "utf-8");
   return JSON.parse(file) as Image[];
 };

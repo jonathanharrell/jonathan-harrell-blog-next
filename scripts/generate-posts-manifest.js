@@ -23,7 +23,7 @@ const generateManifest = async () => {
 
   const data = await Promise.all(promises);
   const json = JSON.stringify(data, null, 2);
-  fs.writeFileSync("public/posts-manifest.json", json, "utf-8");
+  fs.writeFileSync("data/posts-manifest.json", json, "utf-8");
 };
 
 generateManifest();
