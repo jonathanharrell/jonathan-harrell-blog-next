@@ -50,7 +50,7 @@ const getAllImageSlugs = async () => {
 const generateManifest = async () => {
   const data = await getAllImageSlugs();
   const json = JSON.stringify(data, null, 2);
-  fs.writeFileSync("data/images-manifest.json", json, "utf-8");
+  fs.writeFileSync("public/images-manifest.json", json, "utf-8");
 };
 
 generateManifest();

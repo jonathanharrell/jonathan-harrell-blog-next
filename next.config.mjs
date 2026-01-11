@@ -32,11 +32,7 @@ const nextConfig = {
   cacheComponents: true,
   // Exclude large asset directories from serverless function tracing
   outputFileTracingExcludes: {
-    "*": [
-      "public/assets/photos/**",
-      "public/assets/art/**",
-      "data/**",
-    ],
+    "*": ["public/assets/photos/**", "public/assets/art/**"],
   },
 };
 
