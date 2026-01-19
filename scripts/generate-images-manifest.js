@@ -50,7 +50,14 @@ const getAllImageSlugs = async () => {
 const generateManifest = async () => {
   const data = await getAllImageSlugs();
   const json = JSON.stringify(data, null, 2);
-  fs.writeFileSync("public/images-manifest.json", json, "utf-8");
+  
+  // Ensure data directory exists
+  const dataDir = path.resolve(".", "data");
+  if (!fs.existsSync(dataDir)) {
+    fs.mkdirSync(dataDir, { recursive: true });
+  }
+  
+  fs.writeFileSync(path.join(dataDir, "images-manifest.json"), json, "utf-8");
 };
 
 generateManifest();
