@@ -60,14 +60,7 @@ const generateManifest = async () => {
 
   const data = await Promise.all(promises);
   const json = JSON.stringify(data, null, 2);
-  
-  // Ensure data directory exists
-  const dataDir = path.resolve(".", "data");
-  if (!fs.existsSync(dataDir)) {
-    fs.mkdirSync(dataDir, { recursive: true });
-  }
-  
-  fs.writeFileSync(path.join(dataDir, "photos-manifest.json"), json, "utf-8");
+  fs.writeFileSync("public/photos-manifest.json", json, "utf-8");
 };
 
 generateManifest();

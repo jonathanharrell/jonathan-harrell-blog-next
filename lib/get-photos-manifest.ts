@@ -9,7 +9,7 @@ interface Photo {
 }
 
 export const getPhotosManifest = () => {
-  const filePath = path.join(process.cwd(), "data", "photos-manifest.json");
+  const filePath = path.join(process.cwd(), "public", "photos-manifest.json");
   const file = fs.readFileSync(filePath, "utf-8");
   return JSON.parse(file) as Photo[];
 };

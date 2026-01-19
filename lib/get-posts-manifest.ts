@@ -9,7 +9,7 @@ interface Post {
 }
 
 export const getPostsManifest = () => {
-  const filePath = path.join(process.cwd(), "data", "posts-manifest.json");
+  const filePath = path.join(process.cwd(), "public", "posts-manifest.json");
   const file = fs.readFileSync(filePath, "utf-8");
   return JSON.parse(file) as Post[];
 };
