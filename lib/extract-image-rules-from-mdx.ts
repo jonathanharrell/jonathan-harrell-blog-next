@@ -20,5 +20,35 @@ export const extractImageUrlsFromMdx = async (
     }
   });
 
+  // Extract from MDX JSX elements (e.g., <img src="...">)
+  const extractFromJsxElement = (node: {
+    name?: string;
+    attributes?: Array<{
+      type: string;
+      name: string;
+      value?: string | { type?: string; value?: string };
+    }>;
+  }) => {
+    if (node.name === "img" && node.attributes) {
+      for (const attr of node.attributes) {
+        if (attr.type === "mdxJsxAttribute" && attr.name === "src") {
+          if (attr.value && typeof attr.value === "string") {
+            imageUrls.push(attr.value);
+          } else if (
+            attr.value &&
+            typeof attr.value === "object" &&
+            "value" in attr.value &&
+            typeof attr.value.value === "string"
+          ) {
+            imageUrls.push(attr.value.value);
+          }
+        }
+      }
+    }
+  };
+
+  visit(ast, "mdxJsxFlowElement", extractFromJsxElement);
+  visit(ast, "mdxJsxTextElement", extractFromJsxElement);
+
   return imageUrls;
 };

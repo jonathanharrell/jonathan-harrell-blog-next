@@ -22,9 +22,30 @@ const extractImageUrlsFromMdx = async (source) => {
   const tree = processor.parse(source);
   const ast = await processor.run(tree); // Ensures plugins have a chance to modify the AST
 
+  // Extract from markdown image syntax
   visit(ast, "image", (node) => {
     if (node.url) {
       imageUrls.push(node.url);
+    }
+  });
+
+  // Extract from MDX JSX elements (e.g., <img src="...">)
+  visit(ast, ["mdxJsxFlowElement", "mdxJsxTextElement"], (node) => {
+    if (node.name === "img" && node.attributes) {
+      for (const attr of node.attributes) {
+        if (attr.type === "mdxJsxAttribute" && attr.name === "src") {
+          if (attr.value && typeof attr.value === "string") {
+            imageUrls.push(attr.value);
+          } else if (
+            attr.value &&
+            typeof attr.value === "object" &&
+            attr.value.value &&
+            typeof attr.value.value === "string"
+          ) {
+            imageUrls.push(attr.value.value);
+          }
+        }
+      }
     }
   });
 
@@ -46,7 +67,9 @@ const preprocessHtmlForPlainText = (md) => {
 
   return md.replace(figureRegex, (match, alt, figcaptionContent) => {
     // Extract title from <i> tags and author after "by"
-    const figcaptionMatch = figcaptionContent.match(/<i>(.*?)<\/i>[\s\S]*?by\s+(.*)/);
+    const figcaptionMatch = figcaptionContent.match(
+      /<i>(.*?)<\/i>[\s\S]*?by\s+(.*)/,
+    );
     if (figcaptionMatch) {
       const title = figcaptionMatch[1].trim();
       const author = figcaptionMatch[2].replace(/<[^>]*>/g, "").trim();
@@ -83,7 +106,6 @@ const getPosts = async () => {
     const fileContentsWithoutFrontmatter = preprocessHtmlForPlainText(
       preprocessImagesForPlainText(fileContents.replace(/---[\s\S]*?---/, "")),
     );
-    console.log(fileContentsWithoutFrontmatter);
 
     return {
       slug: file.replace(/\.mdx$/, ""),
