@@ -1,4 +1,5 @@
-export const Footer = () => {
+export const Footer = async () => {
+  "use cache";
   const currentYear = new Date().getFullYear();
 
   return (

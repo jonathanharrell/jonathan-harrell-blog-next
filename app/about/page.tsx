@@ -1,5 +1,5 @@
 import Image from "next/image";
-import glyph from "/public/assets/glyphs/glyph-2.svg";
+import glyph from "../../public/assets/glyphs/glyph-2.svg";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {

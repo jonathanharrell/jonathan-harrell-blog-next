@@ -13,14 +13,15 @@ export const metadata: Metadata = {
 };
 
 interface FilteredBlogPageProps {
-  searchParams: {
+  searchParams: Promise<{
     tag?: string;
     month?: string;
     page?: string;
-  };
+  }>;
 }
 
-const FilteredBlogPage = async ({ searchParams }: FilteredBlogPageProps) => {
+const FilteredBlogPage = async (props: FilteredBlogPageProps) => {
+  const searchParams = await props.searchParams;
   const {
     tag: selectedTag,
     month: selectedMonth,

@@ -20,6 +20,7 @@ const nextConfig = {
   },
   images: {
     deviceSizes: [390, 600, 900, 1200, 1600],
+    qualities: [40, 100],
     remotePatterns: [
       {
         protocol: "https",
@@ -27,6 +28,11 @@ const nextConfig = {
         pathname: "/**",
       },
     ],
+  },
+  cacheComponents: true,
+  // Exclude large asset directories from serverless function tracing
+  outputFileTracingExcludes: {
+    "*": ["./public/assets/photos/**", "./public/assets/art/**"],
   },
 };
 
@@ -38,7 +44,11 @@ export default withSentryConfig(withMdx(nextConfig), {
   org: "jonathan-harrell",
   project: "jonathanharrell-blog",
   silent: !process.env.CI,
-  disableLogger: true,
   authToken: process.env.SENTRY_AUTH_TOKEN,
   widenClientFileUpload: true,
+  webpack: {
+    treeshake: {
+      removeDebugLogging: true,
+    },
+  },
 });

@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import { flushSync } from "react-dom";
-import { Link } from "next-view-transitions";
+import Link from "next/link";
 import { X } from "react-feather";
 
 export const MobileNav = () => {

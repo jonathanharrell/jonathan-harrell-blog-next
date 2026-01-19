@@ -1,4 +1,4 @@
-import { Link } from "next-view-transitions";
+import Link from "next/link";
 import classNames from "classnames";
 import { getPostData } from "@/lib/get-post-data";
 import { SITE_URL } from "@/constants";
@@ -11,6 +11,7 @@ interface PostProps {
 }
 
 export const Post = async ({ slug, single, className }: PostProps) => {
+  "use cache";
   const [{ content, frontmatter }, { previous, next }] = await Promise.all([
     getPostData(slug),
     getPreviousAndNextPosts(slug),

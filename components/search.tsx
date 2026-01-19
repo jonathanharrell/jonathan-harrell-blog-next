@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { Link } from "next-view-transitions";
-import { algoliasearch } from "algoliasearch";
+import Link from "next/link";
 import {
+  InstantSearch,
   Snippet,
   useInfiniteHits,
   UseInfiniteHitsProps,
@@ -12,18 +12,20 @@ import {
   useSearchBox,
   UseSearchBoxProps,
 } from "react-instantsearch";
-import { InstantSearchNext } from "react-instantsearch-nextjs";
 import { useRef } from "react";
+import { searchClient } from "@/lib/algolia-client";
 
-const searchClient = algoliasearch(
-  process.env.NEXT_PUBLIC_ALGOLIA_APP_ID!,
-  process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY!,
-);
-
+// TODO: convert to InstantSearchNext when can get working with Next cache components
 export const Search = () => {
   return (
     <search>
-      <InstantSearchNext searchClient={searchClient} indexName="posts_index">
+      <InstantSearch
+        searchClient={searchClient}
+        indexName="posts_index"
+        future={{
+          preserveSharedStateOnUnmount: false,
+        }}
+      >
         <div className="grid grid-cols-12 gap-y-12 md:gap-y-6 md:gap-x-8">
           <div className="col-start-1 col-end-13 md:col-start-4 lg:col-end-11 md:row-start-1 flex flex-col gap-4">
             <header>
@@ -36,7 +38,7 @@ export const Search = () => {
             <CustomRefinementList attribute="tags" sortBy={["name"]} />
           </div>
         </div>
-      </InstantSearchNext>
+      </InstantSearch>
     </search>
   );
 };
@@ -62,6 +64,7 @@ const CustomSearchBox = (props: UseSearchBoxProps) => {
         placeholder="Search posts"
         value={query}
         autoFocus={true}
+        autoComplete="off"
         onChange={(event) => refine(event.target.value)}
         ref={searchInputRef}
         className="block w-full py-1.5 px-3 border border-neutral-800 text-lg placeholder:text-neutral-500"

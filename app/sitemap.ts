@@ -1,11 +1,11 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/constants";
 import { getPostSlugs } from "@/lib/get-post-slugs";
-import { getAllPhotoSlugs } from "@/lib/get-all-photo-slugs";
+import { getPhotosManifest } from "@/lib/get-photos-manifest";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const { slugs: postSlugs = [] } = await getPostSlugs({ perPage: Infinity });
-  const photoSlugs = (await getAllPhotoSlugs()) ?? [];
+  const photosManifest = getPhotosManifest();
 
   return [
     {
@@ -33,9 +33,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly",
       priority: 0.5,
     },
-    ...photoSlugs.map(({ slug, lastModified }) => ({
+    ...photosManifest.map(({ slug, lastModified }) => ({
       url: `${SITE_URL}/photo/${slug}`,
-      lastModified,
+      lastModified: new Date(lastModified),
       changeFrequency:
         "never" as MetadataRoute.Sitemap[number]["changeFrequency"],
       priority: 0.5,

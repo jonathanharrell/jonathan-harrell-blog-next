@@ -1,4 +1,5 @@
-import { Link } from "next-view-transitions";
+import { Suspense } from "react";
+import Link from "next/link";
 import { DesktopNav } from "@/components/desktop-nav";
 import { MobileNav } from "@/components/mobile-nav";
 import { Glyph } from "@/components/glyph";
@@ -23,7 +24,9 @@ export const Header = () => {
               <span>Jonathan Harrell’s Commonplace Book</span>
             </div>
           </div>
-          <DesktopNav />
+          <Suspense fallback={<></>}>
+            <DesktopNav />
+          </Suspense>
           <MobileNav />
         </div>
       </div>
