@@ -5,6 +5,35 @@ import markdownToTxt from "markdown-to-txt";
 import { truncate } from "lodash";
 import { Frontmatter } from "@/types";
 
+const preprocessImagesForPlainText = (md: string) => {
+  const imageRegex = /!\[(.*?)\]\([^\s]+?\s+"<i>(.*?)<\/i>, by (.*?)"\)/g;
+
+  return md.replace(imageRegex, (_, alt, title, author) => {
+    return `${alt.trim()}\n*${title.trim()}*, by ${author.trim()}\n`;
+  });
+};
+
+const preprocessHtmlForPlainText = (md: string) => {
+  // Match <figure> blocks that contain <img> and <figcaption>
+  const figureRegex =
+    /<figure>[\s\S]*?<img[\s\S]*?alt=["']([^"']*)["'][\s\S]*?(?:\/>|>)[\s\S]*?<figcaption>([\s\S]*?)<\/figcaption>[\s\S]*?<\/figure>/g;
+
+  return md.replace(figureRegex, (match, alt, figcaptionContent) => {
+    // Extract title from <i> tags and author after "by"
+    const figcaptionMatch = figcaptionContent.match(
+      /<i>(.*?)<\/i>[\s\S]*?by\s+(.*)/,
+    );
+    if (figcaptionMatch) {
+      const title = figcaptionMatch[1].trim();
+      const author = figcaptionMatch[2].replace(/<[^>]*>/g, "").trim();
+      return `${alt.trim()}\n*${title.trim()}*, by ${author.trim()}\n`;
+    }
+    // Fallback: if format doesn't match, just strip HTML tags from figcaption
+    const plainText = figcaptionContent.replace(/<[^>]*>/g, "").trim();
+    return `${alt.trim()}\n${plainText}\n`;
+  });
+};
+
 export const getPostTeasers = async ({
   tag,
   perPage = Infinity,
@@ -21,9 +50,8 @@ export const getPostTeasers = async ({
       options: { parseFrontmatter: true },
     });
 
-    const fileContentsWithoutFrontmatter = fileContents.replace(
-      /---[\s\S]*?---/,
-      "",
+    const fileContentsWithoutFrontmatter = preprocessHtmlForPlainText(
+      preprocessImagesForPlainText(fileContents.replace(/---[\s\S]*?---/, "")),
     );
 
     let images: string[] = [];
