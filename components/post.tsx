@@ -12,6 +12,7 @@ interface PostProps {
 
 export const Post = async ({ slug, single, className }: PostProps) => {
   "use cache";
+  console.time(`Post-${slug}`);
   const [{ content, frontmatter }, { previous, next }] = await Promise.all([
     getPostData(slug),
     getPreviousAndNextPosts(slug),
@@ -41,7 +42,7 @@ export const Post = async ({ slug, single, className }: PostProps) => {
     image: `${SITE_URL}/assets/seo/og.png`,
     keywords: filteredTags.join(","),
   };
-
+  console.timeEnd(`Post-${slug}`);
   return (
     <article className={classNames("jh-prose", className)}>
       <header className="mb-4">

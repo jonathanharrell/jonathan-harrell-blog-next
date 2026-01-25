@@ -21,6 +21,7 @@ interface FilteredBlogPageProps {
 }
 
 const FilteredBlogPage = async (props: FilteredBlogPageProps) => {
+  console.time("FilteredBlogPage");
   const searchParams = await props.searchParams;
   const {
     tag: selectedTag,
@@ -43,7 +44,7 @@ const FilteredBlogPage = async (props: FilteredBlogPageProps) => {
       ? `${pageLinkPrefix}&month=${selectedMonth}`
       : `month=${selectedMonth}`;
   }
-
+  console.timeEnd("FilteredBlogPage");
   return (
     <div className="wrapper pt-8 sm:pt-10 md:pt-14">
       <header className="jh-prose mx-auto">
