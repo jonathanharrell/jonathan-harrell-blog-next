@@ -49,22 +49,37 @@ export const PhotoModal = ({
     }
   };
 
+  const closeModal = () => {
+    if (typeof document.startViewTransition !== "undefined") {
+      document.startViewTransition(() => {
+        modalRef.current?.close();
+
+        flushSync(() => {
+          setIsModalOpen(false);
+        });
+      });
+    } else {
+      modalRef.current?.close();
+      setIsModalOpen(false);
+    }
+  };
+
   const goBack = useCallback(() => {
     if (typeof document.startViewTransition !== "undefined") {
       document.startViewTransition(() => {
+        closeModal();
         router.replace(`/photos?from=${slug}`, {
           scroll: false,
         });
         router.refresh();
       });
     } else {
+      closeModal();
       router.replace(`/photos?from=${slug}`, {
         scroll: false,
       });
       router.refresh();
     }
-
-    setIsModalOpen(false);
   }, [router, slug]);
 
   useEffect(() => {
