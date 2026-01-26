@@ -29,7 +29,6 @@ export const Post = async ({
   next: nextProp,
 }: PostProps) => {
   "use cache";
-  console.time(`Post-${slug}`);
   const [postDataResult, previousNextResult] = await Promise.all([
     getPostData(slug),
     // only get previous and next posts if not already passed in as props
@@ -68,7 +67,7 @@ export const Post = async ({
     image: `${SITE_URL}/assets/seo/og.png`,
     keywords: filteredTags.join(","),
   };
-  console.timeEnd(`Post-${slug}`);
+
   return (
     <article className={classNames("jh-prose", className)}>
       <header className="mb-4">
