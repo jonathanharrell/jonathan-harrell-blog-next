@@ -4,18 +4,45 @@ import { getPostData } from "@/lib/get-post-data";
 import { SITE_URL } from "@/constants";
 import { getPreviousAndNextPosts } from "@/lib/get-previous-and-next-posts";
 
+interface PostSlug {
+  slug: string;
+  frontmatter: {
+    date: string;
+    tags?: string[];
+  };
+  lastModified: Date;
+}
+
 interface PostProps {
   slug: string;
   single?: boolean;
   className?: string;
+  previous?: PostSlug | null;
+  next?: PostSlug | null;
 }
 
-export const Post = async ({ slug, single, className }: PostProps) => {
+export const Post = async ({
+  slug,
+  single,
+  className,
+  previous: previousProp,
+  next: nextProp,
+}: PostProps) => {
   "use cache";
-  const [{ content, frontmatter }, { previous, next }] = await Promise.all([
+  console.time(`Post-${slug}`);
+  const [postDataResult, previousNextResult] = await Promise.all([
     getPostData(slug),
-    getPreviousAndNextPosts(slug),
+    // only get previous and next posts if not already passed in as props
+    previousProp === undefined && nextProp === undefined
+      ? getPreviousAndNextPosts(slug)
+      : Promise.resolve({
+          previous: previousProp ?? null,
+          next: nextProp ?? null,
+        }),
   ]);
+
+  const { content, frontmatter } = postDataResult;
+  const { previous, next } = previousNextResult;
 
   const formattedDate = new Date(frontmatter.date).toLocaleDateString("en-US", {
     month: "long",
@@ -41,7 +68,7 @@ export const Post = async ({ slug, single, className }: PostProps) => {
     image: `${SITE_URL}/assets/seo/og.png`,
     keywords: filteredTags.join(","),
   };
-
+  console.timeEnd(`Post-${slug}`);
   return (
     <article className={classNames("jh-prose", className)}>
       <header className="mb-4">

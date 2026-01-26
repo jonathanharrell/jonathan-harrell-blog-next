@@ -18,16 +18,23 @@ export const Posts = ({ slugs }: PostsProps) => {
         Posts
       </h2>
       <ul className="group/list flex flex-col" aria-labelledby="posts-label">
-        {slugs.map(({ slug }) => (
-          <li key={slug} className="group/post">
-            <Suspense fallback={<Loading />}>
-              <Post
-                slug={slug}
-                className="mx-auto py-8 sm:py-10 group-has-[+li]/post:border-b group-has-[+#pagination]/list:border-b border-neutral-200 border-dashed"
-              />
-            </Suspense>
-          </li>
-        ))}
+        {slugs.map(({ slug }, index) => {
+          const previous = slugs[index + 1] || null;
+          const next = slugs[index - 1] || null;
+          
+          return (
+            <li key={slug} className="group/post">
+              <Suspense fallback={<Loading />}>
+                <Post
+                  slug={slug}
+                  previous={previous}
+                  next={next}
+                  className="mx-auto py-8 sm:py-10 group-has-[+li]/post:border-b group-has-[+#pagination]/list:border-b border-neutral-200 border-dashed"
+                />
+              </Suspense>
+            </li>
+          );
+        })}
       </ul>
     </>
   );
