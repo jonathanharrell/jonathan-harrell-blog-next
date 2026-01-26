@@ -17,27 +17,16 @@ interface PostProps {
   slug: string;
   single?: boolean;
   className?: string;
-  previous?: PostSlug | null;
-  next?: PostSlug | null;
 }
 
-export const Post = async ({
-  slug,
-  single,
-  className,
-  previous: previousProp,
-  next: nextProp,
-}: PostProps) => {
+export const Post = async ({ slug, single, className }: PostProps) => {
   "use cache";
   const [postDataResult, previousNextResult] = await Promise.all([
     getPostData(slug),
-    // only get previous and next posts if not already passed in as props
-    previousProp === undefined && nextProp === undefined
+    // only get previous and next posts if single post
+    single
       ? getPreviousAndNextPosts(slug)
-      : Promise.resolve({
-          previous: previousProp ?? null,
-          next: nextProp ?? null,
-        }),
+      : Promise.resolve({ previous: null, next: null }),
   ]);
 
   const { content, frontmatter } = postDataResult;
