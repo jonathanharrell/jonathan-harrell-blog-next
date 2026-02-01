@@ -22,14 +22,17 @@ const PhotoPage = async (props: PhotoPageProps) => {
   const nextSlug = photosManifest[matchingIndex + 1]?.slug;
 
   return (
-    <PhotoModal
-      slug={params.slug}
-      width={1600}
-      height={1600}
-      metadata={metadata}
-      previousSlug={previousSlug}
-      nextSlug={nextSlug}
-    />
+    <>
+      <div className="flex items-center justify-center fixed inset-0 w-screen h-screen bg-neutral-900 bg-opacity-95" />
+      <PhotoModal
+        slug={params.slug}
+        width={1600}
+        height={1600}
+        metadata={metadata}
+        previousSlug={previousSlug}
+        nextSlug={nextSlug}
+      />
+    </>
   );
 };
 

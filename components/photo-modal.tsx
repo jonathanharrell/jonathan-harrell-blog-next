@@ -1,8 +1,8 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import * as Dialog from "@radix-ui/react-dialog";
+import { useCallback, useEffect, useState } from "react";
 import { flushSync } from "react-dom";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import classNames from "classnames";
 import { X, ChevronLeft, ChevronRight } from "react-feather";
@@ -19,6 +19,17 @@ interface PhotoModalProps {
   nextSlug?: string;
 }
 
+function withViewTransition(fn: () => void) {
+  if (
+    typeof document !== "undefined" &&
+    typeof document.startViewTransition !== "undefined"
+  ) {
+    document.startViewTransition(() => fn());
+  } else {
+    fn();
+  }
+}
+
 export const PhotoModal = ({
   slug,
   width,
@@ -29,154 +40,123 @@ export const PhotoModal = ({
 }: PhotoModalProps) => {
   const router = useRouter();
 
-  const modalRef = useRef<HTMLDialogElement | null>(null);
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const showModal = () => {
-    if (typeof document.startViewTransition !== "undefined") {
-      document.startViewTransition(() => {
-        modalRef.current?.showModal();
-
-        flushSync(() => {
-          setIsModalOpen(true);
-        });
-      });
-    } else {
-      modalRef.current?.showModal();
-      setIsModalOpen(true);
-    }
-  };
-
-  const closeModal = () => {
-    if (typeof document.startViewTransition !== "undefined") {
-      document.startViewTransition(() => {
-        modalRef.current?.close();
-
-        flushSync(() => {
-          setIsModalOpen(false);
-        });
-      });
-    } else {
-      modalRef.current?.close();
-      setIsModalOpen(false);
-    }
-  };
-
   const goBack = useCallback(() => {
-    if (typeof document.startViewTransition !== "undefined") {
-      document.startViewTransition(() => {
-        closeModal();
-        router.replace(`/photos?from=${slug}`, {
-          scroll: false,
-        });
-        router.refresh();
-      });
-    } else {
-      closeModal();
-      router.replace(`/photos?from=${slug}`, {
-        scroll: false,
-      });
-      router.refresh();
-    }
+    withViewTransition(() => {
+      router.replace(`/photos?from=${slug}`, { scroll: false });
+      setIsOpen(false);
+    });
   }, [router, slug]);
 
+  const goToPrevious = useCallback(() => {
+    if (!previousSlug) return;
+
+    withViewTransition(() => {
+      router.push(`/photo/${previousSlug}`, { scroll: false });
+      setIsOpen(false);
+    });
+  }, [router, previousSlug]);
+
+  const goToNext = useCallback(() => {
+    if (!nextSlug) return;
+
+    withViewTransition(() => {
+      router.push(`/photo/${nextSlug}`, { scroll: false });
+      setIsOpen(false);
+    });
+  }, [router, nextSlug]);
+
   useEffect(() => {
-    showModal();
-
-    const handleClick = (event: MouseEvent) => {
-      if (modalRef.current === event.target) {
-        goBack();
-      }
-    };
-
-    const handleKeydown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        goBack();
-      }
-    };
-
-    document.addEventListener("click", handleClick);
-    window.addEventListener("keydown", handleKeydown);
-
-    return () => {
-      document.removeEventListener("click", handleClick);
-      window.removeEventListener("keydown", handleKeydown);
-    };
-  }, [goBack]);
+    setIsOpen(true);
+  }, []);
 
   return (
     <>
-      {!isModalOpen && (
-        <div className="flex items-center justify-center fixed inset-0 w-screen h-screen bg-neutral-900 bg-opacity-95" />
-      )}
-      <dialog
-        className={classNames(
-          "flex flex-col items-center justify-center fixed inset-0 !max-w-none !max-h-none bg-transparent backdrop:bg-neutral-900 backdrop:bg-opacity-95",
-          {
-            "min-w-6 min-h-6": !isLoaded,
-          },
-        )}
-        ref={modalRef}
+      <Dialog.Root
+        open={isOpen}
+        onOpenChange={(nextOpen) => {
+          // Overlay click or programmatic close
+          if (!nextOpen) {
+            goBack();
+          }
+        }}
       >
-        <div className="flex flex-col">
-          <button
-            autoFocus
-            onClick={goBack}
-            className="fixed top-0 right-0 p-3 text-neutral-400 hover:text-neutral-100 transition-colors duration-200 ease-in-out focus-visible:ring-0"
+        <Dialog.Portal>
+          <Dialog.Content
+            className={classNames(
+              "fixed inset-0 z-50 flex items-center justify-center outline-none",
+              {
+                "min-w-6 min-h-6": !isLoaded,
+              },
+            )}
           >
-            <X />
-            <span className="sr-only">Close photo dialog</span>
-          </button>
-          {!isLoaded && (
-            <div
-              className="flex flex-col items-center justify-center absolute inset-0 text-neutral-100"
-              style={{ viewTransitionName: "none" }}
-            >
-              <Spinner />
-            </div>
-          )}
-          <div className="pt-4 md:pt-0">
-            <Photo
-              slug={slug}
-              width={width}
-              height={height}
-              metadata={metadata}
-              className={classNames(
-                "block w-auto sm:max-w-[min(calc(100dvw-6rem),calc(1300px-6rem))] h-auto max-h-[min(calc(100dvh-6rem),calc(1300px-6rem))]",
+            <Dialog.Title className="sr-only">Photo viewer</Dialog.Title>
+            <Dialog.Description className="sr-only">
+              Full-size photo preview. Use the previous and next buttons to
+              browse photos, or press Escape to close.
+            </Dialog.Description>
+            <div className="flex flex-col">
+              <Dialog.Close asChild>
+                <button
+                  autoFocus
+                  onClick={(e) => {
+                    e.preventDefault();
+                    goBack();
+                  }}
+                  className="fixed top-0 right-0 p-3 text-neutral-400 hover:text-neutral-100 transition-colors duration-200 ease-in-out focus-visible:ring-0"
+                >
+                  <X />
+                  <span className="sr-only">Close photo dialog</span>
+                </button>
+              </Dialog.Close>
+              {!isLoaded && (
+                <div
+                  className="flex flex-col items-center justify-center absolute inset-0 text-neutral-100"
+                  style={{ viewTransitionName: "none" }}
+                >
+                  <Spinner />
+                </div>
               )}
-              captionClassName="wrapper text-sm text-center text-neutral-400"
-              isLoaded={isLoaded}
-              onLoad={() => setIsLoaded(true)}
-            />
-            {previousSlug && (
-              <div className="fixed top-1/2 left-0 sm:left-2 z-10 -mt-8 md:mt-0 -translate-1/2 text-white">
-                <Link
-                  href={`/photo/${previousSlug}`}
-                  scroll={false}
-                  className="block p-1 lg:p-2 text-neutral-100 sm:text-neutral-400 hover:text-neutral-100 transition-colors duration-200 ease-in-out"
-                >
-                  <ChevronLeft size={36} />
-                  <span className="sr-only">Previous image</span>
-                </Link>
+              <div className="pt-4 md:pt-0">
+                <Photo
+                  slug={slug}
+                  width={width}
+                  height={height}
+                  metadata={metadata}
+                  className="block w-auto sm:max-w-[min(calc(100dvw-6rem),calc(1300px-6rem))] h-auto max-h-[min(calc(100dvh-6rem),calc(1300px-6rem))]"
+                  captionClassName="wrapper text-sm text-center text-neutral-400"
+                  isLoaded={isLoaded}
+                  onLoad={() => setIsLoaded(true)}
+                />
+                {previousSlug && (
+                  <div className="fixed top-1/2 left-0 sm:left-2 z-10 -mt-8 md:mt-0 -translate-y-1/2 text-white">
+                    <button
+                      onClick={goToPrevious}
+                      className="block p-1 lg:p-2 text-neutral-100 sm:text-neutral-400 hover:text-neutral-100 transition-colors duration-200 ease-in-out"
+                    >
+                      <ChevronLeft size={36} />
+                      <span className="sr-only">Previous image</span>
+                    </button>
+                  </div>
+                )}
+                {nextSlug && (
+                  <div className="fixed top-1/2 right-0 sm:right-2 z-10 -mt-8 md:mt-0 -translate-y-1/2 text-white">
+                    <button
+                      onClick={goToNext}
+                      className="block p-1 lg:p-2 text-neutral-100 sm:text-neutral-400 hover:text-neutral-100 transition-colors duration-200 ease-in-out"
+                    >
+                      <ChevronRight size={36} />
+                      <span className="sr-only">Next image</span>
+                    </button>
+                  </div>
+                )}
               </div>
-            )}
-            {nextSlug && (
-              <div className="fixed top-1/2 right-0 sm:right-2 z-10 -mt-8 md:mt-0 -translate-1/2 text-white">
-                <Link
-                  href={`/photo/${nextSlug}`}
-                  scroll={false}
-                  className="block p-1 lg:p-2 text-neutral-100 sm:text-neutral-400 hover:text-neutral-100 transition-colors duration-200 ease-in-out"
-                >
-                  <ChevronRight size={36} />
-                  <span className="sr-only">Next image</span>
-                </Link>
-              </div>
-            )}
-          </div>
-        </div>
-      </dialog>
+            </div>
+          </Dialog.Content>
+        </Dialog.Portal>
+      </Dialog.Root>
     </>
   );
 };
