@@ -19,7 +19,7 @@ export const DesktopNav = () => {
       <h2 id="navigation-label" className="sr-only" aria-hidden="true">
         Site navigation
       </h2>
-      <ul className="flex justify-center gap-8 [&_a:hover]:underline [&_a:hover]:decoration-1 underline-offset-4 text-lg">
+      <ul className="flex justify-center gap-6 [&_a:hover]:underline [&_a:hover]:decoration-1 underline-offset-4 text-lg">
         <li>
           <Link
             href="/blog"
